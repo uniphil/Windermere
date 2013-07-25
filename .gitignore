@@ -1,3 +1,8 @@
+# development database
+dev-db.sqlite3
+
+# config
+config.py
 
 # compiled python files
 *.pyc
@@ -5,3 +10,6 @@
 
 # virtualenv
 venv/
+
+# annoying text editor backup stuff
+*~
