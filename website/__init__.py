@@ -7,10 +7,20 @@
 # the package namespace here.
 #
 
-from flask import Flask
+try:
+    from flask import Flask
+except ImportError as e:
+    e.message += "\nHave you installed everything from requirements.txt?"
+    raise e
 
 app = Flask(__name__)
 
-import config
-from . import endpoints
+try:
+    import config
+except ImportError as e:
+    e.message += "\nHave you copied config-template.py to config.py?"
 
+import models
+import access
+import admin
+import endpoints
