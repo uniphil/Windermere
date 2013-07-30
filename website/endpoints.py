@@ -5,6 +5,7 @@
 from flask import session, render_template, redirect, url_for
 from flask.ext.login import (current_user, login_required, login_user,
                              logout_user)
+from . import forms
 from . import app
 
 
@@ -15,11 +16,16 @@ def home():
 
 @app.route('/login')
 def login():
-    session.clear()
-    from models import User
-    phil = User.query.get(1)
-    login_user(phil)
-    return redirect(url_for('home'))
+    partner_form = forms.PartnerForm()
+    admin_form = forms.AdminForm()
+    return render_template('login.html',
+                           partner_form=partner_form
+                           admin_form=admin_form)
+    # session.clear()
+    # from models import User
+    # phil = User.query.get(1)
+    # login_user(phil)
+    # return redirect(url_for('home'))
     # return "you need ta login na"
 
 @app.route('/overview-sample')

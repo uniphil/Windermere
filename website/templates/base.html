@@ -3,11 +3,15 @@
     <head>
         <meta charset="utf-8" />
         <title>{% block title %}Windermere{% endblock %}</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}" />
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
     </head>
     <body>
-        {% block content %}{% endblock %}
+        <div id="container" class="col-12">
+            {% block content %}
+            {% endblock %}
+        </div>
         <script src="{{ url_for('static', filename='js/zepto.js') }}"></script>
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     </body>

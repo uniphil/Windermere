@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+    <div class="navbar">
+        {% block nav %}
+            <a href="#" class="navbar-brand">Windermere</a></li>
+        {% endblock %}
+    </div>
+
+    <div class="col-lg-6 col-sm-8 col-offset-1">
+        <div class="page-header">
+            {% block header %}
+            {% endblock %}
+        </div>
+
+        {% block page %}
+        {% endblock %}
+    </div>
+
+{% endblock %}
