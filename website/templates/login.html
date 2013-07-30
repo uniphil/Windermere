@@ -1,27 +1,31 @@
 {% extends "base-simple.html" %}
 
-{% block header %}
-    <h1>Log In</h1>
-    <p>Access to research data is provided to members of the Windermere Consortium.</p>
-{% endblock %}
+{% set title="Log In" %}
 
-{% block page %}
-    <form method="post" action=".">
-        {{ partner_form.csrf_token }}
-        <div class="input-group">
-            <span class="input-group-addon">{{ partner_form.key.label.text }}</span>
-            <input type="text"
-                   id="{{ partner_form.key.id }}"
-                   name="{{ partner_form.key.name }}"
-                   class="form-control"
-                   placeholder="Access Key" />
-            <span class="input-group-btn">
-                <button type="submit" class="btn btn-default">Unlock</button>
-            </span>
-        </div>
-        <span class="help-block">Lorem ipsum if you need a new key</span>
-    </form>
-    <form method="post" action=".">
-        {{ admin_form.csrf_token }}
-    </form>
+{% block page_content %}
+    <div class="">
+        <form method="post" action=".">
+            {{ partner_form.csrf_token }}
+            <div class="input-group">
+                <span class="input-group-addon">{{ partner_form.key.label.text }}</span>
+                <input type="text"
+                       id="{{ partner_form.key.id }}"
+                       name="{{ partner_form.key.name }}"
+                       class="form-control"
+                       placeholder="Access Key" />
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default">Unlock</button>
+                </span>
+            </div>
+        </form>
+    </div>
+<!--     <div class="col-sm-4 col-lg-3">
+        <form method="post" action=".">
+            {{ admin_form.csrf_token }}
+            <fieldset>
+                <legend>Administrative Login</legend>
+                <p>For adding content and website management</p>
+            </fieldset>
+        </form>
+    </div> -->
 {% endblock %}

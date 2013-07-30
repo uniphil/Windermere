@@ -3,20 +3,27 @@
 {% block content %}
 
 
-    <div class="navbar">
+    <nav class="navbar">
         {% block nav %}
             <a href="#" class="navbar-brand">Windermere</a></li>
         {% endblock %}
-    </div>
+    </nav>
 
-    <div class="col-lg-6 col-sm-8 col-offset-1">
-        <div class="page-header">
-            {% block header %}
+    {% block page %}
+        <div class="page col-sm-10 col-lg-8 col-offset-2 row">
+            {% block page_header %}
+                <header class="page-header">
+                    <h1>{{ title }}</h1>
+                </header>
+            {% endblock %}
+
+            {% block page_content %}
             {% endblock %}
         </div>
+    {% endblock %}
 
-        {% block page %}
-        {% endblock %}
-    </div>
+    <footer class="footer col-12">
+        <p>lalala</p>
+    </footer>
 
 {% endblock %}

@@ -19,7 +19,7 @@ def login():
     partner_form = forms.PartnerForm()
     admin_form = forms.AdminForm()
     return render_template('login.html',
-                           partner_form=partner_form
+                           partner_form=partner_form,
                            admin_form=admin_form)
     # session.clear()
     # from models import User

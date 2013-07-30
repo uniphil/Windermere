@@ -16,4 +16,4 @@ class PartnerForm(Form):
 
 class AdminForm(Form):
     username = TextField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
