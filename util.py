@@ -3,7 +3,7 @@
 try:
     import imp
     imp.load_source('activate_this', 'venv/bin/activate_this.py')
-except ImportError:
+except IOError:
     print "could not activate virtualenv for util.py..."
 
 
