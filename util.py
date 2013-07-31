@@ -26,9 +26,9 @@ if __name__ == '__main__':
         if cmd == 'reinitdb':
             import os
             try:
-                os.remove('website/dev-db.sqlite3')
+                os.remove('dev-db.sqlite3')
             except OSError:
-                print 'no database at website/dev-db.sqlite3. ignoring...'
+                print 'no database at dev-db.sqlite3. ignoring...'
         db.create_all()
 
     elif cmd == 'server':
