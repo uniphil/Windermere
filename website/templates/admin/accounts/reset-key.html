@@ -1,0 +1,16 @@
+{% extends 'admin/w_master.html' %}
+
+{% block body %}
+    <section>
+        <h2>Really Access Key for {{ partner.name }}?</h2>
+        <p>The current key will no longer work, and {{ partner.name }} will lose all access to protected content until they have the new key. This action cannot be undone.</p>
+        
+        <form action="{{ url_for('accounts.reset_partner_key', id=partner.id) }}" method="post" class="form-inline">
+            <input type="hidden" name="confirm" value="yes" />
+            <a href="{{ url_for('accounts.index') }}" class="btn"><i class="icon-arrow-left"></i> Cancel and go back</a>
+            <button type="submit" class="btn btn-danger"><i class="icon-minus-sign icon-white"></i> Reset Key for {{ partner.name }}</button>
+        </form>
+
+    </section>
+
+{% endblock %}

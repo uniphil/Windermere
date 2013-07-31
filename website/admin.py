@@ -37,17 +37,36 @@ class AccountsView(BaseView):
         return self.render('admin/accounts/index.html', partners=partners,
                            admins=admins)
 
-    @expose('/partner/<int:id>/reset-key')
+    @expose('/partner/<int:id>/reset-key', methods=['GET', 'POST'])
     def reset_partner_key(self, id):
-        print "resetting key for {}".format(id)
+        partner = models.Partner.query.get(id)
+        if request.form.get('confirm') == 'yes':
+            partner.new_key()
+            models.db.session.add(partner)
+            models.db.session.commit()
+            flash('Access key reset for {}'.format(partner.name))
+            return redirect(url_for('.index'))
+        return self.render('admin/accounts/reset-key.html', partner=partner)
 
     @expose('/partner/<int:id>/disable')
     def disable_partner(self, id):
-        print "removing {}".format(id)
+        partner = models.Partner.query.get(id)
+        partner.disabled = True
+        models.db.session.add(partner)
+        models.db.session.commit()
+        flash('Disabled {}. They will not have access to protected content '
+              'until re-enabled.'.format(partner.name))
+        return redirect(url_for('.index'))
 
     @expose('/partner/<int:id>/enable')
     def enable_partner(self, id):
-        print "removing {}".format(id)
+        partner = models.Partner.query.get(id)
+        partner.disabled = False
+        models.db.session.add(partner)
+        models.db.session.commit()
+        flash('Re-enabled access to protected content for {}.'
+              .format(partner.name), 'info')
+        return redirect(url_for('.index'))
 
     @expose('/partner/<int:id>/remove')
     def remove_partner(self, id):
