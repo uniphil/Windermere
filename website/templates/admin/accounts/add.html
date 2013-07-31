@@ -1,0 +1,15 @@
+{% extends 'admin/w_master.html' %}
+
+{% block body %}
+    <section>
+        <h2>Add a Partner</h2>
+        
+        <form action="{{ url_for('accounts.add_partner') }}" method="post" class="form-inline">
+            <label class="control-label" for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Name" required="required" />
+            <button type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> Add</button>
+        </form>
+
+    </section>
+
+{% endblock %}

@@ -2,28 +2,27 @@
 
 {% block content %}
 
-
-    <nav class="navbar">
+    <nav class="navbar navbar-inverse">
         {% block nav %}
-            <a href="#" class="navbar-brand">Windermere</a></li>
+            <a href="{{ url_for('home') }}" class="navbar-brand">Windermere</a></li>
         {% endblock %}
     </nav>
 
     {% block page %}
-        <div class="page col-sm-10 col-lg-8 col-offset-2 row">
-            {% block page_header %}
-                <header class="page-header">
-                    <h1>{{ title }}</h1>
-                </header>
-            {% endblock %}
-
-            {% block page_content %}
-            {% endblock %}
+        <div class="row">
+            <div class="page col-sm-10 col-lg-8 col-offset-2">
+                {% block page_content %}
+                {% endblock %}
+            </div>
         </div>
     {% endblock %}
 
     <footer class="footer col-12">
-        <p>lalala</p>
+        <div class="row">
+            <div class="col-lg-8 col-offset-2">
+                <p class="text-muted text-center">The Windermere Consortium</p>
+            </div>
+        </div>
     </footer>
 
 {% endblock %}

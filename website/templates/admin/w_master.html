@@ -1,0 +1,44 @@
+{% extends "admin/master.html" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" />
+{% endblock %}
+
+
+{% block page_body %}
+    <div class="container">
+      <div class="navbar">
+        <div class="navbar-inner">
+          {% block brand %}
+          <span class="brand">{{ admin_view.admin.name }}</span>
+          {% endblock %}
+          {% block main_menu %}
+          <ul class="nav">
+            {{ layout.menu() }}
+          </ul>
+          {% endblock %}
+          {% block menu_links %}
+          <ul class="nav pull-right">
+            {{ layout.menu_links() }}
+          </ul>
+          {% endblock %}
+          {% block access_control %}
+          {% endblock %}
+        </div>
+      </div>
+
+      {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert{% if category %} alert-{{ category }}{%endif %}">
+              <a href="#" class="close" data-dismiss="alert" title="dismiss">&times;</a>
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      {% block body %}{% endblock %}
+    </div>
+{% endblock %}

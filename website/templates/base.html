@@ -8,11 +8,15 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
     </head>
     <body>
-        <div id="container" class="col-12">
-            {% block content %}
-            {% endblock %}
+        <div class="container">
+            <div class="col-12 row">
+                {% block content %}
+                {% endblock %}
+            </div>
         </div>
         <script src="{{ url_for('static', filename='js/zepto.js') }}"></script>
+        <script>var jQuery = Zepto;</script>
+        <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     </body>
 </html>

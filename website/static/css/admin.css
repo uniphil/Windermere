@@ -1,0 +1,17 @@
+
+section {
+    margin: 40px 0 60px;
+}
+
+.table tr:first-child td,
+.table tr:first-child th {
+    border-top-color: transparent;
+}
+
+tr a.row-hover-show {
+    opacity: 0;
+}
+
+tr:hover a.row-hover-show {
+    opacity: 1;
+}

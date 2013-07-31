@@ -1,0 +1,16 @@
+{% extends 'admin/w_master.html' %}
+
+{% block body %}
+    <section>
+        <h2>Really Remove {{ partner.name }}?</h2>
+        <p>This action cannot be undone.</p>
+        
+        <form action="{{ url_for('accounts.remove_partner', id=partner.id) }}" method="get" class="form-inline">
+            <input type="hidden" name="confirm" value="yes" />
+            <a href="{{ url_for('accounts.index') }}" class="btn"><i class="icon-arrow-left"></i> Cancel and go back</a>
+            <button type="submit" class="btn btn-danger"><i class="icon-minus-sign icon-white"></i> Remove {{ partner.name }}</button>
+        </form>
+
+    </section>
+
+{% endblock %}

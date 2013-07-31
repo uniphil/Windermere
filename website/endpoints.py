@@ -2,31 +2,53 @@
 # endpoints.py
 # 
 
-from flask import session, render_template, redirect, url_for
+from flask import request, session, render_template, redirect, url_for, flash
 from flask.ext.login import (current_user, login_required, login_user,
                              logout_user)
-from . import forms
-from . import app
+from . import app, models, forms
 
 
 @app.route('/')
 def home():
-    return "hellooooooooo"
+    return render_template('home.html')
 
 
-@app.route('/login')
-def login():
-    partner_form = forms.PartnerForm()
-    admin_form = forms.AdminForm()
-    return render_template('login.html',
-                           partner_form=partner_form,
-                           admin_form=admin_form)
+@app.route('/unlock', methods=['GET', 'POST'])
+def unlock():
+    form = forms.PartnerForm(request.form)
+    if form.validate_on_submit():
+        partner = models.Partner.query.filter_by(key=form.key.data).first()
+        if partner is not None:
+            if partner.is_active():
+                login_user(partner)
+                flash('Full access unlocked for {}'.format(partner.name),
+                      'success')
+                return redirect(request.args.get('next') or url_for('home'))
+            else:
+                form.key.errors.append('This access key for {} is currently '
+                                       'disabled.'.format(partner.name))
+        else:
+            form.key.errors.append('That key could not be found.')
+    return render_template('login.html', form=form)
     # session.clear()
     # from models import User
     # phil = User.query.get(1)
     # login_user(phil)
     # return redirect(url_for('home'))
     # return "you need ta login na"
+
+
+@app.route('/lock')
+def lock():
+    logout_user()
+    return redirect(url_for('home'))
+
+
+@app.route('/restricted')
+@login_required
+def restricted():
+    return "lalala"
+
 
 @app.route('/overview-sample')
 def mock_overview():
