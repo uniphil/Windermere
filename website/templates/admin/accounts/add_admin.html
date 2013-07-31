@@ -1,0 +1,39 @@
+{% extends 'admin/w_master.html' %}
+
+{% macro horizontal_input(input, labeled=true) %}
+    <div class="control-group{% if input.errors %} warning{% endif %}">
+        {% if labeled %}
+            <label class="control-label" for="{{ input.id }}">{{ input.label.text }}</label>
+        {% endif %}
+        <div class="controls">
+            {{ input }}
+            {% if input.errors %}
+                <span class="help-inline">{{ input.errors.0 }}</span>
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}
+
+{% block body %}
+    <section>
+        <h2>Add an Administrator</h2>
+        <p>Administrator accounts have full access to add, modify, and remove all content and accounts.</p>
+        <form action="{{ url_for('accounts.add_admin') }}" method="post" class="form-horizontal">
+            {{ form.csrf_token }}
+            {{ horizontal_input(form.name) }}
+            {{ horizontal_input(form.username) }}
+            {{ horizontal_input(form.password) }}
+            {% set buttons='
+                <button type="submit" class="btn btn-success">
+                    <i class="icon-plus icon-white"></i> Add Admin
+                </button>
+                <a href="' + url_for('accounts.index') + '" class="btn btn-link">
+                    Cancel
+                </a>
+            ' %}
+            {{ horizontal_input(buttons|safe, labeled=false) }}
+        </form>
+
+    </section>
+
+{% endblock %}

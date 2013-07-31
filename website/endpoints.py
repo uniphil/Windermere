@@ -29,13 +29,7 @@ def unlock():
                                        'disabled.'.format(partner.name))
         else:
             form.key.errors.append('That key could not be found.')
-    return render_template('login.html', form=form)
-    # session.clear()
-    # from models import User
-    # phil = User.query.get(1)
-    # login_user(phil)
-    # return redirect(url_for('home'))
-    # return "you need ta login na"
+    return render_template('unlock.html', form=form)
 
 
 @app.route('/lock')

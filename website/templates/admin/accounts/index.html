@@ -23,11 +23,20 @@
                             <a href="{{ url_for('accounts.enable_partner', id=partner.id) }}">enable</a>
                         {% else %}
                             <span class="text-success"><i class="icon-ok"></i> Active</span>
+                            <small class="muted">{{ partner.last_active|since }}</small>
                             <a href="{{ url_for('accounts.disable_partner', id=partner.id)}}" class="btn btn-small btn-link row-hover-show">disable</a>
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{{ url_for('accounts.remove_partner', id=partner.id) }}" class="pull-right row-hover-show"><i class="icon-remove"></i></a>
+                        <a href="{{ url_for('accounts.remove_partner', id=partner.id) }}" class="pull-right row-hover-show" title="Remove Partner"><i class="icon-remove"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">
+                        <div class="alert">
+                            <strong>No Partners!</strong> There are no partners in the database.
+                        </div>
                     </td>
                 </tr>
             {% endfor %}
@@ -36,7 +45,47 @@
     </section>
     <section>
         <h2>Admins <small>Manage content and accounts</small></h2>
-        <a href="{{ url_for('accounts.add_partner') }}" class="btn btn-success"><i class="icon-plus icon-white"></i> Add an Admin</a>
+        <table class="table table-hover">
+            <tr>
+                <td></td>
+                <th>Email Address</th>
+                <th>Password</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+            {% for admin in admins %}
+                <tr>
+                    <th>{{ admin.name }} <span class="muted">/ {{ admin.username }}</span></th>
+                    <td>{{ admin.email }}</td>
+                    <td>
+                        <code title="Password Hidden">&elips;</code>
+                        <a href="{{ url_for('accounts.reset_password') }}" class="btn btn-small btn-link row-hover-show">reset</a>
+                    </td>
+                    <td>
+                        {% if admin.disabled %}
+                            <span class="text-warning"><i class="icon-minus-sign"></i> Disabled</span>
+                            <a href="{{ url_for('accounts.enable_admin', id=admin.id) }}">enable</a>
+                        {% else %}
+                            <span class="text-success"><i class="icon-ok"></i> Active</span>
+                            <small class="muted">{{ admin.last_active|since }}</small>
+                            <a href="{{ url_for('accounts.disable_admin', id=admin.id) }}" class="btn btn-small btn-link row-hover-show">disable</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ url_for('acounts.remove_admin', id=admin.id) }}" class="pull-right row-hover-show" title="Remove Admin"><i lass="icon-remove"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">
+                        <div class="alert">
+                            <strong>No Admins!</strong> There are no administrators in the database.
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <a href="{{ url_for('accounts.add_admin') }}" class="btn btn-success"><i class="icon-plus icon-white"></i> Add an Admin</a>
     </section>
 
 {% endblock %}

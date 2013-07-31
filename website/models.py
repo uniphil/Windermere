@@ -25,10 +25,10 @@ class Partner(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     key = db.Column(db.String(24), unique=True)
     name = db.Column(db.String(80), unique=True)
-    disabled = db.Column(db.Boolean())
+    disabled = db.Column(db.Boolean)
+    last_active = db.Column(db.DateTime)
 
     def __init__(self):
-        # self.name = name
         self.new_key()
         self.disabled = False
 
@@ -44,9 +44,12 @@ class Partner(db.Model, UserMixin):
 
 class Admin(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), unique=True)
+    email = db.Column(db.String(80), unique=True)
     username = db.Column(db.String(80), unique=True)
     password_hash = db.Column(db.String(87))
     disabled = db.Column(db.Boolean())
+    last_active = db.Column(db.DateTime)
 
     def __init__(self, *args, **kwargs):
         super(Admin, self).__init__(*args, **kwargs)

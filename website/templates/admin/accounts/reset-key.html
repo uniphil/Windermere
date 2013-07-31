@@ -7,8 +7,8 @@
         
         <form action="{{ url_for('accounts.reset_partner_key', id=partner.id) }}" method="post" class="form-inline">
             <input type="hidden" name="confirm" value="yes" />
-            <a href="{{ url_for('accounts.index') }}" class="btn"><i class="icon-arrow-left"></i> Cancel and go back</a>
-            <button type="submit" class="btn btn-danger"><i class="icon-minus-sign icon-white"></i> Reset Key for {{ partner.name }}</button>
+            <button type="submit" class="btn btn-danger"><i class="icon-exclamation-sign icon-white"></i> Reset Key for {{ partner.name }}</button>
+            <a href="{{ url_for('accounts.index') }}" class="btn btn-link">Cancel</a>
         </form>
 
     </section>

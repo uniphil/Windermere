@@ -7,7 +7,7 @@
 from flask import request, flash, redirect, url_for
 from flask.ext.admin import Admin, BaseView, expose
 from flask.ext.admin.contrib.sqlamodel import ModelView
-from website import app, models
+from website import app, models, forms
 admin = Admin(app, name='Windermere Admin')
 
 
@@ -30,6 +30,7 @@ admin.add_view(PhotoView(name='Photos'))
 
 
 class AccountsView(BaseView):
+
     @expose('/')
     def index(self):
         partners = models.Partner.query.all()
@@ -74,7 +75,7 @@ class AccountsView(BaseView):
         if request.args.get('confirm') == 'yes':
             models.db.session.delete(partner)
             models.db.session.commit()
-            flash('Deleted partner {}.'.format(partner.name))
+            flash('Removed partner {}.'.format(partner.name), 'info')
             return redirect(url_for('.index'))
         return self.render('admin/accounts/remove.html', partner=partner)
 
@@ -90,6 +91,13 @@ class AccountsView(BaseView):
                   'success')
             return redirect(url_for('.index'))
         return self.render('admin/accounts/add.html')
+
+    @expose('/admin/add', methods=['GET', 'POST'])
+    def add_admin(self):
+        form = forms.AdminForm(request.form)
+        if form.validate_on_submit():
+            print "validated!"
+        return self.render('admin/accounts/add_admin.html', form=form)
 
 
 admin.add_view(AccountsView(name='Accounts', endpoint='accounts'))
