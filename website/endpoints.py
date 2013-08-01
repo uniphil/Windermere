@@ -21,7 +21,7 @@ def unlock():
         if partner is not None:
             if partner.is_active():
                 login_user(partner)
-                flash('Full access unlocked for {}'.format(partner.name),
+                flash('Restricted access unlocked for {}'.format(partner.name),
                       'success')
                 return redirect(request.args.get('next') or url_for('home'))
             else:
