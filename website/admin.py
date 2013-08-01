@@ -56,7 +56,7 @@ class AccountsView(BaseView):
         models.db.session.add(partner)
         models.db.session.commit()
         flash('Disabled {}. They will not have access to protected content '
-              'until re-enabled.'.format(partner.name))
+              'until re-enabled.'.format(partner.name), 'info')
         return redirect(url_for('.index'))
 
     @expose('/partner/<int:id>/enable')
@@ -66,7 +66,7 @@ class AccountsView(BaseView):
         models.db.session.add(partner)
         models.db.session.commit()
         flash('Re-enabled access to protected content for {}.'
-              .format(partner.name), 'info')
+              .format(partner.name), 'success')
         return redirect(url_for('.index'))
 
     @expose('/partner/<int:id>/remove')
@@ -96,8 +96,50 @@ class AccountsView(BaseView):
     def add_admin(self):
         form = forms.AdminForm(request.form)
         if form.validate_on_submit():
-            print "validated!"
+            new_admin = models.Admin()
+            new_admin.name = form.name.data
+            new_admin.username = form.username.data
+            new_admin.set_password(form.password.data)
+            models.db.session.add(new_admin)
+            models.db.session.commit()
+            flash('Successfully added new admin {}.'.format(new_admin.name),
+                  'success')
+            return redirect(url_for('.index'))
         return self.render('admin/accounts/add_admin.html', form=form)
+
+    @expose('/admin/<int:id>/new-password')
+    def new_password(self, id):
+        return 'passwd'
+
+    @expose('/admin/<int:id>/disable')
+    def disable_admin(self, id):
+        the_admin = models.Admin.query.get(id)
+        the_admin.disabled = True
+        models.db.session.add(the_admin)
+        models.db.session.commit()
+        flash('Disabled {}. They will be restricted to public access only.'
+              .format(the_admin.name), 'info')
+        return redirect(url_for('.index'))
+
+    @expose('/admin/<int:id>/enable')
+    def enable_admin(self, id):
+        the_admin = models.Admin.query.get(id)
+        the_admin.disabled = False
+        models.db.session.add(the_admin)
+        models.db.session.commit()
+        flash('Re-enabled administrator {}.'.format(the_admin.name), 'success')
+        return redirect(url_for('.index'))
+
+    @expose('/admin/<int:id>/remove', methods=['GET', 'POST'])
+    def remove_admin(self, id):
+        the_admin = models.Admin.query.get(id)
+        if request.form.get('confirm') == 'yes':
+            models.db.session.delete(the_admin)
+            models.db.session.commit()
+            flash('Removed administrator {}.'.format(the_admin.name), 'info')
+            return redirect(url_for('.index'))
+        return self.render('admin/accounts/remove_admin.html', admin=the_admin)
+
 
 
 admin.add_view(AccountsView(name='Accounts', endpoint='accounts'))

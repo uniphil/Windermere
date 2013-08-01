@@ -2,7 +2,7 @@
 
 {% block body %}
     <section>
-        <h2>Partners <small>Granted access to all content</small></h2>
+        <h2>Partners <small>Granted access to restricted content</small></h2>
         <table class="table table-hover">
             <tr>
                 <td></td>
@@ -48,18 +48,18 @@
         <table class="table table-hover">
             <tr>
                 <td></td>
-                <th>Email Address</th>
+                <th>Username</th>
                 <th>Password</th>
                 <th>Status</th>
                 <th></th>
             </tr>
             {% for admin in admins %}
                 <tr>
-                    <th>{{ admin.name }} <span class="muted">/ {{ admin.username }}</span></th>
-                    <td>{{ admin.email }}</td>
+                    <th>{{ admin.name }}</th>
+                    <td>{{ admin.username }}</td>
                     <td>
-                        <code title="Password Hidden">&elips;</code>
-                        <a href="{{ url_for('accounts.reset_password') }}" class="btn btn-small btn-link row-hover-show">reset</a>
+                        <code title="Password Hidden">&lt;hidden&gt;</code>
+                        <a href="{{ url_for('accounts.new_password', id=admin.id) }}" class="btn btn-small btn-link row-hover-show">reset</a>
                     </td>
                     <td>
                         {% if admin.disabled %}
@@ -72,7 +72,7 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{{ url_for('acounts.remove_admin', id=admin.id) }}" class="pull-right row-hover-show" title="Remove Admin"><i lass="icon-remove"></i></a>
+                        <a href="{{ url_for('accounts.remove_admin', id=admin.id) }}" class="pull-right row-hover-show" title="Remove Admin"><i class="icon-remove"></i></a>
                     </td>
                 </tr>
             {% else %}

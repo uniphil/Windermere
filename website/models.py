@@ -45,7 +45,6 @@ class Partner(db.Model, UserMixin):
 class Admin(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=True)
-    email = db.Column(db.String(80), unique=True)
     username = db.Column(db.String(80), unique=True)
     password_hash = db.Column(db.String(87))
     disabled = db.Column(db.Boolean())
