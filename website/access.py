@@ -30,4 +30,8 @@ def load_user(userid):
         return partner
     else:
         int_uid = int(userid)
-        return Admin.query.filter_by(id=int_uid).first()
+        the_admin = Admin.query.filter_by(id=int_uid).first()
+        the_admin.last_active = datetime.now()
+        db.session.add(the_admin)
+        db.session.commit()
+        return the_admin
