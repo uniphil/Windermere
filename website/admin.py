@@ -40,18 +40,18 @@ class AccountsView(BaseView):
 
     @expose('/partner/<int:id>/reset-key', methods=['GET', 'POST'])
     def reset_partner_key(self, id):
-        partner = models.Partner.query.get(id)
+        partner = models.Partner.query.get_or_404(id)
         if request.form.get('confirm') == 'yes':
             partner.new_key()
             models.db.session.add(partner)
             models.db.session.commit()
-            flash('Access key reset for {}'.format(partner.name))
+            flash('Access key reset for {}'.format(partner.name), 'info')
             return redirect(url_for('.index'))
         return self.render('admin/accounts/reset-key.html', partner=partner)
 
     @expose('/partner/<int:id>/disable')
     def disable_partner(self, id):
-        partner = models.Partner.query.get(id)
+        partner = models.Partner.query.get_or_404(id)
         partner.disabled = True
         models.db.session.add(partner)
         models.db.session.commit()
@@ -61,7 +61,7 @@ class AccountsView(BaseView):
 
     @expose('/partner/<int:id>/enable')
     def enable_partner(self, id):
-        partner = models.Partner.query.get(id)
+        partner = models.Partner.query.get_or_404(id)
         partner.disabled = False
         models.db.session.add(partner)
         models.db.session.commit()
@@ -71,7 +71,7 @@ class AccountsView(BaseView):
 
     @expose('/partner/<int:id>/remove')
     def remove_partner(self, id):
-        partner = models.Partner.query.get(id)
+        partner = models.Partner.query.get_or_404(id)
         if request.args.get('confirm') == 'yes':
             models.db.session.delete(partner)
             models.db.session.commit()
@@ -107,13 +107,20 @@ class AccountsView(BaseView):
             return redirect(url_for('.index'))
         return self.render('admin/accounts/add_admin.html', form=form)
 
-    @expose('/admin/<int:id>/new-password')
+    @expose('/admin/<int:id>/new-password', methods=['GET', 'POST'])
     def new_password(self, id):
-        return 'passwd'
+        the_admin = models.Admin.query.get_or_404(id)
+        if request.method == 'POST' and 'password' in request.form:
+            the_admin.set_password(request.form['password'])
+            models.db.session.add(the_admin)
+            models.db.session.commit()
+            flash('New password set for {}'.format(the_admin.name), 'info')
+            return redirect(url_for('.index'))
+        return self.render('admin/accounts/password.html', admin=the_admin)
 
     @expose('/admin/<int:id>/disable')
     def disable_admin(self, id):
-        the_admin = models.Admin.query.get(id)
+        the_admin = models.Admin.query.get_or_404(id)
         the_admin.disabled = True
         models.db.session.add(the_admin)
         models.db.session.commit()
@@ -123,7 +130,7 @@ class AccountsView(BaseView):
 
     @expose('/admin/<int:id>/enable')
     def enable_admin(self, id):
-        the_admin = models.Admin.query.get(id)
+        the_admin = models.Admin.query.get_or_404(id)
         the_admin.disabled = False
         models.db.session.add(the_admin)
         models.db.session.commit()
@@ -132,7 +139,7 @@ class AccountsView(BaseView):
 
     @expose('/admin/<int:id>/remove', methods=['GET', 'POST'])
     def remove_admin(self, id):
-        the_admin = models.Admin.query.get(id)
+        the_admin = models.Admin.query.get_or_404(id)
         if request.form.get('confirm') == 'yes':
             models.db.session.delete(the_admin)
             models.db.session.commit()
