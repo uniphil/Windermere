@@ -27,6 +27,7 @@ class Partner(db.Model, UserMixin):
     name = db.Column(db.String(80), unique=True)
     disabled = db.Column(db.Boolean)
     last_active = db.Column(db.DateTime)
+    is_admin = False
 
     def __init__(self):
         self.new_key()
@@ -49,6 +50,7 @@ class Admin(db.Model, UserMixin):
     password_hash = db.Column(db.String(87))
     disabled = db.Column(db.Boolean())
     last_active = db.Column(db.DateTime)
+    is_admin = True
 
     def __init__(self, *args, **kwargs):
         super(Admin, self).__init__(*args, **kwargs)

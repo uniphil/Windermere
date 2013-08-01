@@ -5,32 +5,64 @@
 #
 
 from flask import request, flash, redirect, url_for
-from flask.ext.admin import Admin, BaseView, expose
+from flask.ext.login import current_user, login_user, logout_user
+from flask.ext.admin import Admin, BaseView, AdminIndexView, expose
 from flask.ext.admin.contrib.sqlamodel import ModelView
 from website import app, models, forms
-admin = Admin(app, name='Windermere Admin')
 
 
-class DocumentView(BaseView):
+class HomeView(AdminIndexView):
+    @expose('/')
+    def index(self):
+        if not (current_user.is_authenticated() and current_user.is_admin):
+            return redirect(url_for('.login'))
+        return self.render('admin/overview.html')
+
+    @expose('/login', methods=['GET', 'POST'])
+    def login(self):
+        form = forms.LoginForm(request.form)
+        if form.validate_on_submit():
+            ragequit = Exception('AAHHAHAHARRMRRMAHARMARA')
+            the_admin = models.Admin.query.filter_by(
+                            username=form.username.data).first()
+            if the_admin is None:
+                raise ragequit
+            if not the_admin.check_password(form.password.data):
+                raise ragequit
+            login_user(the_admin)
+            flash("Hello {}, you have successfully logged in.".format(
+                the_admin.name), 'success')
+            return redirect(url_for(request.args.get('next') or 'admin.index'))
+        return self.render('admin/login.html', form=form)
+
+    @expose('/logout')
+    def logout(self):
+        logout_user()
+        return redirect(url_for('home'))
+
+
+class AdminView(BaseView):
+    def is_accessible(self):
+        return current_user.is_authenticated() and current_user.is_admin
+
+
+class DocumentView(AdminView):
     @expose('/')
     def index(self):
         return self.render('admin/documents.html')
 
 
-admin.add_view(DocumentView(name='Documents'))
 
 
-class PhotoView(BaseView):
+class PhotoView(AdminView):
     @expose('/')
     def index(self):
         return self.render('admin/photos.html')
 
-admin.add_view(PhotoView(name='Photos'))
 
 
 
-class AccountsView(BaseView):
-
+class AccountsView(AdminView):
     @expose('/')
     def index(self):
         partners = models.Partner.query.all()
@@ -149,4 +181,7 @@ class AccountsView(BaseView):
 
 
 
+admin = Admin(app, name='Windermere Admin', index_view=HomeView(name="Overview"))
+admin.add_view(DocumentView(name='Documents'))
+admin.add_view(PhotoView(name='Photos'))
 admin.add_view(AccountsView(name='Accounts', endpoint='accounts'))
