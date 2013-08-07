@@ -12,6 +12,7 @@ try:
 except ImportError:
     print "could not import app..."
 
+
 if __name__ == '__main__':
     import sys
     cmd = sys.argv[1]
@@ -30,6 +31,16 @@ if __name__ == '__main__':
             except OSError:
                 print 'no database at dev-db.sqlite3. ignoring...'
         db.create_all()
+
+    if cmd == 'mkphil':
+        from website import models
+        phil = models.Admin()
+        phil.name = 'Phil Schleihauf'
+        phil.username = 'phil'
+        phil.set_password('asdf')
+        models.db.session.add(phil)
+        models.db.session.commit()
+
 
     elif cmd == 'server':
         app.run(debug=True)
