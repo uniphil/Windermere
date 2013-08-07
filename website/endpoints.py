@@ -44,6 +44,14 @@ def restricted():
     return "lalala"
 
 
+@app.route('/content/<string:coarse>/')
+@app.route('/content/<string:coarse>/<string:medium>/')
+@app.route('/content/<string:coarse>/<string:medium>/<string:fine>/')
+def topic_overview(coarse, medium=None, fine=None):
+    return render_template('content-overview.html',
+                           coarse=coarse, medium=medium, fine=fine)
+
+
 @app.route('/overview-sample')
 def mock_overview():
     class Content(list):

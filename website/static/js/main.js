@@ -1,0 +1,1 @@
+$('.ttbutton').tooltip({container: 'body'});
