@@ -20,7 +20,7 @@ AnonymousUserMixin.is_admin = False
 
 @login_manager.user_loader
 def load_user(userid):
-    if userid.startswith('k+'):
+    if userid.startswith('k_'):
         partner = Partner.query.filter_by(key=userid).first()
         if partner is None:
             return None

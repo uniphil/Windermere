@@ -34,7 +34,7 @@ class Partner(db.Model, UserMixin):
         self.disabled = False
 
     def new_key(self):
-        self.key = 'k+' + keygen(21)
+        self.key = 'k_' + keygen(21).replace('-', '_')
 
     def get_id(self):
         return self.key

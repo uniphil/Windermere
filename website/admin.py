@@ -11,6 +11,10 @@ from flask.ext.admin.contrib.sqlamodel import ModelView
 from website import app, models, forms
 
 
+class AuthException(Exception):
+    pass
+
+
 class HomeView(AdminIndexView):
     @expose('/')
     def index(self):
@@ -22,17 +26,22 @@ class HomeView(AdminIndexView):
     def login(self):
         form = forms.LoginForm(request.form)
         if form.validate_on_submit():
-            ragequit = Exception('AAHHAHAHARRMRRMAHARMARA')
-            the_admin = models.Admin.query.filter_by(
-                            username=form.username.data).first()
-            if the_admin is None:
-                raise ragequit
-            if not the_admin.check_password(form.password.data):
-                raise ragequit
-            login_user(the_admin)
-            flash("Hello {}, you have successfully logged in.".format(
-                the_admin.name), 'success')
-            return redirect(url_for(request.args.get('next') or 'admin.index'))
+            try:
+                the_admin = models.Admin.query.filter_by(
+                                username=form.username.data).first()
+                if the_admin is None:
+                    form.username.errors.append('Username not found :|')
+                    raise AuthException
+                if not the_admin.check_password(form.password.data):
+                    form.password.errors.append('Password did not check out :(')
+                    raise AuthException
+                login_user(the_admin)
+                flash("Hello {}, you have successfully logged in.".format(
+                    the_admin.name), 'success')
+                return redirect(url_for(request.args.get('next') or
+                                        'admin.index'))
+            except AuthException:
+                pass
         return self.render('admin/login.html', form=form)
 
     @expose('/logout')
@@ -111,6 +120,22 @@ class AccountsView(AdminView):
             return redirect(url_for('.index'))
         return self.render('admin/accounts/remove.html', partner=partner)
 
+    @expose('/partner/<int:id>/edit', methods=['GET', 'POST'])
+    def edit_partner(self, id):
+        partner = models.Partner.query.get_or_404(id)
+        errors = []
+        if request.method == 'POST':
+            if request.form.get('name'):
+                partner.name = request.form['name']
+                models.db.session.add(partner)
+                models.db.session.commit()
+                flash('Saved changes to {}'.format(partner.name), 'info')
+                return redirect(url_for('.index'))
+            else:
+                errors.append('Gotta have a name...')
+        return self.render('admin/accounts/add.html', verb='Edit',
+                           action='save', ico='pencil', name=partner.name)
+
     @expose('/partner/add', methods=['GET', 'POST'])
     def add_partner(self):
         if request.method == 'POST':
@@ -122,7 +147,8 @@ class AccountsView(AdminView):
             flash('Successfully added "{}" as a partner'.format(partner.name),
                   'success')
             return redirect(url_for('.index'))
-        return self.render('admin/accounts/add.html')
+        return self.render('admin/accounts/add.html', verb='Add', action='Add',
+                           ico='plus')
 
     @expose('/admin/add', methods=['GET', 'POST'])
     def add_admin(self):
@@ -137,18 +163,26 @@ class AccountsView(AdminView):
             flash('Successfully added new admin {}.'.format(new_admin.name),
                   'success')
             return redirect(url_for('.index'))
-        return self.render('admin/accounts/add_admin.html', form=form)
+        return self.render('admin/accounts/add_admin.html', form=form,
+                           verb='Add', action='Add', ico='plus')
 
-    @expose('/admin/<int:id>/new-password', methods=['GET', 'POST'])
-    def new_password(self, id):
+    @expose('/admin/<int:id>/edit', methods=['GET', 'POST'])
+    def edit_admin(self, id):
         the_admin = models.Admin.query.get_or_404(id)
-        if request.method == 'POST' and 'password' in request.form:
-            the_admin.set_password(request.form['password'])
+        form = forms.AdminForm(request.form, the_admin)
+        form.password.validators = []
+        if form.validate_on_submit():
+            the_admin.name = form.name.data
+            the_admin.username = form.username.data
+            if form.password.data:
+                the_admin.set_password(form.password.data)
             models.db.session.add(the_admin)
             models.db.session.commit()
-            flash('New password set for {}'.format(the_admin.name), 'info')
+            flash('Successfully saved settings for {}.'.format(the_admin.name),
+                  'info')
             return redirect(url_for('.index'))
-        return self.render('admin/accounts/password.html', admin=the_admin)
+        return self.render('admin/accounts/add_admin.html', form=form,
+                           verb='Edit', action='Save', ico='pencil')
 
     @expose('/admin/<int:id>/disable')
     def disable_admin(self, id):

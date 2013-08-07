@@ -2,12 +2,12 @@
 
 {% block body %}
     <section>
-        <h2>Add a Partner</h2>
+        <h2>{{ verb }} {{ (name + '<small>(Partner)</small>'|safe) if name else 'a Partner' }}</h2>
         
-        <form action="{{ url_for('accounts.add_partner') }}" method="post" class="form-inline">
+        <form action="" method="post" class="form-inline">
             <label class="control-label" for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Name" required="required" />
-            <button type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> Add</button>
+            <input type="text" id="name" name="name" placeholder="Name" required="required" value="{{ name }}" />
+            <button type="submit" class="btn btn-success"><i class="icon-{{ ico }} icon-white"></i> {{ action }}</button>
             <a href="{{ url_for('accounts.index') }}" class="btn btn-link">Cancel</a>
         </form>
 

@@ -19,6 +19,17 @@
     <div class="">
         <form method="post" action="{{ url_for('admin.login', next=request.args.get('next')) }}" class="form-horizontal">
             {{ form.csrf_token }}
+
+            {% if form.errors %}
+                <ul class="list-unstyled">
+                    {% for errlist in form.errors.values() %}
+                        {% for message in errlist %}
+                            <li class="alert">{{ message }}<a href="#" class="close" data-dismiss="alert" title="dismiss">&times;</a></li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
             <div class="form-group">
                 <label for="{{ form.username.id }}" class="control-label col-sm-2">{{ form.username.label.text }}</label>
                 <div class="col-sm-6">
@@ -27,7 +38,8 @@
                         id="{{ form.username.id }}"
                         name="{{ form.username.name }}"
                         placeholder="{{ form.username.label.text }}"
-                        required="required" />
+                        required="required"
+                        value="{{ form.username.value }}" />
                 </div>
             </div>
             <div class="form-group">
@@ -46,13 +58,6 @@
                     <button type="submit" class="btn btn-primary pull-right">Log In</button>
                 </div>
             </div>
-            {% if form.key %}
-                <ul class="list-unstyled">
-                    {% for error in form.key.errors %}
-                        <li class="alert">{{ error }}<a href="#" class="close" data-dismiss="alert" title="dismiss">&times;</a></li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
         </form>
     </div>
 {% endblock %}

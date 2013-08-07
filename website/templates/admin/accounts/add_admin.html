@@ -15,17 +15,20 @@
 {% endmacro %}
 
 {% block body %}
-    <section>
-        <h2>Add an Administrator</h2>
-        <p>Administrator accounts have full access to add, modify, and remove all content and accounts.</p>
-        <form action="{{ url_for('accounts.add_admin') }}" method="post" class="form-horizontal">
+
+    <section class="page col-sm-10 col-lg-8 col-offset-2">
+        <header class="page-header">
+            <h2>{{ verb }} {{ (form.name.data + ' <small>(Administrator)</small>'|safe) if form.name.data else 'an Administrator' }}</h2>
+            <p>Administrator accounts have full access to add, modify, and remove all content and accounts.</p>
+        </header>
+        <form action="" method="post" class="form-horizontal">
             {{ form.csrf_token }}
             {{ horizontal_input(form.name) }}
             {{ horizontal_input(form.username) }}
             {{ horizontal_input(form.password) }}
             {% set buttons='
                 <button type="submit" class="btn btn-success">
-                    <i class="icon-plus icon-white"></i> Add Admin
+                    <i class="icon-' + ico + ' icon-white"></i> ' + action + ' Admin
                 </button>
                 <a href="' + url_for('accounts.index') + '" class="btn btn-link">
                     Cancel
@@ -33,7 +36,6 @@
             ' %}
             {{ horizontal_input(buttons|safe, labeled=false) }}
         </form>
-
     </section>
 
 {% endblock %}
