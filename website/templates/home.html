@@ -1,10 +1,92 @@
-{% extends "base-simple.html" %}
+{% extends "base-full.html" %}
 
 {% set title = "Windermere" %}
 
 {% block page_content %}
-  <div class="page-header">
+  <div class="page-header cover" data-bg="{{ bg }}">
     <h1>The Windermere Consortium</h1>
   </div>
-  <p>The high cost of exploration drilling in modern offshore areas necessitates a highly resolved understanding of the evolution and architectural elements of passive-margin turbidite systems. The Windermere Supergroup in the south-western Canadian Rockies is a more than 100,000 km2 deep-marine turbidite system hich is analogous in both scale and tectonic setting to modern passive margin petroleum plays. In addition, the superb vertical and lateral continuity of these alpine exposures will allow us to bridge the gap between the features seen on modern fans, in ancient examples, and on industry seismic reflection profiles. Results provide improved appreciation and predictive capabilities in 2D and 3D seismic data from modern passive margin turbidite systems.</p>
+
+  <div class="row">
+    <div class="col-sm-6 col-lg-8">
+      <h3>Summary</h3>
+      <p>The high cost of exploration drilling in modern offshore areas necessitates a highly resolved understanding of the evolution and architectural elements of passive-margin turbidite systems. The Windermere Supergroup in the south-western Canadian Rockies is a more than 100,000 km<sup>2</sup> deep-marine turbidite system hich is analogous in both scale and tectonic setting to modern passive margin petroleum plays. In addition, the superb vertical and lateral continuity of these alpine exposures will allow us to bridge the gap between the features seen on modern fans, in ancient examples, and on industry seismic reflection profiles. Results provide improved appreciation and predictive capabilities in 2D and 3D seismic data from modern passive margin turbidite systems.</p>
+    </div>
+
+    <div class="col-sm-6 col-lg-4">
+      <h3>People</h3>
+      <ul class="media-list">
+        <li class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="http://lorempixel.com/42/42/people/8" alt="Bill Arnott" />
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading">Bill Arnott</h4>
+            <p>whatever</p>
+          </div>
+        </li>
+        <li class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="http://lorempixel.com/42/42/people/9" alt="Bill Arnott" />
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading">Viktor Terlaky</h4>
+            <p>however</p>
+          </div>
+        </li>
+        <li class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="http://lorempixel.com/42/42/people/6" alt="Bill Arnott" />
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading">Jonathan Rocheleau</h4>
+            <p>whoever</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row">
+    <div class="col-sm-4 col-lg-4">
+      <h3>News</h3>
+
+      <h4>CUPC 2013 <small>23 Sept 2013</small></h4>
+      <p>This Year's Canadian Undergraduage Physics Conference will be attended by two members of the Windermere Consortium: Liz Sullivan and Seth Nancy.</p>
+
+      <h4>RETHINK <small>4 Nov 2013</small></h4>
+      <p>James Bortolus will be presenting his research at Engineers Without Borders' development conference in January.</p>
+    </div>
+
+    <div class="col-sm-4 col-lg-4">
+      <h3>Studying Here</h3>
+      <p>this is how</p>
+    </div>
+
+    <div class="col-sm-4 col-lg-4">
+      <h3>Contact Us</h3>
+      <p>Send an email to Bill at <a href="mailto:warnott@uottawa.ca?subject=Question+about+the+Windermere+Consortium" title="Send Bill an email">warnott@uottawa.ca</a>, or use the contact form below:</p>
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <label for="from" class="col-xs-3 col-sm-3 col-md-2 control-label">From:</label>
+          <div class="col-xs-9 col-sm-9 col-md-10">
+            <input type="email" class="form-control" id="from" name="from" placeholder="Enter your email" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="message" class="sr-only control-label">Message</label>
+          <div class="col-sm-12">
+            <textarea class="form-control" name="message" rows="5" placeholder="Write a message..."></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <button type="submit" class="btn btn-default"><span data-icon="m">&nbsp;</span> Send Message</button>
+          </div>
+        </div>
+    </div>
+  </div>
+
 {% endblock %}

@@ -2,6 +2,8 @@
 # endpoints.py
 # 
 
+import os
+import random
 from flask import request, session, render_template, redirect, url_for, flash
 from flask.ext.login import (current_user, login_required, login_user,
                              logout_user)
@@ -10,8 +12,17 @@ from . import app, models, forms
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    form = forms.PartnerForm(request.form)
+    root = os.path.join('website', 'static')
+    static = os.path.join('img', 'cover', 'resized')
+    cover = random.choice(os.listdir(os.path.join(root, static)))
+    bg = url_for('static', filename=os.path.join(static, cover))
+    return render_template('home.html', form=form, bg=bg)
 
+
+@app.route('/people')
+def people():
+    return render_template('people.html')
 
 @app.route('/unlock', methods=['GET', 'POST'])
 def unlock():
@@ -47,6 +58,7 @@ def restricted():
 @app.route('/content/<string:coarse>/')
 @app.route('/content/<string:coarse>/<string:medium>/')
 @app.route('/content/<string:coarse>/<string:medium>/<string:fine>/')
+#@login_required
 def topic_overview(coarse, medium=None, fine=None):
     return render_template('content-overview.html',
                            coarse=coarse, medium=medium, fine=fine)
@@ -67,3 +79,9 @@ def mock_overview():
     ]
     
     return render_template('mock-overview.html', contents=contents)
+
+
+@app.errorhandler(404)
+def not_found(error):
+    print dir(error)
+    return render_template('error.html', error=error), 404

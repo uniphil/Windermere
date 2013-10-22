@@ -4,19 +4,23 @@
 {% block content %}
   <nav class="navbar navbar-inverse">
     {% block nav %}
-      <a href="{{ url_for('home') }}" class="navbar-brand">Windermere</a></li>
-      {% if current_user.is_authenticated() %}
-        <p class="navbar-text pull-right">{{ current_user.name }} <span data-icon="l"></span></p>
-      {% endif %}
+      <div class="navbar-header">
+        <a href="{{ url_for('home') }}" class="navbar-brand">Windermere</a>
+      </div>
+      <p class="navbar-text pull-right">
+        {% if current_user.is_authenticated() %}
+          {{ current_user.name }}
+        {% else %}
+          <a href="{{ url_for('unlock') }}" class="btn btn-success btn-xs navbar-button"><span data-icon="k"></span> Partner Access</a>
+        {% endif %}
+      </p>
     {% endblock %}
   </nav>
 
   {% block page %}
-    <div class="row">
-      <div class="page col-sm-10 col-lg-8 col-offset-2">
-        {% block page_content %}
-        {% endblock %}
-      </div>
+    <div class="page col-sm-10 col-lg-8 col-offset-2">
+      {% block page_content %}
+      {% endblock %}
     </div>
   {% endblock %}
 {% endblock %}

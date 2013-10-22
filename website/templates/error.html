@@ -1,0 +1,10 @@
+{% extends "base-full.html" %}
+
+{% set title = error.code %}
+
+{% block page_content %}
+  <div class="page-header">
+    <h1>Oops... {{ error }}</h1>
+  </div>
+  <p>Something went wrong. Sorry about that. <a href="/">Windermere home</a>.</p>
+{% endblock %}

@@ -54,7 +54,7 @@ body {
     height: auto !important;
     height: 100%;
     margin: 0 auto -80px;
-    padding: 0 0 80px;
+    padding: 0 0 100px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -67,4 +67,24 @@ footer {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+.page-header.cover {
+    height: 372px;
+    /*margin-top: -72px;*/
+    /*margin-top: -20px;*/
+    margin-top: -24px;
+    background: #555 url('../img/cover/resized/rockies2.jpg') 50%;
+    position: relative;
+}
+
+.page-header.cover h1 {
+    position: absolute;
+    left: 0;
+    margin: 0;
+    bottom: 0;
+    padding: 0.1em 0.2em 0.1em 0.1em;
+    color: #fff;
+    text-shadow: 0 0 7px #000;
+    background: rgba(0, 0, 0, 0.667);
 }

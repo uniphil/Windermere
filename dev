@@ -1,17 +1,22 @@
 #!/usr/bin/env python2
 
-import os
-import logging
-
-try:
-    import imp
-    imp.load_source('activate_this', 'venv/bin/activate_this.py')
-except IOError:
-    logging.warn('could not source virtualenv venv')
-
-
-from website import app
+def sourc(env_name):
+    import logging
+    try:
+        import imp
+        imp.load_source('activate_this', env_name + '/bin/activate_this.py')
+    except IOError:
+        logging.warn('could not source virtualenv ' + env_name)
 
 
-app.debug = True
-app.run()
+def run_debug():
+    from website import app
+    app.debug = True
+    app.run()
+
+
+if __name__ == '__main__':
+    import sys
+    if (sys.argv) == 1:
+        source(sys.argv[1])
+    run_debug()
