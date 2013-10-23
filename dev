@@ -11,6 +11,8 @@ def sourc(env_name):
 
 def run_debug():
     from website import app
+    from os import environ
+    app.secret_key = environ.get('SECRET_KEY', 'very secure')
     app.debug = True
     app.run()
 
