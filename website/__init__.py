@@ -25,3 +25,5 @@ import access
 import admin
 import endpoints
 import filters
+
+app.debug = True
