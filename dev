@@ -14,7 +14,7 @@ def run_debug():
     from os import environ
     app.secret_key = environ.get('SECRET_KEY', 'very secure')
     app.debug = True
-    app.run(port=49155)
+    app.run()
 
 
 if __name__ == '__main__':
