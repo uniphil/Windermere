@@ -1,10 +1,14 @@
 #!/usr/bin/env python2
 
 try:
+    import os
+    assert "venv" in os.listdir('.'), "no venv here.."
     import imp
     imp.load_source('activate_this', 'venv/bin/activate_this.py')
+except AssertionError:
+    print "no venv to activate. continuing..."
 except IOError:
-    print "could not activate virtualenv for util.py..."
+    print "could not activate virtualenv '{}' for util.py...".format('venv')
 
 
 try:
@@ -16,6 +20,7 @@ except ImportError:
 if __name__ == '__main__':
     import sys
     cmd = sys.argv[1]
+    print "running '{}'...".format(cmd)
 
     if cmd == 'activate':
         import os
@@ -32,7 +37,7 @@ if __name__ == '__main__':
                 print 'no database at dev-db.sqlite3. ignoring...'
         db.create_all()
 
-    if cmd == 'mkphil':
+    elif cmd == 'mkphil':
         from website import models
         phil = models.Admin()
         phil.name = 'Phil Schleihauf'
