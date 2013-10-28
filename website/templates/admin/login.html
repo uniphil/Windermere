@@ -12,7 +12,8 @@
   {% endwith %}
   <div class="page-header">
     <h1>Restricted Access <small>Admins Only</small></h1>
-    <p>Please provide your login credentials to continue</p>
+    <p class="alert alert-info">Looking for access to restricted content? <a class="btn btn-xs btn-success" href="{{ url_for('unlock') }}"><span data-icon="k"></span> Partner Access</a></p>
+    <p>Please provide your administrative login credentials to continue.</p>
   </div>
   <div class="container">
     <form method="post" action="{{ url_for('admin.login', next=request.args.get('next')) }}" class="form-horizontal">
@@ -22,7 +23,7 @@
         <ul class="list-unstyled">
           {% for errlist in form.errors.values() %}
             {% for message in errlist %}
-              <li class="alert">{{ message }}<a href="#" class="close" data-dismiss="alert" title="dismiss">&times;</a></li>
+              <li class="alert alert-warning">{{ message }}<a href="#" class="close" data-dismiss="alert" title="dismiss">&times;</a></li>
             {% endfor %}
           {% endfor %}
         </ul>
