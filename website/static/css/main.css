@@ -69,11 +69,16 @@ footer {
     box-sizing: border-box;
 }
 
+.navbar {
+    border-radius: 0;
+    border-bottom: 2px solid #999;
+}
+
 .page-header.cover {
     height: 372px;
     /*margin-top: -72px;*/
-    /*margin-top: -20px;*/
-    margin-top: -24px;
+    margin-top: -20px;
+    /*margin-top: -24px;*/
     background: #555 url('../img/cover/resized/rockies2.jpg') 50%;
     position: relative;
 }
