@@ -2,28 +2,34 @@
 
 {% set map_nav = [
   {'name': 'Scenic Photos', 'href': '#'},
-  {'name': 'Slope', 'href': '#', 'children': [
-    {'name': 'Large Channels', 'href': '#'},
-    {'name': '', 'href': '#'},
-    {'name': ' Dead', 'href': '#'},
-    {'name': '', 'href': '#', 'active': true},
+  {'name': 'Slope', 'href': '#', 'selected': true, 'children': [
+    {'name': 'Channels', 'href': '#', 'children': [
+      {'name': 'Large Channels', 'href': '#'},
+      {'name': 'Small Channels', 'href': '#'},
+    ]},
+    {'name': 'Levees and Splays', 'selected': true, 'href': '#'},
+    {'name': 'Mass Transport Deposits', 'href': '#'},
   ]},
-  {'name': 'Mass Transport', 'href': '#', 'sibblings': [
-    {'name': 'Mass Transport', 'href': '#', 'active': true},
-    {'name': 'Light Transport', 'href': '#'},
-    {'name': 'Sans Port', 'href': '#'},
-    {'name': 'Land Port', 'href': '#'},
+  {'name': 'Channel-Lobe Transition Zone', 'href': '#'},
+  {'name': 'Basin Floor Lobes', 'href': '#', 'children': [
+    {'name': 'Isolated Scour', 'href': '#'},
+    {'name': 'Avulsion Splay', 'href': '#'},
+    {'name': 'Feeder Channel', 'href': '#'},
+    {'name': 'Distributary Channel', 'href': '#'},
+    {'name': 'Terminal Splay', 'href': '#'}
   ]},
+  {'name': 'Old Fort Point', 'href': '#'}
 ] %}
 
 {% set content_types = [
   {'name': 'Overview', 'active': true},
-  {'name': 'Photos', 'count': 5},
   {'name': 'Publications', 'count': 14},
-  {'name': 'Theses', 'count': 0},
   {'name': 'Presentations', 'count': 3},
-  {'name': 'Gamma-Ray', 'count': 7},
-  {'name': 'Logs', 'count': 0},
+  {'name': 'Theses', 'count': 0},
+  {'name': 'Representative Logs & Correlations', 'count': 12},
+  {'name': 'High-Resolution Images', 'count': 0},
+  {'name': 'Gamma-Ray Logs', 'count': 7},
+  {'name': 'Photos', 'count': 5},
 ] %}
 
 {% macro item(title, summary, label=none) %}
@@ -35,12 +41,7 @@
 {% block page_content %}
 
   <div class="map well well-sm">
-    <p><i>expandable clickable map/diagram as the background in here...</i></p>
-
-    <div class="map-controls">
-      <div class="expander pull-right">
-        <a class="btn btn-default btn-xs" data-icon="e" > expand</a>
-      </div>
+    <p><i>interactive map here, with expanding text navigation stuck to the bottom</i></p>
 
       {#<ul class="breadcrumb">
         {% for crumb in map_nav %}
@@ -61,63 +62,33 @@
           </li>
         {% endfor %}
       </ul>#}
-    </div>
-    <div class="clearfix"></div>
 
   </div>
   <nav class="tree">
     <ul>
-      <li>
-        <a href="#">Scenic Photos</a>
-      </li>
-      <li class="selected">
-        <a href="#">Slope</a>
-        <ul>
-          <li>
-            <a href="#">Channels</a>
+      {% for zone in map_nav %}
+        <li{{ ' class="selected"'|safe if zone.selected }}>
+          <a href="{{ zone.href }}">{{ zone.name }}</a>
+          {% if zone.children %}
             <ul>
-              <li>
-                <a href="#">Large Channels</a>
-              </li>
-              <li>
-                <a href="#">Small Channels</a>
-              </li>
+              {% for subzone in zone.children %}
+                <li{{ ' class="selected"'|safe if subzone.selected }}>
+                  <a href="{{ subzone.href }}">{{ subzone.name }}</a>
+                  {% if subzone.children %}
+                    <ul>
+                      {% for subsub in subzone.children %}
+                        <li{{ ' class="selected"'|safe if subsub.selected }}>
+                          <a href="{{ subsub.href }}">{{ subsub.name }}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </li>
+              {% endfor %}
             </ul>
-          </li>
-          <li>
-            <a href="#">Levees and Splays</a>
-          </li>
-          <li class="selected">
-            <a href="#">Mass Transport Deposits</a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">Channel-Lobe Transition Zone</a>
-      </li>
-      <li>
-        <a href="#">Basin Floor Lobes</a>
-        <ul>
-          <li>
-            <a href="#">Isolated Scour</a>
-          </li>
-          <li>
-            <a href="#">Avulsion Splay</a>
-          </li>
-          <li>
-            <a href="#">Feeder Channel</a>
-          </li>
-          <li>
-            <a href="#">Distributary Channel</a>
-          </li>
-          <li>
-            <a href="#">Terminal Splay</a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">Old Fort Point</a>
-      </li>
+          {% endif %}
+        </li>
+      {% endfor %}
     </ul>
   </nav>
 
