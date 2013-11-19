@@ -40,6 +40,224 @@
     padding: 0;
 }
 
+.map {
+    margin-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.tree {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 940px;
+  margin: 0 auto 20px;
+  display: block;
+  position: relative;
+  font: 14px/28px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #dedede;
+  border: 1px solid #e3e3e3;
+  border-radius: 0 0 3px 3px;
+  border-top: none;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.tree ul, .tree li {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tree ul {
+  width: 312.66667px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+.tree ul ul {
+  box-shadow: 312.66667px 0 3px rgba(0, 0, 0, 0.1);
+}
+.tree ul ul ul {
+  box-shadow: 309.66667px 0 3px rgba(0, 0, 0, 0.1);
+}
+.tree li {
+  position: relative;
+  min-height: 0;
+  opacity: 0;
+  background: #fdfdfd;
+}
+.tree li:nth-child(2n+1) {
+  background: #ededed;
+}
+.tree li:nth-child(2n+1) li {
+  background: #fdfdfd;
+}
+.tree li:nth-child(2n+1) li:nth-child(2n) {
+  background: #ededed;
+}
+.tree li:nth-last-child(1) {
+  -webkit-transition: min-height 0.16s ease-out 0.44s, opacity 0.16s ease-out 0.44s, background 0.5s ease 0.68s;
+  -moz-transition: min-height 0.16s ease-out 0.44s, opacity 0.16s ease-out 0.44s, background 0.5s ease 0.68s;
+  -o-transition: min-height 0.16s ease-out 0.44s, opacity 0.16s ease-out 0.44s, background 0.5s ease 0.68s;
+  transition: min-height 0.16s ease-out 0.44s, opacity 0.16s ease-out 0.44s, background 0.5s ease 0.68s;
+}
+.tree li:nth-last-child(2) {
+  -webkit-transition: min-height 0.16s ease-out 0.48s, opacity 0.16s ease-out 0.48s, background 0.5s ease 0.68s;
+  -moz-transition: min-height 0.16s ease-out 0.48s, opacity 0.16s ease-out 0.48s, background 0.5s ease 0.68s;
+  -o-transition: min-height 0.16s ease-out 0.48s, opacity 0.16s ease-out 0.48s, background 0.5s ease 0.68s;
+  transition: min-height 0.16s ease-out 0.48s, opacity 0.16s ease-out 0.48s, background 0.5s ease 0.68s;
+}
+.tree li:nth-last-child(3) {
+  -webkit-transition: min-height 0.16s ease-out 0.52s, opacity 0.16s ease-out 0.52s, background 0.5s ease 0.68s;
+  -moz-transition: min-height 0.16s ease-out 0.52s, opacity 0.16s ease-out 0.52s, background 0.5s ease 0.68s;
+  -o-transition: min-height 0.16s ease-out 0.52s, opacity 0.16s ease-out 0.52s, background 0.5s ease 0.68s;
+  transition: min-height 0.16s ease-out 0.52s, opacity 0.16s ease-out 0.52s, background 0.5s ease 0.68s;
+}
+.tree li:nth-last-child(4) {
+  -webkit-transition: min-height 0.16s ease-out 0.56s, opacity 0.16s ease-out 0.56s, background 0.5s ease 0.68s;
+  -moz-transition: min-height 0.16s ease-out 0.56s, opacity 0.16s ease-out 0.56s, background 0.5s ease 0.68s;
+  -o-transition: min-height 0.16s ease-out 0.56s, opacity 0.16s ease-out 0.56s, background 0.5s ease 0.68s;
+  transition: min-height 0.16s ease-out 0.56s, opacity 0.16s ease-out 0.56s, background 0.5s ease 0.68s;
+}
+.tree li:nth-last-child(5) {
+  -webkit-transition: min-height 0.16s ease-out 0.6s, opacity 0.16s ease-out 0.6s, background 0.5s ease 0.68s;
+  -moz-transition: min-height 0.16s ease-out 0.6s, opacity 0.16s ease-out 0.6s, background 0.5s ease 0.68s;
+  -o-transition: min-height 0.16s ease-out 0.6s, opacity 0.16s ease-out 0.6s, background 0.5s ease 0.68s;
+  transition: min-height 0.16s ease-out 0.6s, opacity 0.16s ease-out 0.6s, background 0.5s ease 0.68s;
+}
+.tree li:nth-last-child(6) {
+  -webkit-transition: min-height 0.16s ease-out 0.64s, opacity 0.16s ease-out 0.64s, background 0.5s ease 0.68s;
+  -moz-transition: min-height 0.16s ease-out 0.64s, opacity 0.16s ease-out 0.64s, background 0.5s ease 0.68s;
+  -o-transition: min-height 0.16s ease-out 0.64s, opacity 0.16s ease-out 0.64s, background 0.5s ease 0.68s;
+  transition: min-height 0.16s ease-out 0.64s, opacity 0.16s ease-out 0.64s, background 0.5s ease 0.68s;
+}
+.tree li:nth-last-child(7) {
+  -webkit-transition: min-height 0.16s ease-out 0.68s, opacity 0.16s ease-out 0.68s, background 0.5s ease 0.68s;
+  -moz-transition: min-height 0.16s ease-out 0.68s, opacity 0.16s ease-out 0.68s, background 0.5s ease 0.68s;
+  -o-transition: min-height 0.16s ease-out 0.68s, opacity 0.16s ease-out 0.68s, background 0.5s ease 0.68s;
+  transition: min-height 0.16s ease-out 0.68s, opacity 0.16s ease-out 0.68s, background 0.5s ease 0.68s;
+}
+.tree li li {
+  left: 100%;
+}
+.tree li.selected {
+  background: whitesmoke;
+}
+.tree li.selected li.selected:before {
+  content: "»";
+  display: block;
+  position: absolute;
+  right: 100%;
+  -webkit-transition: opacity 0.5s ease 0.68s;
+  -moz-transition: opacity 0.5s ease 0.68s;
+  -o-transition: opacity 0.5s ease 0.68s;
+  transition: opacity 0.5s ease 0.68s;
+}
+.tree a {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding-left: 9px;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-decoration: none;
+  color: inherit;
+  -webkit-transition: background 0.12s;
+  -moz-transition: background 0.12s;
+  -o-transition: background 0.12s;
+  transition: background 0.12s;
+  z-index: 1;
+}
+.tree a:before {
+  content: "";
+  display: block;
+  height: 50%;
+  margin-top: -14px;
+  z-index: 2;
+}
+.tree li:hover > a,
+.tree a:hover + ul a {
+  background: #8ab7de;
+}
+.tree li > a:hover {
+  background: #428bca;
+  color: white;
+}
+
+.tree:hover li,
+.tree li.selected {
+  min-height: 28px;
+  opacity: 1;
+}
+
+.tree:hover li {
+  background: #fdfdfd;
+}
+.tree:hover li:nth-child(2n+1) {
+  background: #ededed;
+}
+.tree:hover li:nth-child(2n+1) li {
+  background: #fdfdfd;
+}
+.tree:hover li:nth-child(2n+1) li:nth-child(2n) {
+  background: #ededed;
+}
+.tree:hover li:nth-child(1) {
+  -webkit-transition: min-height 0.16s ease-in 0.04s, opacity 0.16s ease-in 0.04s;
+  -moz-transition: min-height 0.16s ease-in 0.04s, opacity 0.16s ease-in 0.04s;
+  -o-transition: min-height 0.16s ease-in 0.04s, opacity 0.16s ease-in 0.04s;
+  transition: min-height 0.16s ease-in 0.04s, opacity 0.16s ease-in 0.04s;
+}
+.tree:hover li:nth-child(2) {
+  -webkit-transition: min-height 0.16s ease-in 0.08s, opacity 0.16s ease-in 0.08s;
+  -moz-transition: min-height 0.16s ease-in 0.08s, opacity 0.16s ease-in 0.08s;
+  -o-transition: min-height 0.16s ease-in 0.08s, opacity 0.16s ease-in 0.08s;
+  transition: min-height 0.16s ease-in 0.08s, opacity 0.16s ease-in 0.08s;
+}
+.tree:hover li:nth-child(3) {
+  -webkit-transition: min-height 0.16s ease-in 0.12s, opacity 0.16s ease-in 0.12s;
+  -moz-transition: min-height 0.16s ease-in 0.12s, opacity 0.16s ease-in 0.12s;
+  -o-transition: min-height 0.16s ease-in 0.12s, opacity 0.16s ease-in 0.12s;
+  transition: min-height 0.16s ease-in 0.12s, opacity 0.16s ease-in 0.12s;
+}
+.tree:hover li:nth-child(4) {
+  -webkit-transition: min-height 0.16s ease-in 0.16s, opacity 0.16s ease-in 0.16s;
+  -moz-transition: min-height 0.16s ease-in 0.16s, opacity 0.16s ease-in 0.16s;
+  -o-transition: min-height 0.16s ease-in 0.16s, opacity 0.16s ease-in 0.16s;
+  transition: min-height 0.16s ease-in 0.16s, opacity 0.16s ease-in 0.16s;
+}
+.tree:hover li:nth-child(5) {
+  -webkit-transition: min-height 0.16s ease-in 0.2s, opacity 0.16s ease-in 0.2s;
+  -moz-transition: min-height 0.16s ease-in 0.2s, opacity 0.16s ease-in 0.2s;
+  -o-transition: min-height 0.16s ease-in 0.2s, opacity 0.16s ease-in 0.2s;
+  transition: min-height 0.16s ease-in 0.2s, opacity 0.16s ease-in 0.2s;
+}
+.tree:hover li:nth-child(6) {
+  -webkit-transition: min-height 0.16s ease-in 0.24s, opacity 0.16s ease-in 0.24s;
+  -moz-transition: min-height 0.16s ease-in 0.24s, opacity 0.16s ease-in 0.24s;
+  -o-transition: min-height 0.16s ease-in 0.24s, opacity 0.16s ease-in 0.24s;
+  transition: min-height 0.16s ease-in 0.24s, opacity 0.16s ease-in 0.24s;
+}
+.tree:hover li:nth-child(7) {
+  -webkit-transition: min-height 0.16s ease-in 0.28s, opacity 0.16s ease-in 0.28s;
+  -moz-transition: min-height 0.16s ease-in 0.28s, opacity 0.16s ease-in 0.28s;
+  -o-transition: min-height 0.16s ease-in 0.28s, opacity 0.16s ease-in 0.28s;
+  transition: min-height 0.16s ease-in 0.28s, opacity 0.16s ease-in 0.28s;
+}
+.tree:hover li.selected .selected:before {
+  opacity: 0;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+
 .summary-more {
     margin-bottom: 20px;
 }

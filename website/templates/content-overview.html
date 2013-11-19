@@ -1,26 +1,22 @@
 {% extends 'base-full.html' %}
 
-{% set map_nav = (
-  {'name': 'Slope', 'href': '#', 'sibblings': (
-    {'name': 'Height', 'href': '#'},
-    {'name': 'Slope', 'href': '#', 'active': true},
-    {'name': 'Width', 'href': '#'},
-  )},
-  {'name': 'Channels', 'href': '#', 'sibblings': (
-    {'name': 'Stations', 'href': '#'},
-    {'name': 'Netflix', 'href': '#'},
-    {'name': 'Walking Dead', 'href': '#'},
-    {'name': 'Channels', 'href': '#', 'active': true},
-  )},
-  {'name': 'Mass Transport', 'href': '#', 'sibblings': (
+{% set map_nav = [
+  {'name': 'Scenic Photos', 'href': '#'},
+  {'name': 'Slope', 'href': '#', 'children': [
+    {'name': 'Large Channels', 'href': '#'},
+    {'name': '', 'href': '#'},
+    {'name': ' Dead', 'href': '#'},
+    {'name': '', 'href': '#', 'active': true},
+  ]},
+  {'name': 'Mass Transport', 'href': '#', 'sibblings': [
     {'name': 'Mass Transport', 'href': '#', 'active': true},
     {'name': 'Light Transport', 'href': '#'},
     {'name': 'Sans Port', 'href': '#'},
     {'name': 'Land Port', 'href': '#'},
-  )},
-) %}
+  ]},
+] %}
 
-{% set content_types = (
+{% set content_types = [
   {'name': 'Overview', 'active': true},
   {'name': 'Photos', 'count': 5},
   {'name': 'Publications', 'count': 14},
@@ -28,7 +24,7 @@
   {'name': 'Presentations', 'count': 3},
   {'name': 'Gamma-Ray', 'count': 7},
   {'name': 'Logs', 'count': 0},
-) %}
+] %}
 
 {% macro item(title, summary, label=none) %}
   <li>
@@ -46,7 +42,7 @@
         <a class="btn btn-default btn-xs" data-icon="e" > expand</a>
       </div>
 
-      <ul class="breadcrumb">
+      {#<ul class="breadcrumb">
         {% for crumb in map_nav %}
           <li>
             <div class="btn-group">
@@ -64,10 +60,66 @@
             </div>
           </li>
         {% endfor %}
-      </ul>
+      </ul>#}
     </div>
+    <div class="clearfix"></div>
 
   </div>
+  <nav class="tree">
+    <ul>
+      <li>
+        <a href="#">Scenic Photos</a>
+      </li>
+      <li class="selected">
+        <a href="#">Slope</a>
+        <ul>
+          <li>
+            <a href="#">Channels</a>
+            <ul>
+              <li>
+                <a href="#">Large Channels</a>
+              </li>
+              <li>
+                <a href="#">Small Channels</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Levees and Splays</a>
+          </li>
+          <li class="selected">
+            <a href="#">Mass Transport Deposits</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Channel-Lobe Transition Zone</a>
+      </li>
+      <li>
+        <a href="#">Basin Floor Lobes</a>
+        <ul>
+          <li>
+            <a href="#">Isolated Scour</a>
+          </li>
+          <li>
+            <a href="#">Avulsion Splay</a>
+          </li>
+          <li>
+            <a href="#">Feeder Channel</a>
+          </li>
+          <li>
+            <a href="#">Distributary Channel</a>
+          </li>
+          <li>
+            <a href="#">Terminal Splay</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Old Fort Point</a>
+      </li>
+    </ul>
+  </nav>
 
 
   <div class="row">
