@@ -5,14 +5,14 @@
   <nav class="navbar navbar-inverse">
     {% block nav %}
       <div class="navbar-header">
-        <a href="{{ url_for('home') }}" class="navbar-brand">Windermere</a>
+        <!--<a href="{{ url_for('home') }}" class="navbar-brand">Windermere</a>-->
       </div>
       <p class="navbar-text pull-right">
         {% if current_user.is_authenticated() %}
           {{ current_user.name }}
           <a href="{{ url_for('lock') }}" class="btn btn-warning btn-xs navbar-button ttbuttonbot" data-toggle="tooltip" title="Lock Access"><span data-icon="u"></span><span class="visuallyhidden">Lock Access</span></a> 
         {% else %}
-          <a href="{{ url_for('unlock') }}" class="btn btn-success btn-xs navbar-button"><span data-icon="k"></span> Partner Access</a>
+          <a href="{{ url_for('unlock') }}" class="btn btn-success navbar-button"><span data-icon="k"></span>&nbsp;&nbsp;&nbsp;Partner Access</a>
         {% endif %}
       </p>
     {% endblock %}
