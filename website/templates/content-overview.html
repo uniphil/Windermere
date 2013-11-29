@@ -1,7 +1,6 @@
 {% extends 'base-full.html' %}
 
 {% set map_nav = [
-  {'name': 'Scenic Photos', 'href': '#'},
   {'name': 'Slope', 'href': '#', 'selected': true, 'children': [
     {'name': 'Channels', 'href': '#', 'children': [
       {'name': 'Large Channels', 'href': '#'},
@@ -18,18 +17,17 @@
     {'name': 'Distributary Channel', 'href': '#'},
     {'name': 'Terminal Splay', 'href': '#'}
   ]},
-  {'name': 'Old Fort Point', 'href': '#'}
+  {'name': 'Old Fort Point', 'href': '#'},
+  {'name': 'Current Events', 'href': '#'},
 ] %}
 
 {% set content_types = [
-  {'name': 'Overview', 'active': true},
+  {'name': 'Everything', 'active': true},
   {'name': 'Publications', 'count': 14},
+  {'name': 'Experimental', 'count': 8},
   {'name': 'Presentations', 'count': 3},
   {'name': 'Theses', 'count': 0},
-  {'name': 'Representative Logs & Correlations', 'count': 12},
-  {'name': 'High-Resolution Images', 'count': 0},
-  {'name': 'Gamma-Ray Logs', 'count': 7},
-  {'name': 'Photos', 'count': 5},
+  {'name': 'High-Resolution Images', 'count': 2},
 ] %}
 
 {% macro item(title, summary, label=none) %}
@@ -39,31 +37,6 @@
 {% endmacro %}
 
 {% block page_content %}
-
-  <div class="map well well-sm">
-    <p><i>interactive map here, with expanding text navigation stuck to the bottom</i></p>
-
-      {#<ul class="breadcrumb">
-        {% for crumb in map_nav %}
-          <li>
-            <div class="btn-group">
-              <a href="{{ crumb.href }}" class="btn btn-link btn-xs">{{ crumb.name }}</a>
-              <button class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown">
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu">
-                {% for sib in crumb.sibblings %}
-                  <li class="{% if sib.active %}disabled{% endif %}">
-                    <a href="{{ sib.href }}">{{ sib.name }}</a>
-                  </li>
-                {% endfor %}
-              </ul>
-            </div>
-          </li>
-        {% endfor %}
-      </ul>#}
-
-  </div>
   <nav class="tree">
     <ul>
       {% for zone in map_nav %}

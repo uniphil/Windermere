@@ -51,7 +51,7 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  margin: 0 auto 20px;
+  margin: -20px auto 20px;
   display: block;
   position: relative;
   font: 14px/28px "Helvetica Neue", Helvetica, Arial, sans-serif;
