@@ -321,3 +321,58 @@ footer {
     text-shadow: 0 0 7px #000;
     background: rgba(0, 0, 0, 0.667);
 }
+
+
+.sponsors {
+  text-align: center;
+  vertical-align: middle
+}
+.sponsors span {
+  display: inline-block;
+  position: relative;
+  margin: 2em;
+}
+.sponsors span:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+.sponsors:hover span:before {
+  opacity: 1;
+}
+.sponsors span.bp:before {
+  background: url('../img/sponsors/bp.png');
+}
+.sponsors span.chevron:before {
+  background: url('../img/sponsors/chevron.png');
+}
+.sponsors span.uottawa:before {
+  background: url('../img/sponsors/uottawa.png');
+}
+.sponsors span.statoil:before {
+  background: url('../img/sponsors/statoil.png');
+}
+.sponsors span.canadian:before {
+  background: url('../img/sponsors/canadian-natural.png');
+}
+.sponsors span.nexen:before {
+  background: url('../img/sponsors/nexen.png');
+}
+.sponsors span.nserc:before {
+  background: url('../img/sponsors/nserc.png');
+}
+.sponsors span.anadarko:before {
+  background: url('../img/sponsors/anadarko.png');
+}
+.sponsors span.husky:before {
+  background: url('../img/sponsors/husky.png');
+}
