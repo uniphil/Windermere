@@ -1,5 +1,6 @@
 # development database
 dev-db.sqlite3
+website/data.sqlite3
 
 # config
 config.py
