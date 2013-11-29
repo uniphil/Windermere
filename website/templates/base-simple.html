@@ -5,12 +5,16 @@
   <nav class="navbar navbar-inverse">
     {% block nav %}
       <div class="navbar-header">
-        <!--<a href="{{ url_for('home') }}" class="navbar-brand">Windermere</a>-->
+        <a href="{{ url_for('home') }}" class="navbar-brand">Windermere</a>
+        {% if title %}<span class="navbar-text">{{ title }}</span>{% endif %}
       </div>
       <p class="navbar-text pull-right">
         {% if current_user.is_authenticated() %}
-          {{ current_user.name }}
-          <a href="{{ url_for('lock') }}" class="btn btn-warning btn-xs navbar-button ttbuttonbot" data-toggle="tooltip" title="Lock Access"><span data-icon="u"></span><span class="visuallyhidden">Lock Access</span></a> 
+          Access unlocked for {{ current_user.name }}
+          {% if request.path == '/' %}
+            <a href="{{ url_for('topic_overview', coarse='lalala') }}" class="btn btn-primary navbar-button"><span data-icon="r"></span>&nbsp;&nbsp;&nbsp;Content Browser</a>
+          {% endif %}
+          <a href="{{ url_for('lock') }}" class="btn btn-warning navbar-button ttbuttonbot" data-toggle="tooltip" title="Lock Access"><span data-icon="u"></span><span class="visuallyhidden">Lock Access</span></a> 
         {% else %}
           <a href="{{ url_for('unlock') }}" class="btn btn-success navbar-button"><span data-icon="k"></span>&nbsp;&nbsp;&nbsp;Partner Access</a>
         {% endif %}

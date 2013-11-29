@@ -34,7 +34,7 @@ def unlock():
                 login_user(partner)
                 flash('Restricted access unlocked for {}'.format(partner.name),
                       'success')
-                return redirect(request.args.get('next') or url_for('home'))
+                return redirect(request.args.get('next') or url_for('topic_overview', coarse="asdf"))
             else:
                 form.key.errors.append('This access key for {} is currently '
                                        'disabled.'.format(partner.name))
@@ -60,7 +60,7 @@ def restricted():
 @app.route('/content/<string:coarse>/<string:medium>/<string:fine>/')
 #@login_required
 def topic_overview(coarse, medium=None, fine=None):
-    return render_template('content-overview.html',
+    return render_template('content-overview.html', title='Content Browser',
                            coarse=coarse, medium=medium, fine=fine)
 
 
