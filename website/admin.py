@@ -79,76 +79,24 @@ class AccountsView(AdminView):
         return self.render('admin/accounts/index.html', partners=partners,
                            admins=admins)
 
-    @expose('/partner/<int:id>/reset-key', methods=['GET', 'POST'])
-    def reset_partner_key(self, id):
-        partner = models.Partner.query.get_or_404(id)
-        if request.form.get('confirm') == 'yes':
-            partner.new_key()
-            models.db.session.add(partner)
-            models.db.session.commit()
-            flash('Access key reset for {}'.format(partner.name), 'info')
-            return redirect(url_for('.index'))
-        return self.render('admin/accounts/reset-key.html', partner=partner)
-
-    @expose('/partner/<int:id>/disable')
-    def disable_partner(self, id):
-        partner = models.Partner.query.get_or_404(id)
-        partner.disabled = True
-        models.db.session.add(partner)
-        models.db.session.commit()
-        flash('Disabled {}. They will not have access to protected content '
-              'until re-enabled.'.format(partner.name), 'info')
-        return redirect(url_for('.index'))
-
-    @expose('/partner/<int:id>/enable')
-    def enable_partner(self, id):
-        partner = models.Partner.query.get_or_404(id)
-        partner.disabled = False
-        models.db.session.add(partner)
-        models.db.session.commit()
-        flash('Re-enabled access to protected content for {}.'
-              .format(partner.name), 'success')
-        return redirect(url_for('.index'))
-
-    @expose('/partner/<int:id>/remove')
-    def remove_partner(self, id):
-        partner = models.Partner.query.get_or_404(id)
-        if request.args.get('confirm') == 'yes':
-            models.db.session.delete(partner)
-            models.db.session.commit()
-            flash('Removed partner {}.'.format(partner.name), 'info')
-            return redirect(url_for('.index'))
-        return self.render('admin/accounts/remove.html', partner=partner)
-
     @expose('/partner/<int:id>/edit', methods=['GET', 'POST'])
     def edit_partner(self, id):
         partner = models.Partner.query.get_or_404(id)
         errors = []
         if request.method == 'POST':
-            if request.form.get('name'):
-                partner.name = request.form['name']
+            if request.form.get('key'):
+                from datetime import datetime
+                partner.key = request.form['key']
+                partner.last_keychange = datetime.now()
                 models.db.session.add(partner)
                 models.db.session.commit()
-                flash('Saved changes to {}'.format(partner.name), 'info')
+                flash('Saved new key for {}'.format(partner.name), 'info')
                 return redirect(url_for('.index'))
             else:
-                errors.append('Gotta have a name...')
-        return self.render('admin/accounts/add.html', verb='Edit',
-                           action='save', ico='pencil', name=partner.name)
-
-    @expose('/partner/add', methods=['GET', 'POST'])
-    def add_partner(self):
-        if request.method == 'POST':
-            name = request.form['name']
-            partner = models.Partner()
-            partner.name = name
-            models.db.session.add(partner)
-            models.db.session.commit()
-            flash('Successfully added "{}" as a partner'.format(partner.name),
-                  'success')
-            return redirect(url_for('.index'))
-        return self.render('admin/accounts/add.html', verb='Add', action='Add',
-                           ico='plus')
+                errors.append('Please set a key for partner access...')
+        return self.render('admin/accounts/edit_partner.html', verb='Edit',
+                           action='set', ico='pencil', key=partner.key,
+                           name=partner.name)
 
     @expose('/admin/add', methods=['GET', 'POST'])
     def add_admin(self):

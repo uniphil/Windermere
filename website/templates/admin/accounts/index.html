@@ -4,33 +4,20 @@
     <section>
         <h2>Partners <small>Access to restricted content</small></h2>
         <table class="table table-hover">
-            <tr>
-                <td></td>
-                <th>Access Key</th>
-                <th>Status</th>
-                <th></th>
-            </tr>
             {% for partner in partners %}
+                <tr>
+                    <td></td>
+                    <th>Access Key</th>
+                    <td></td>
+                </tr>
                 <tr>
                     <th>{{ partner.name }}</th>
                     <td>
-                        <code>{{ partner.key }}</code>
-                        <a href="{{ url_for('accounts.reset_partner_key', id=partner.id) }}" class="btn btn-small btn-link row-hover-show">reset</a>
-                    </td>
-                    <td>
-                        {% if partner.disabled %}
-                            <span class="text-warning"><i class="icon-minus-sign"></i> Disabled</span>
-                            <a href="{{ url_for('accounts.enable_partner', id=partner.id) }}">enable</a>
-                        {% else %}
-                            <span class="text-success"><i class="icon-ok"></i> Active</span>
-                            <small class="muted">{{ partner.last_active|since }}</small>
-                            <a href="{{ url_for('accounts.disable_partner', id=partner.id)}}" class="btn btn-small btn-link row-hover-show">disable</a>
-                        {% endif %}
+                        <code>{{ partner.key }}</code> <span class="muted">set {{ partner.last_keychange|since }}</span>
                     </td>
                     <td>
                         <div class="pull-right">
                             <a href="{{ url_for('accounts.edit_partner', id=partner.id) }}" class="btn btn-small btn-link row-hover-show" title="Edit Partner"><i class="icon-pencil"></i></a>
-                            <a href="{{ url_for('accounts.remove_partner', id=partner.id) }}" class="btn btn-small btn-link row-hover-show" title="Remove Partner"><i class="icon-remove"></i></a>
                         </div>
                     </td>
                 </tr>
@@ -38,13 +25,12 @@
                 <tr>
                     <td colspan="4">
                         <div class="alert">
-                            <strong>No Partners!</strong> There are no partners in the database.
+                            <strong>No Partners!</strong> There are no partners in the database. Please get an admin to initialize the database.
                         </div>
                     </td>
                 </tr>
             {% endfor %}
         </table>
-        <a href="{{ url_for('accounts.add_partner') }}" class="btn"><i class="icon-plus"></i> Add a Partner</a>
     </section>
     <section>
         <h2>Admins <small>Manage content and accounts</small></h2>

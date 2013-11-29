@@ -20,17 +20,21 @@ AnonymousUserMixin.is_admin = False
 
 @login_manager.user_loader
 def load_user(userid):
-    if userid.startswith('k_'):
-        partner = Partner.query.filter_by(key=userid).first()
-        if partner is None:
-            return None
+    # try to load a partner...
+    partner = Partner.query.filter_by(key=userid).first()
+    if partner is not None:
         partner.last_active = datetime.now()
         db.session.add(partner)
         db.session.commit()
         return partner
     else:
-        int_uid = int(userid)
+        try:
+            int_uid = int(userid)
+        except ValueError:
+            return None
         the_admin = Admin.query.filter_by(id=int_uid).first()
+        if the_admin is None:
+            return None
         the_admin.last_active = datetime.now()
         db.session.add(the_admin)
         db.session.commit()

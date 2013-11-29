@@ -14,33 +14,16 @@ from website import app
 db = SQLAlchemy(app)
 
 
-def keygen(chars):
-    """Get a string of random safe characters"""
-    num_bytes = int(ceil(chars * 3.0 / 4))
-    key = b64encode(urandom(num_bytes))
-    return key[:chars]
-
-
 class Partner(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     key = db.Column(db.String(24), unique=True)
     name = db.Column(db.String(80), unique=True)
-    disabled = db.Column(db.Boolean)
     last_active = db.Column(db.DateTime)
+    last_keychange = db.Column(db.DateTime)
     is_admin = False
-
-    def __init__(self):
-        self.new_key()
-        self.disabled = False
-
-    def new_key(self):
-        self.key = 'k_' + keygen(21).replace('-', '_')
 
     def get_id(self):
         return self.key
-
-    def is_active(self):
-        return False if self.disabled else True
 
 
 class Admin(db.Model, UserMixin):
