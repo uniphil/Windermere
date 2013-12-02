@@ -55,6 +55,21 @@ class Admin(db.Model, UserMixin):
         return '<Admin {}>'.format(self.username)
 
 
+class Person(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    # PHOTO
+    bio = db.Column(db.Text)
+    href = db.Column(db.String(120))
+    contact = db.Column(db.Text)
+    current = db.Column(db.Boolean)
+
+
+# class ScenicPhoto(db.Model):
+#     # PHOTOS LAAAAAAA
+#     pass
+
+
 class Document(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     file = 'lalala'
