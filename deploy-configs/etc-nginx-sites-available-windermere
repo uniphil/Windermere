@@ -1,0 +1,31 @@
+upstream windermere_app {
+    server unix:/home/windermere/app.sock fail_timeout=0;
+}
+
+server {
+    listen 80 default deferred;
+    server_name windermere wwww.windermere.uottawa.ca windermere.uottawa.ca;
+
+    error_page 500 503 504 /errors/server.html;
+    error_page 502 /errors/app.html;
+    error_page 404 /errors/not-found.html;
+
+    location /errors/ {
+        root /home/windermere/Windermere/website/static;
+    }   
+
+    location /static/ {
+        root /home/windermere/Windermere/website;
+    }
+
+    location /files/ {
+        # TODO: auth
+        root /home/windermere;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://windermere_app;
+    }
+
+}
