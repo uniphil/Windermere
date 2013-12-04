@@ -1,0 +1,49 @@
+#!/bin/bash
+#
+# /etc/init.d/windermere
+#
+# Control the Windermere application server
+#
+
+APP_NAME="Winderemere application server: gunicorn"
+PROCS_RUNNING=$(ps -ef | grep -v grep | grep -cw /home/windermere/venv/bin/gunicorn)
+
+case "$1" in
+  start)
+    echo -n "Starting $APP_NAME ... "
+    if [ $PROCS_RUNNING -ne 0 ]
+    then
+      echo "already started."
+      exit 1
+    fi
+    su windermere -c /home/windermere/start_app.sh
+    echo "started."
+  ;;
+  stop)
+    echo -n "Stopping $APP_NAME ... "
+    pkill -SIGQUIT gunicorn
+    echo "stopped."
+  ;;
+  restart)
+    echo "Restarting $APP_NAME ... "
+    $0 stop; $0 start
+  ;;
+  reload)
+    echo -n "Reloading $APP_NAME ... "
+    pkill -SIGHUP gunicorn
+    echo "reloaded."
+  ;;
+  status)
+    echo -n "Status for $APP_NAME ... "
+    if [ $PROCS_RUNNING -eq 0 ]
+    then
+      echo "not running."
+    else
+      echo "running."
+    fi
+  ;;
+  *)
+    echo "Usage: windermere start"
+    exit 1
+  ;;
+esac
