@@ -4,7 +4,8 @@
 
 import os
 import random
-from flask import request, session, render_template, redirect, url_for, flash
+from flask import (request, session, render_template, redirect, url_for, flash,
+                   send_from_directory)
 from flask.ext.login import (current_user, login_required, login_user,
                              logout_user)
 from . import app, models, forms
@@ -83,5 +84,5 @@ def mock_overview():
 
 @app.errorhandler(404)
 def not_found(error):
-    print dir(error)
-    return render_template('error.html', error=error), 404
+    err_dir = os.path.join(app.root_path, 'static', 'errors')
+    return send_from_directory(err_dir, 'not-found.html'), 404
