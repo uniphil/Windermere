@@ -59,9 +59,7 @@ class Admin(db.Model, UserMixin):
 class Person(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    photo_full = db.Column(db.String(220))
-    phtoo_sized = db.Column(db.String(220))
-    photo_thumb = db.Column(db.String(220))
+    photo = db.Column(db.String(220))
     bio = db.Column(db.Text)
     href = db.Column(db.String(120))
     contact = db.Column(db.Text)
@@ -70,9 +68,7 @@ class Person(db.Model):
 
 class ScenicPhoto(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    photo_full = db.Column(db.String(220))
-    photo_sized = db.Column(db.String(220))
-    photo_thumb = db.Column(db.String(220))
+    photo = db.Column(db.String(220))
     title = db.Column(db.String(100))
     description = db.Column(db.Text)
     added = db.Column(db.DateTime)

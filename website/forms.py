@@ -27,7 +27,7 @@ class LoginForm(Form):
 
 
 class ScenicPhotoForm(Form):
-    photo = fields.FileField('Photo', [validators.DataRequired()])
+    photo = fields.FileField('Photo')
     title = fields.TextField('Title', [validators.DataRequired()])
     featured = fields.BooleanField('Homepage Cover Photo')
     description = fields.TextAreaField('Description')

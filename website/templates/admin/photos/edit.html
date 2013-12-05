@@ -18,9 +18,10 @@
 
   <section class="page col-sm-10 col-lg-8 col-offset-2">
     <header class="page-header">
-      <h2>Edit {{ (form.title.data + ' <small>(Scenic Photo)</small>'|safe) if form.title.data else 'a Scenic Photo' }}</h2>
+      <h2>Edit {{ ('"' + form.title.data + '"' + ' <small>(Scenic Photo)</small>'|safe) if form.title.data else 'a Scenic Photo' }}</h2>
       <p>Scenic photos appear on the front page, accessible to everyone.</p>
     </header>
+    <img src="{{ url_for('photo', filename=photo.photo) }}" alt="{{ photo.description }}" />
     <form action="" method="post" class="form-horizontal">
       {{ form.csrf_token }}
       {{ horizontal_input(form.title) }}

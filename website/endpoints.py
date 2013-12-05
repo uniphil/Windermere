@@ -83,6 +83,12 @@ def mock_overview():
     return render_template('mock-overview.html', contents=contents)
 
 
+@app.route('/photo/<filename>')
+def photo(filename):
+    photos_dir = os.path.join(app.config['UPLOAD_FOLDER'], 'scenic')
+    return send_from_directory(photos_dir, filename)
+
+
 @app.errorhandler(404)
 def not_found(error):
     err_dir = os.path.join(app.root_path, 'static', 'errors')

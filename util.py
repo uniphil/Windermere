@@ -58,6 +58,19 @@ if __name__ == '__main__':
         models.db.session.add(phil)
         models.db.session.commit()
 
+    elif cmd == 'mkuploads':
+        uploads = app.config['UPLOAD_FOLDER']
+        paths = [
+            uploads,
+            os.path.join(uploads, 'scenic'),
+        ]
+        for path in paths:
+            try:
+                os.makedirs(path)
+            except OSError as e:
+                if e.errno != 17:
+                    raise e
+                print '    {}: {}'.format(path, e.strerror)
 
     elif cmd == 'server':
         #from xaccel import app

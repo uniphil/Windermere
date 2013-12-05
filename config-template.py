@@ -17,4 +17,5 @@ app.config.update(
     SECRET_KEY='',
     # database stuff. see here: http://pythonhosted.org/Flask-SQLAlchemy/config.html
     SQLALCHEMY_DATABASE_URI='',
+    UPLOAD_FOLDER='',
 )

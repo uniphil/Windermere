@@ -21,7 +21,7 @@
       <h2>Add {{ (form.title.data + ' <small>(Scenic Photo)</small>'|safe) if form.title.data else 'a Scenic Photo' }}</h2>
       <p>Scenic photos appear on the front page, accessible to everyone.</p>
     </header>
-    <form action="" method="post" class="form-horizontal">
+    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
       {{ form.csrf_token }}
       {{ horizontal_input(form.title) }}
       {{ horizontal_input(form.photo) }}
