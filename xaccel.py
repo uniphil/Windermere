@@ -20,6 +20,7 @@ if '/local/lib/python' not in LIBS:
         print('replacing site-packages path with /local/ one')
         LIBS = LOCAL_LIBS
 
+
 class XAccelMiddleware(object):
     def __init__(self, app):
         app.config['USE_X_SENDFILE'] = True
@@ -39,6 +40,8 @@ class XAccelMiddleware(object):
             return ['X-Accel-Redirect', header[1][len(app.root_path):]]
         elif header[1].startswith(LIBS):
             return ['X-Accel-Redirect', '/libstatic' + header[1][len(LIBS):]]
+        elif header[1].startswith(app.config['UPLOAD_FOLDER']):
+            return ['X-Accel-Redirect', '/uploads/' + header[1][len(app.config['UPLOAD_FOLDER'])]]
         else:
             return ['X-Filesend-Error-Noooooooooo', str(header) + ' ..... ' + LIBS]
 
