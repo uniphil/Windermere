@@ -18,16 +18,18 @@
 
   <section class="page col-sm-10 col-lg-8 col-offset-2">
     <header class="page-header">
-      <h2>{{ verb }} {{ (form.title.data + ' <small>(Photo)</small>'|safe) if form.title.data else 'a Scenic Photo' }}</h2>
+      <h2>Add {{ (form.title.data + ' <small>(Scenic Photo)</small>'|safe) if form.title.data else 'a Scenic Photo' }}</h2>
       <p>Scenic photos appear on the front page, accessible to everyone.</p>
     </header>
     <form action="" method="post" class="form-horizontal">
       {{ form.csrf_token }}
       {{ horizontal_input(form.title) }}
+      {{ horizontal_input(form.photo) }}
       {{ horizontal_input(form.description) }}
+      {{ horizontal_input(form.featured) }}
       {% set buttons='
         <button type="submit" class="btn btn-success">
-          <i class="icon-' + ico + ' icon-white"></i> ' + action + ' Scenic Photo
+          <i class="icon-plus icon-white"></i> Save New Scenic Photo
         </button>
         <a href="' + url_for('photos.index') + '" class="btn btn-link">
           Cancel

@@ -70,11 +70,11 @@ class Person(db.Model):
 class ScenicPhoto(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     photo_full = db.Column(db.String(220))
-    phtoo_sized = db.Column(db.String(220))
+    photo_sized = db.Column(db.String(220))
     photo_thumb = db.Column(db.String(220))
     title = db.Column(db.String(100))
     description = db.Column(db.Text)
-    date = db.Column(db.DateTime)
+    added = db.Column(db.DateTime)
     featured = db.Column(db.Boolean)
 
 

@@ -5,17 +5,26 @@
     <h2>Scenic Photos</h2>
     <table class="table table-hover">
       <tr>
-        <td>Title</td>
+        <td></td>
         <th>Description</th>
+        <th>Added</th>
+        <td></td>
       </tr>
       {% for photo in photos %}
         <tr>
           <th>{{ photo.title }}</th>
           <td>{{ photo.description }}</td>
+          <td>{{ photo.added|since }}</td>
+          <td>
+            <div class="pull-right">
+              <a href="{{ url_for('photos.edit_photo', id=photo.id) }}" class="btn btn-small btn-link row-hover-show" title="Edit Photo"><i class="icon-pencil"></i></a>
+              <a href="{{ url_for('photos.remove_photo', id=photo.id) }}" class="btn btn-small btn-link row-hover-show" title="Remove Photo"><i class="icon-remove"></i></a>
+            </div>
+          </td>
         </tr>
       {% else %}
         <tr>
-          <td colspan="2">
+          <td colspan="4">
             <div class="alert">
               <strong>No photos!</strong> There are no scenic photos in the database :(
             </div>

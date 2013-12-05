@@ -1,9 +1,11 @@
-#
-# admin.py
-#
-# administrative controls over the content for the Windermere website
-#
+"""
+    website.admin
+    ~~~~~~~~~~~~~
 
+    administrative controls over the content for the Windermere website
+"""
+
+from datetime import datetime
 from flask import request, flash, redirect, url_for
 from flask.ext.login import current_user, login_user, logout_user
 from flask.ext.admin import Admin, BaseView, AdminIndexView, expose
@@ -61,8 +63,6 @@ class DocumentView(AdminView):
         return self.render('admin/documents.html')
 
 
-
-
 class PhotoView(AdminView):
     @expose('/')
     def index(self):
@@ -74,14 +74,39 @@ class PhotoView(AdminView):
         form = forms.ScenicPhotoForm(request.form)
         if form.validate_on_submit():
             new_photo = models.ScenicPhoto()
-            new_photo.title = request.form['title']
-            new_photo.description = request.form['description']
+            new_photo.added = datetime.now()
+            new_photo.title = form.title.data
+            new_photo.description = form.description.data
+            new_photo.featured = form.featured.data
             models.db.session.add(new_photo)
             models.db.session.commit()
             flash('Saved new photo "{}"'.format(new_photo.title), 'success')
             return redirect(url_for('.index'))
-        return self.render('admin/photos/add_edit.html', form=form,
-                           verb='Add', ico='plus', action='Save')
+        return self.render('admin/photos/add.html', form=form)
+
+    @expose('/photo/<int:id>/edit', methods=['GET', 'POST'])
+    def edit_photo(self, id):
+        the_photo = models.ScenicPhoto.query.get_or_404(id)
+        form = forms.ScenicPhotoEditForm(request.form, the_photo)
+        if form.validate_on_submit():
+            the_photo.title = form.title.data
+            the_photo.description = form.description.data
+            the_photo.featured = form.featured.data
+            models.db.session.add(the_photo)
+            models.db.session.commit()
+            flash('Saved changes to "{}"'.format(the_photo.title), 'success')
+            return redirect(url_for('.index'))
+        return self.render('admin/photos/edit.html', photo=the_photo, form=form)
+
+    @expose('/photo/<int:id>/remove', methods=['GET', 'POST'])
+    def remove_photo(self, id):
+        the_photo = models.ScenicPhoto.query.get_or_404(id)
+        if request.form.get('confirm') == 'yes':
+            models.db.session.delete(the_photo)
+            models.db.session.commit()
+            flash('Removed Scenic Photo {}.'.format(the_photo.title), 'info')
+            return redirect(url_for('.index'))
+        return self.render('admin/photos/remove.html', photo=the_photo)
 
 
 
@@ -99,8 +124,7 @@ class AccountsView(AdminView):
         errors = []
         if request.method == 'POST':
             if request.form.get('key'):
-                from datetime import datetime
-                partner.key = request.form['key']
+                partner.key = form.key.data
                 partner.last_keychange = datetime.now()
                 models.db.session.add(partner)
                 models.db.session.commit()

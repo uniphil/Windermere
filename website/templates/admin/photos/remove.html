@@ -1,0 +1,16 @@
+{% extends 'admin/w_master.html' %}
+
+{% block body %}
+    <section>
+        <h2>Really Remove {{ photo.title }}? <small>({{ photo.description }})</small></h2>
+        <p>This action cannot be undone.</p>
+        
+        <form action="{{ url_for('photos.remove_photo', id=photo.id) }}" method="post" class="form-inline">
+            <input type="hidden" name="confirm" value="yes" />
+            <button type="submit" class="btn btn-danger"><i class="icon-remove-sign icon-white"></i> Remove {{ photo.title }}</button>
+            <a href="{{ url_for('photos.index') }}" class="btn btn-link">Cancel</a>
+        </form>
+
+    </section>
+
+{% endblock %}
