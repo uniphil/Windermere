@@ -1,6 +1,15 @@
 from distutils.sysconfig import get_python_lib
 LIBS = get_python_lib()
 
+if '/local/lib/python' not in LIBS:
+    import os
+    assert '/lib/python' in LIBS, 'you have an odd site-packages setup or something...'
+    LOCAL_LIBS = LIBS.replace('/lib/python', '/local/lib/python')
+    if not os.path.isdir(LOCAL_LIBS):
+        print('hrmph no local libs site-packages or something?')
+    else:
+        print('replacing site-packages path with /local/ one')
+        LIBS = LOCAL_LIBS
 
 class XAccelMiddleware(object):
     def __init__(self, app):
