@@ -1,0 +1,40 @@
+{% extends 'admin/w_master.html' %}
+
+{% macro horizontal_input(input, labeled=true) %}
+  <div class="control-group{% if input.errors %} warning{% endif %}">
+    {% if labeled %}
+      <label class="control-label" for="{{ input.id }}">{{ input.label.text }}</label>
+    {% endif %}
+    <div class="controls">
+      {{ input }}
+      {% if input.errors %}
+        <span class="help-inline">{{ input.errors.0 }}</span>
+      {% endif %}
+    </div>
+  </div>
+{% endmacro %}
+
+{% block body %}
+
+  <section class="page col-sm-10 col-lg-8 col-offset-2">
+    <header class="page-header">
+      <h2>{{ verb }} {{ (form.title.data + ' <small>(Photo)</small>'|safe) if form.title.data else 'a Scenic Photo' }}</h2>
+      <p>Scenic photos appear on the front page, accessible to everyone.</p>
+    </header>
+    <form action="" method="post" class="form-horizontal">
+      {{ form.csrf_token }}
+      {{ horizontal_input(form.title) }}
+      {{ horizontal_input(form.description) }}
+      {% set buttons='
+        <button type="submit" class="btn btn-success">
+          <i class="icon-' + ico + ' icon-white"></i> ' + action + ' Scenic Photo
+        </button>
+        <a href="' + url_for('photos.index') + '" class="btn btn-link">
+          Cancel
+        </a>
+      ' %}
+      {{ horizontal_input(buttons|safe, labeled=false) }}
+    </form>
+  </section>
+
+{% endblock %}

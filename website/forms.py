@@ -34,3 +34,21 @@ class LoginForm(Form):
     password = fields.PasswordField('Password', validators=[
         validators.DataRequired(),
     ])
+
+
+class ScenicPhotoForm(Form):
+    """
+    copied from the model:
+    id = db.Column(db.Integer, primary_key=True)
+    photo_full = db.Column(db.String(220))
+    phtoo_sized = db.Column(db.String(220))
+    photo_thumb = db.Column(db.String(220))
+    title = db.Column(db.String(100))
+    description = db.Column(db.Text)
+    date = db.Column(db.DateTime)
+    featured = db.Column(db.Boolean)
+    """
+    title = fields.TextField('Title', validators=[
+        validators.DataRequired(),
+    ])
+    description = fields.TextField('Description')

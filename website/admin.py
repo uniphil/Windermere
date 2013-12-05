@@ -66,8 +66,22 @@ class DocumentView(AdminView):
 class PhotoView(AdminView):
     @expose('/')
     def index(self):
-        return self.render('admin/photos.html')
+        photos = models.ScenicPhoto.query.all()
+        return self.render('admin/photos/index.html', photos=photos)
 
+    @expose('/photo/add', methods=['GET', 'POST'])
+    def add_photo(self):
+        form = forms.ScenicPhotoForm(request.form)
+        if form.validate_on_submit():
+            new_photo = models.ScenicPhoto()
+            new_photo.title = request.form['title']
+            new_photo.description = request.form['description']
+            models.db.session.add(new_photo)
+            models.db.session.commit()
+            flash('Saved new photo "{}"'.format(new_photo.title), 'success')
+            return redirect(url_for('.index'))
+        return self.render('admin/photos/add_edit.html', form=form,
+                           verb='Add', ico='plus', action='Save')
 
 
 
@@ -165,5 +179,5 @@ class AccountsView(AdminView):
 
 admin = Admin(app, name='Windermere Admin', index_view=HomeView(name="Overview"))
 admin.add_view(DocumentView(name='Documents'))
-admin.add_view(PhotoView(name='Photos'))
+admin.add_view(PhotoView(name='Photos', endpoint='photos'))
 admin.add_view(AccountsView(name='Accounts', endpoint='accounts'))
