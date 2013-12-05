@@ -6,7 +6,7 @@
 import os
 import random
 from flask import (request, session, render_template, redirect, url_for, flash,
-                   send_from_directory)
+                   send_from_directory, send_file)
 from flask.ext.login import (current_user, login_required, login_user,
                              logout_user)
 from . import app, models, forms
@@ -85,8 +85,8 @@ def mock_overview():
 
 @app.route('/photo/<filename>')
 def photo(filename):
-    photos_dir = os.path.join(app.config['UPLOAD_FOLDER'], 'scenic')
-    return send_from_directory(photos_dir, filename)
+    filepath = app.config['scenic'](filename)
+    return send_file(filepath)
 
 
 @app.errorhandler(404)

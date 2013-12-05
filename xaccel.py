@@ -41,7 +41,7 @@ class XAccelMiddleware(object):
         elif header[1].startswith(LIBS):
             return ['X-Accel-Redirect', '/libstatic' + header[1][len(LIBS):]]
         elif header[1].startswith(app.config['UPLOAD_FOLDER']):
-            return ['X-Accel-Redirect', '/uploads/' + header[1][len(app.config['UPLOAD_FOLDER'])]]
+            return ['X-Accel-Redirect', '/uploads' + header[1][len(app.config['UPLOAD_FOLDER']):]]
         else:
             return ['X-Filesend-Error-Noooooooooo', str(header) + ' ..... ' + LIBS]
 

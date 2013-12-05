@@ -26,3 +26,7 @@ import access
 import admin
 import endpoints
 import filters
+
+
+import os
+app.config['scenic'] = lambda f: os.path.join(app.config['UPLOAD_FOLDER'], 'scenic', f)

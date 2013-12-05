@@ -71,10 +71,23 @@ class PhotoView(AdminView):
         if raw_file is None:
             return False
         filename = secure_filename(raw_file.filename)
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], 'scenic', filename)
+        filepath = os.config['scenic'](filename)
         raw_file.save(filepath)
         photo.photo = filename
         return True
+
+    def rm_photo(self, photo):
+        filepath = app.config['scenic'](photo.photo)
+        try:
+            os.remove(filepath)
+        except OSError as e:
+            if app.debug:
+                raise e
+            else:
+                return False
+        else:
+            return True
+
 
     @expose('/')
     def index(self):
@@ -117,12 +130,13 @@ class PhotoView(AdminView):
     def remove_photo(self, id):
         the_photo = models.ScenicPhoto.query.get_or_404(id)
         if request.form.get('confirm') == 'yes':
-            photos_path = os.path.join(app.config['UPLOAD_FOLDER'], 'scenic')
-            os.remove(os.path.join(photos_path, the_photo.photo))
-            models.db.session.delete(the_photo)
-            models.db.session.commit()
-            flash('Removed Scenic Photo {}.'.format(the_photo.title), 'info')
-            return redirect(url_for('.index'))
+            if self.rm_photo(the_photo):
+                models.db.session.delete(the_photo)
+                models.db.session.commit()
+                flash('Removed Scenic Photo {}.'.format(the_photo.title), 'info')
+                return redirect(url_for('.index'))
+            else:
+                flash('There was an error removing {}'.format(the_photo.title))
         return self.render('admin/photos/remove.html', photo=the_photo)
 
 
