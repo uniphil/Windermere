@@ -86,6 +86,7 @@ def mock_overview():
 @app.route('/photo/<filename>')
 def photo(filename):
     filepath = app.config['scenic'](filename)
+    print filepath
     return send_file(filepath)
 
 

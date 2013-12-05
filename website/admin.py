@@ -71,7 +71,7 @@ class PhotoView(AdminView):
         if raw_file is None:
             return False
         filename = secure_filename(raw_file.filename)
-        filepath = os.config['scenic'](filename)
+        filepath = app.config['scenic'](filename)
         raw_file.save(filepath)
         photo.photo = filename
         return True
