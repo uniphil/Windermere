@@ -22,7 +22,7 @@ class XAccelMiddleware(object):
         elif header[1].startswith(LIBS):
             return ['X-Accel-Redirect', '/libstatic' + header[1][len(LIBS):]]
         else:
-            return ['X-Filesend-Error-Noooooooooo', str(header)]
+            return ['X-Filesend-Error-Noooooooooo', str(header) + ' ..... ' + LIBS]
 
 
 from website import app
