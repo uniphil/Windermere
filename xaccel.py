@@ -1,5 +1,5 @@
-import os
-root = os.getcwd()
+from distutils.sysconfig import get_python_lib
+LIBS = get_python_lib()
 
 
 class XAccelMiddleware(object):
@@ -17,10 +17,12 @@ class XAccelMiddleware(object):
     def xfix(self, header):
         if header[0].lower() != 'x-sendfile':
             return header
-        if header[1].startswith(app.root_path):
+        elif header[1].startswith(app.root_path):
             return ['X-Accel-Redirect', header[1][len(app.root_path):]]
-        return header
-
+        elif header[1].startswith(LIBS):
+            return ['X-Accel-Redirect', '/libstatic' + header[1][len(LIBS):]]
+        else:
+            return ['X-Filesend-Error-Noooooooooo', str(header)]
 
 
 from website import app
