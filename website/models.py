@@ -1,8 +1,9 @@
-#
-# models.py
-#
-# Database models for content on the Windermere Consortium website
-#
+"""
+    website.models
+    ~~~~~~~~~~~~~~
+
+    Database models for content on the Windermere Consortium website
+"""
 
 from math import ceil
 from os import urandom

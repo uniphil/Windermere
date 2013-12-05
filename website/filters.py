@@ -1,3 +1,10 @@
+"""
+    website.filters
+    ~~~~~~~~~~~~~~~
+
+    Template filters for the Windermere site
+"""
+
 from datetime import datetime
 from humanize import naturaltime
 from . import app

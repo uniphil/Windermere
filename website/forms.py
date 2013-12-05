@@ -1,8 +1,9 @@
-#
-# forms.py
-#
-# user input models for the windermere website
-#
+"""
+    website.forms
+    ~~~~~~~~~~~~~
+
+    user input models for the windermere website
+"""
 
 from flask.ext.wtf import Form
 from wtforms import fields, validators

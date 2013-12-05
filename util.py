@@ -1,4 +1,10 @@
 #!/usr/bin/env python2
+"""
+    util
+    ~~~~
+
+    Some useful tools for working with the windermere site.
+"""
 
 import os
 

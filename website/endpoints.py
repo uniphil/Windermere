@@ -1,6 +1,7 @@
-#
-# endpoints.py
-# 
+"""
+    website.endpoints
+    ~~~~~~~~~~~~~~~~~
+"""
 
 import os
 import random

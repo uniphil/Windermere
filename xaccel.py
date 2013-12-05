@@ -1,3 +1,12 @@
+#!/usr/bin/env python2
+"""
+    xaccel
+    ~~~~~~
+
+    Middleware to use nginx X-Accel-Redirect with Flask.
+    Based on https://gist.github.com/ThiefMaster/5698549
+"""
+
 from distutils.sysconfig import get_python_lib
 LIBS = get_python_lib()
 

@@ -1,11 +1,12 @@
-#
-# config-template.py
-#
-# Copy this file to config.py in this directory, and fill in the blanks
-#
-# This file is part of the Windermere Consortium (Created for Bill Arnott,
-# University of Ottawa Geology Dept)
-#
+"""
+    config-template
+    ~~~~~~~~~~~~~~~
+
+    Copy this file to config.py in this directory, and fill in the blanks
+
+    This file is part of the Windermere Consortium (Created for Bill Arnott,
+    University of Ottawa Geology Dept)
+"""
 
 
 from website import app

@@ -1,8 +1,9 @@
-#
-# access.py
-#
-# control logins and access to the windermere website
-#
+"""
+    website.access
+    ~~~~~~~~~~~~~~
+
+    control logins and access to the windermere website
+"""
 
 from datetime import datetime
 from flask.ext.login import LoginManager, AnonymousUserMixin
