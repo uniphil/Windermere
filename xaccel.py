@@ -17,7 +17,9 @@ class XAccelMiddleware(object):
     def xfix(self, header):
         if header[0].lower() != 'x-sendfile':
             return header
-        return ['X-Accel-Redirect', header[1][len(app.root_path):]]
+        if header[1].startswith(app.root_path):
+            return ['X-Accel-Redirect', header[1][len(app.root_path):]]
+        return header
 
 
 
