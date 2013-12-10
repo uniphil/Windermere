@@ -15,11 +15,14 @@ from . import app, models, forms
 @app.route('/')
 def home():
     form = forms.PartnerForm(request.form)
-    root = os.path.join('website', 'static')
-    static = os.path.join('img', 'cover', 'resized')
-    cover = random.choice(os.listdir(os.path.join(root, static)))
-    bg = url_for('static', filename=os.path.join(static, cover))
-    return render_template('home.html', form=form, bg=bg)
+    # root = os.path.join('website', 'static')
+    # static = os.path.join('img', 'cover', 'resized')
+    # cover = random.choice(os.listdir(os.path.join(root, static)))
+    # bg = url_for('static', filename=os.path.join(static, cover))
+    feature_query = models.ScenicPhoto.query.filter_by(featured=True)
+    featurenum = random.randrange(0, feature_query.count())
+    featurefile = url_for('photo', filename=feature_query[featurenum].photo + '_sized.jpg')
+    return render_template('home.html', form=form, bg=featurefile)
 
 
 @app.route('/people')
@@ -86,7 +89,6 @@ def mock_overview():
 @app.route('/photo/<filename>')
 def photo(filename):
     filepath = app.config['scenic'](filename)
-    print filepath
     return send_file(filepath)
 
 

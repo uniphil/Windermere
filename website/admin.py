@@ -8,6 +8,7 @@
 import os
 from datetime import datetime
 from werkzeug import secure_filename
+from PIL import Image
 from flask import request, flash, redirect, url_for
 from flask.ext.login import current_user, login_user, logout_user
 from flask.ext.admin import Admin, BaseView, AdminIndexView, expose
@@ -72,22 +73,39 @@ class PhotoView(AdminView):
             return False
         filename = secure_filename(raw_file.filename)
         filepath = app.config['scenic'](filename)
-        raw_file.save(filepath)
+        try:
+            rim = Image.open(raw_file)
+        except IOError as e:
+            flash('Error: ' + e.message, Warning)
+            return False
+        # try:
+        rim.save(filepath)
+        im = rim.copy()
+        del rim
+
+        if im.mode in ('1', 'L', 'P'):
+            im = im.convert('RGB')
+        im.thumbnail((1140, 1140), Image.ANTIALIAS)
+        im.save(filepath + '_sized.jpg', 'JPEG')
+        im.thumbnail((256, 256), Image.ANTIALIAS)
+        im.save(filepath + '_small.jpg', 'JPEG')
         photo.photo = filename
         return True
 
     def rm_photo(self, photo):
         filepath = app.config['scenic'](photo.photo)
-        try:
-            os.remove(filepath)
-        except OSError as e:
-            if app.debug:
-                raise e
-            else:
+        def trydel(extra):
+            try:
+                os.remove(filepath + extra)
+            except OSError as e:
+                # if app.debug:
+                #     raise e
+                if e.errno == 2:
+                    print extra, 'not found'
+                    return True
                 return False
-        else:
             return True
-
+        return all(map(trydel, ('', '_sized.jpg', '_small.jpg')))
 
     @expose('/')
     def index(self):
@@ -125,6 +143,14 @@ class PhotoView(AdminView):
             flash('Saved changes to "{}"'.format(the_photo.title), 'success')
             return redirect(url_for('.index'))
         return self.render('admin/photos/edit.html', photo=the_photo, form=form)
+
+    @expose('/<int:id>/toggle_feature')
+    def toggle_feature(self, id):
+        the_photo = models.ScenicPhoto.query.get_or_404(id)
+        the_photo.featured = not the_photo.featured
+        models.db.session.add(the_photo)
+        models.db.session.commit()
+        return redirect(url_for('.index'))
 
     @expose('/<int:id>/remove', methods=['GET', 'POST'])
     def remove_photo(self, id):

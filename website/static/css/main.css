@@ -301,7 +301,8 @@ footer {
     /*margin-top: -72px;*/
     margin-top: -20px;
     /*margin-top: -24px;*/
-    background: #555 url('../img/cover/resized/rockies2.jpg') 50%;
+    background: #555;
+    background-position: 50%;
     position: relative;
 }
 

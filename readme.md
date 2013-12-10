@@ -10,4 +10,7 @@ for deployment on nginx, we can d x-accel-redirect
 
 remember to leave off the trailing slash for `app.config[UPLOAD_DIR]`
 
-... should probably urljoin or something so that's not an issue, some day...
+
+tricky dependency:
+  * python imaging (preferably pillow)
+  * libjpeg

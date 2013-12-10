@@ -1,4 +1,4 @@
-{% extends 'admin/master.html' %}
+{% extends 'admin/w_master.html' %}
 
 {% block body %}
   <section>
@@ -12,11 +12,12 @@
       </tr>
       {% for photo in photos %}
         <tr>
-          <th>{{ photo.title }}</th>
+          <th><img width="32" src="{{ url_for('photo', filename=photo.photo + '_small.jpg') }}" alt="thumbnail" /> {{ photo.title }}</th>
           <td>{{ photo.description }}</td>
           <td>{{ photo.added|since }}</td>
           <td>
             <div class="pull-right">
+              <a href="{{ url_for('photos.toggle_feature', id=photo.id) }}" class="btn btn-small btn-link" title="Feature on home page"><i class="icon-home {{ 'home-feature' if photo.featured else 'home-unfeature' }}"></i></a>
               <a href="{{ url_for('photos.edit_photo', id=photo.id) }}" class="btn btn-small btn-link row-hover-show" title="Edit Photo"><i class="icon-pencil"></i></a>
               <a href="{{ url_for('photos.remove_photo', id=photo.id) }}" class="btn btn-small btn-link row-hover-show" title="Remove Photo"><i class="icon-remove"></i></a>
             </div>

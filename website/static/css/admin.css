@@ -15,3 +15,13 @@ tr a.row-hover-show {
 tr:hover a.row-hover-show {
     opacity: 1;
 }
+
+.home-unfeature {
+    opacity: 0.25;
+}
+.home-unfeature:hover {
+    opacity: 0.5;
+}
+.home-feature:hover {
+    opacity: 0.667;
+}
