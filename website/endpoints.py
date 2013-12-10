@@ -20,8 +20,11 @@ def home():
     # cover = random.choice(os.listdir(os.path.join(root, static)))
     # bg = url_for('static', filename=os.path.join(static, cover))
     feature_query = models.ScenicPhoto.query.filter_by(featured=True)
-    featurenum = random.randrange(0, feature_query.count())
-    featurefile = url_for('photo', filename=feature_query[featurenum].photo + '_sized.jpg')
+    try:
+        featurenum = random.randrange(0, feature_query.count())
+        featurefile = url_for('photo', filename=feature_query[featurenum].photo + '_sized.jpg')
+    except ValueError:
+        featurefile = ''
     return render_template('home.html', form=form, bg=featurefile)
 
 
