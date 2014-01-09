@@ -32,6 +32,7 @@ def home():
 def people():
     return render_template('people.html')
 
+
 @app.route('/unlock', methods=['GET', 'POST'])
 def unlock():
     form = forms.PartnerForm(request.form)

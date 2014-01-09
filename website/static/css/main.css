@@ -365,6 +365,9 @@ footer {
 .sponsors span.nserc:before {
   background: url('../img/sponsors/nserc.png');
 }
+.sponsors span.apache:before {
+  background: url('../img/sponsors/apache.png');
+}
 .sponsors span.anadarko:before {
   background: url('../img/sponsors/anadarko.png');
 }
