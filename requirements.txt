@@ -1,6 +1,5 @@
 Flask==0.10.1
 Flask-Script==0.6.6
-Flask-Admin==1.0.6
 Flask-Login==0.2.6
 Flask-SQLAlchemy==1.0
 Flask-Migrate==1.2.0
@@ -8,3 +7,6 @@ Flask-WTF==0.8.4
 gunicorn==17.5
 humanize==0.5
 passlib==1.6.1
+
+# latest flask-admin until file fixes land in pypi
+-e git+https://github.com/mrjoes/flask-admin.git#egg=flask-admin
