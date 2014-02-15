@@ -1,19 +1,25 @@
+# -*- coding: utf-8 -*-
 """
     website.admin
     ~~~~~~~~~~~~~
 
     administrative controls over the content for the Windermere website
+
+    :license: BSD or something
+    :author: uniphil
 """
 
 import os
-from datetime import datetime
-from werkzeug import secure_filename
 from PIL import Image
+from werkzeug import secure_filename
 from flask import request, flash, redirect, url_for
 from flask.ext.login import current_user, login_user, logout_user
 from flask.ext.admin import Admin, BaseView, AdminIndexView, expose
-from flask.ext.admin.contrib.sqlamodel import ModelView
-from website import app, models, forms
+from flask.ext.admin.contrib import sqla
+from website import app
+from website import models
+from website import forms
+from website.admin_helpers import wrap_file_field
 
 
 class AuthException(Exception):
@@ -257,8 +263,15 @@ class AccountsView(AdminView):
         return self.render('admin/accounts/remove_admin.html', admin=the_admin)
 
 
+@wrap_file_field('photo', 'people', endpoint='uploaded_file', photo=True)
+class PeopleView(sqla.ModelView):
+    """See all the people"""
+    column_list = ('name', 'current')
+    column_searchable_list = ('name',)
+
 
 admin = Admin(app, name='Windermere Admin', index_view=HomeView(name="Overview"))
+admin.add_view(PeopleView(models.Person, models.db.session, name='People'))
 admin.add_view(DocumentView(name='Documents'))
 admin.add_view(PhotoView(name='Photos', endpoint='photos'))
 admin.add_view(AccountsView(name='Accounts', endpoint='accounts'))

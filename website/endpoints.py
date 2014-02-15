@@ -6,7 +6,8 @@
 import os
 import random
 from flask import (request, session, render_template, redirect, url_for, flash,
-                   send_from_directory, send_file)
+                   send_from_directory, send_file, abort)
+from flask.helpers import safe_join
 from flask.ext.login import (current_user, login_required, login_user,
                              logout_user)
 from . import app, models, forms
@@ -15,10 +16,6 @@ from . import app, models, forms
 @app.route('/')
 def home():
     form = forms.PartnerForm(request.form)
-    # root = os.path.join('website', 'static')
-    # static = os.path.join('img', 'cover', 'resized')
-    # cover = random.choice(os.listdir(os.path.join(root, static)))
-    # bg = url_for('static', filename=os.path.join(static, cover))
     feature_query = models.ScenicPhoto.query.filter_by(featured=True)
     try:
         featurenum = random.randrange(0, feature_query.count())
@@ -93,6 +90,20 @@ def mock_overview():
 @app.route('/photo/<filename>')
 def photo(filename):
     filepath = app.config['scenic'](filename)
+    return send_file(filepath)
+
+
+@app.route('/files/<path:filename>')
+def files(filename):
+    print('yo', filename)
+    filepath = safe_join(app.config['UPLOAD_FOLDER'], filename)
+    print('yo2', filepath)
+    if not os.path.isabs(filepath):
+        filepath = os.path.join(app.root_path, filepath)
+    print('yo3', filepath)
+    # if not os.path.isfile(filepath):
+    #     raise abort(404)
+    print('yo4', filepath)
     return send_file(filepath)
 
 

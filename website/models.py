@@ -6,12 +6,15 @@
 """
 
 from math import ceil
+from PIL import Image
 from os import urandom
 from base64 import urlsafe_b64encode as b64encode
 from passlib.hash import pbkdf2_sha256
 from flask.ext.login import UserMixin
 from flask.ext.sqlalchemy import SQLAlchemy
 from website import app
+
+
 db = SQLAlchemy(app)
 
 
@@ -73,6 +76,12 @@ class ScenicPhoto(db.Model):
     description = db.Column(db.Text)
     added = db.Column(db.DateTime)
     featured = db.Column(db.Boolean)
+
+    def add_photo(self, photo):
+        pass
+
+    def remove_photo(self):
+        pass
 
 
 class Document(db.Model):
