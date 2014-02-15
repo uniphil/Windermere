@@ -77,12 +77,6 @@ class ScenicPhoto(db.Model):
     added = db.Column(db.DateTime)
     featured = db.Column(db.Boolean)
 
-    def add_photo(self, photo):
-        pass
-
-    def remove_photo(self):
-        pass
-
 
 class Document(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -72,106 +72,6 @@ class DocumentView(AdminView):
         return self.render('admin/documents.html')
 
 
-class PhotoView(AdminView):
-    def write_photo(self, photo):
-        raw_file = request.files.get('photo', None)
-        if raw_file is None:
-            return False
-        filename = secure_filename(raw_file.filename)
-        filepath = app.config['scenic'](filename)
-        try:
-            rim = Image.open(raw_file)
-        except IOError as e:
-            flash('Error: ' + e.message, Warning)
-            return False
-        # try:
-        rim.save(filepath)
-        im = rim.copy()
-        del rim
-
-        if im.mode in ('1', 'L', 'P'):
-            im = im.convert('RGB')
-        im.thumbnail((1140, 1140), Image.ANTIALIAS)
-        im.save(filepath + '_sized.jpg', 'JPEG')
-        im.thumbnail((256, 256), Image.ANTIALIAS)
-        im.save(filepath + '_small.jpg', 'JPEG')
-        photo.photo = filename
-        return True
-
-    def rm_photo(self, photo):
-        filepath = app.config['scenic'](photo.photo)
-        def trydel(extra):
-            try:
-                os.remove(filepath + extra)
-            except OSError as e:
-                # if app.debug:
-                #     raise e
-                if e.errno == 2:
-                    print extra, 'not found'
-                    return True
-                return False
-            return True
-        return all(map(trydel, ('', '_sized.jpg', '_small.jpg')))
-
-    @expose('/')
-    def index(self):
-        photos = models.ScenicPhoto.query.all()
-        return self.render('admin/photos/index.html', photos=photos)
-
-    @expose('/add', methods=['GET', 'POST'])
-    def add_photo(self):
-        form = forms.ScenicPhotoForm(request.form)
-        if form.validate_on_submit():
-            new_photo = models.ScenicPhoto()
-            new_photo.added = datetime.now()
-            new_photo.title = form.title.data
-            new_photo.description = form.description.data
-            new_photo.featured = form.featured.data
-            if self.write_photo(new_photo):
-                models.db.session.add(new_photo)
-                models.db.session.commit()
-                flash('Saved new photo "{}"'.format(new_photo.title), 'success')
-                return redirect(url_for('.index'))
-            else:
-                flash('There was a problem saving your photo :(')
-        return self.render('admin/photos/add.html', form=form)
-
-    @expose('/<int:id>/edit', methods=['GET', 'POST'])
-    def edit_photo(self, id):
-        the_photo = models.ScenicPhoto.query.get_or_404(id)
-        form = forms.ScenicPhotoEditForm(request.form, the_photo)
-        if form.validate_on_submit():
-            the_photo.title = form.title.data
-            the_photo.description = form.description.data
-            the_photo.featured = form.featured.data
-            models.db.session.add(the_photo)
-            models.db.session.commit()
-            flash('Saved changes to "{}"'.format(the_photo.title), 'success')
-            return redirect(url_for('.index'))
-        return self.render('admin/photos/edit.html', photo=the_photo, form=form)
-
-    @expose('/<int:id>/toggle_feature')
-    def toggle_feature(self, id):
-        the_photo = models.ScenicPhoto.query.get_or_404(id)
-        the_photo.featured = not the_photo.featured
-        models.db.session.add(the_photo)
-        models.db.session.commit()
-        return redirect(url_for('.index'))
-
-    @expose('/<int:id>/remove', methods=['GET', 'POST'])
-    def remove_photo(self, id):
-        the_photo = models.ScenicPhoto.query.get_or_404(id)
-        if request.form.get('confirm') == 'yes':
-            if self.rm_photo(the_photo):
-                models.db.session.delete(the_photo)
-                models.db.session.commit()
-                flash('Removed Scenic Photo {}.'.format(the_photo.title), 'info')
-                return redirect(url_for('.index'))
-            else:
-                flash('There was an error removing {}'.format(the_photo.title))
-        return self.render('admin/photos/remove.html', photo=the_photo)
-
-
 
 class AccountsView(AdminView):
     @expose('/')
@@ -263,6 +163,11 @@ class AccountsView(AdminView):
         return self.render('admin/accounts/remove_admin.html', admin=the_admin)
 
 
+@wrap_file_field('photo', 'scenic', endpoint='uploaded_file', photo=True)
+class PhotoView(sqla.ModelView):
+    """la la la"""
+
+
 @wrap_file_field('photo', 'people', endpoint='uploaded_file', photo=True)
 class PeopleView(sqla.ModelView):
     """See all the people"""
@@ -273,5 +178,5 @@ class PeopleView(sqla.ModelView):
 admin = Admin(app, name='Windermere Admin', index_view=HomeView(name="Overview"))
 admin.add_view(PeopleView(models.Person, models.db.session, name='People'))
 admin.add_view(DocumentView(name='Documents'))
-admin.add_view(PhotoView(name='Photos', endpoint='photos'))
+admin.add_view(PhotoView(models.ScenicPhoto, models.db.session, name='Photos'))
 admin.add_view(AccountsView(name='Accounts', endpoint='accounts'))
