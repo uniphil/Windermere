@@ -165,7 +165,8 @@ class AccountsView(AdminView):
 
 @wrap_file_field('photo', 'scenic', endpoint='uploaded_file', photo=True)
 class PhotoView(sqla.ModelView):
-    """la la la"""
+    """Scenic photos"""
+    column_list = ('title', 'added', 'featured')
 
 
 @wrap_file_field('photo', 'people', endpoint='uploaded_file', photo=True)
