@@ -63,25 +63,32 @@ def restricted():
 
 
 Filter = namedtuple('Filter', 'name plural active')
+filters = (
+    Filter('Presentation', 'Presentations', filter=='Presentation'),
+    Filter('Publication', 'Publications', filter=='Publication'),
+    Filter('Abstract', 'Abstracts', filter=='Abstract'),
+    Filter('Thesis', 'Theses', filter=='Thesis'),
+    Filter('High-Resolution Image', 'High-Resolution Images', filter=='High-Resolution Image'),
+)
+
+
 
 @app.route('/content/')
-@app.route('/content/<string:coarse>/')
-@app.route('/content/<string:coarse>/<string:medium>/')
-@app.route('/content/<string:coarse>/<string:medium>/<string:fine>/')
+@app.route('/content/<string:category>/')
 #@login_required
-def topic_overview(coarse=None, medium=None, fine=None):
+def topic_overview(category=None):
 
     filter = request.args.get('filter', None)
-    filters = (
-        Filter('Presentation', 'Presentations', filter=='Presentation'),
-        Filter('Publication', 'Publications', filter=='Publication'),
-        Filter('Abstract', 'Abstracts', filter=='Abstract'),
-        Filter('Thesis', 'Theses', filter=='Thesis'),
-        Filter('High-Resolution Image', 'High-Resolution Images', filter=='High-Resolution Image'),
-    )
 
     data = []
     base_q = models.Document.query.order_by(models.Document.added.asc())
+    if category:
+        base_q = base_q.filter(models.db.and_(
+            models.DocCategory.safe == category,
+            models.DocCategory.document_id == models.Document.id,
+        ))
+
+    print base_q
 
     for f in filters:
         q = base_q.filter_by(type=f.name)
@@ -96,9 +103,7 @@ def topic_overview(coarse=None, medium=None, fine=None):
 
     return render_template('content-overview.html',
         title='Content Browser',
-        coarse=coarse,
-        medium=medium,
-        fine=fine,
+        category=category,
         data=data,
         filtered=filter is not None,
     )

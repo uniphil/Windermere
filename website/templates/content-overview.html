@@ -74,7 +74,7 @@
         <h2>Mass Transport</h2>
 
         {% for type, records, count in data %}
-          {% if records is not none %}
+          {% if records is not none and count > 0 %}
             <div class="type-summary">
               <h3>{{ type.name }}</h3>
               <ul class="type-summary-list list-unstyled">
@@ -84,10 +84,10 @@
                   </li>
                 {% endfor %}
               </ul>
-              {% if not filtered %}
+              {% if not filtered and count > 3 %}
                 <p>
                   <a href=".?filter={{ type.name }}" class="btn btn-sm btn-default summary-more">
-                    View {{ type.plural }} <span class="text-muted">({{ count }})</span>
+                    View all {{ type.plural }} <span class="text-muted">({{ count }})</span>
                   </a>
                 </p>
               {% endif %}
