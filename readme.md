@@ -28,4 +28,3 @@ tricky dependency:
  * `./manage.py db upgrade`
  * move it back
 
-it may be necessary to skip the first migration.

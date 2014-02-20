@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "reloading gunicorn..."
+pkill -SIGHUP gunicorn
