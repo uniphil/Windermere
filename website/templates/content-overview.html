@@ -64,11 +64,11 @@
   <div class="row">
 
     <div class="col-sm-3 col-lg-2">
-      <h4>Filter</h4>
+      <h4>Filter <small><a href=".">clear</a></small></h4>
       <ul class="nav nav-pills nav-stacked">
-        {% for type, records in data.items() %}
-          <li class="{% if type.active %}active{% endif %}{% if not records.count and not type.active %}disabled{% endif %}">
-            <a href="">{{ type.plural }}{% if records.count %} <small class="text-muted">{{ records.count }}</small>{% endif %}</a>
+        {% for type, records, count in data %}
+          <li class="{% if type.active %}active{% endif %}{% if not count and not type.active %}disabled{% endif %}">
+            <a href=".?filter={{ type.name }}">{{ type.plural }}{% if count %} <small class="text-muted">{{ count }}</small>{% endif %}</a>
           </li>
         {% endfor %}
       </ul>
@@ -79,8 +79,8 @@
 
         <h2>Mass Transport</h2>
 
-        {% for type, records in data.items() %}
-          {% if records.count > 0 %}
+        {% for type, records, count in data %}
+          {% if records is not none %}
             <div class="type-summary">
               <h3>{{ type.name }}</h3>
               <ul class="type-summary-list list-unstyled">
@@ -90,11 +90,13 @@
                   </li>
                 {% endfor %}
               </ul>
-              <p>
-                <a class="btn btn-sm btn-default summary-more">
-                  View {{ type.plural }} <span class="text-muted">({{ records.count }})</span>
-                </a>
-              </p>
+              {% if not filtered %}
+                <p>
+                  <a href=".?filter={{ type.name }}" class="btn btn-sm btn-default summary-more">
+                    View {{ type.plural }} <span class="text-muted">({{ count }})</span>
+                  </a>
+                </p>
+              {% endif %}
             </div>
           {% endif %}
         {% endfor %}

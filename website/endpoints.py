@@ -73,20 +73,26 @@ def topic_overview(coarse=None, medium=None, fine=None):
 
     filter = request.args.get('filter', None)
     filters = (
-        Filter('Presentation', 'Presentations', filter == 'Presentation'),
-        Filter('Publication', 'Publications', filter == 'Publication'),
-        Filter('Abstract', 'Abstracts', filter == 'Abstract'),
-        Filter('Thesis', 'Theses', filter == 'Thesis'),
-        Filter('High-Resolution Image', 'High-Resolution Images', False),
+        Filter('Presentation', 'Presentations', filter=='Presentation'),
+        Filter('Publication', 'Publications', filter=='Publication'),
+        Filter('Abstract', 'Abstracts', filter=='Abstract'),
+        Filter('Thesis', 'Theses', filter=='Thesis'),
+        Filter('High-Resolution Image', 'High-Resolution Images', filter=='High-Resolution Image'),
     )
 
-    data = {}
-    base_q = models.Document.query.order_by(models.Document.added.desc())
-    for filter in filters:
-        q = base_q.filter_by(type=filter.name)
-        recs = q.limit(3)
-        recs.count = q.count()
-        data[filter] = recs
+    data = []
+    base_q = models.Document.query.order_by(models.Document.added.asc())
+
+    for f in filters:
+        q = base_q.filter_by(type=f.name)
+        if f.name == filter:
+            recs = q.all()
+        elif filter == None:
+            recs = q.limit(3)
+        else:
+            recs = None
+        count = q.count()
+        data.append((f, recs, count))
 
     return render_template('content-overview.html',
         title='Content Browser',
@@ -94,6 +100,7 @@ def topic_overview(coarse=None, medium=None, fine=None):
         medium=medium,
         fine=fine,
         data=data,
+        filtered=filter is not None,
     )
 
 
