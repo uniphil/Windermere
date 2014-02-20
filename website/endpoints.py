@@ -70,23 +70,6 @@ def topic_overview(coarse, medium=None, fine=None):
                            coarse=coarse, medium=medium, fine=fine)
 
 
-@app.route('/overview-sample')
-def mock_overview():
-    class Content(list):
-        def __init__(self, name, stuff=[]):
-            self.name = name
-            super(Content, self).__init__(stuff)
-
-    contents = [
-        Content("Photos", ["lalalal", "lololo", "lelele"]),
-        Content("Publications", ["one", "two", "threeeee"]),
-        Content("Theses", ["un,", "deux", "troisiemme"]),
-        Content("Presentations", ["blah", "blah", "bleh"]),
-    ]
-    
-    return render_template('mock-overview.html', contents=contents)
-
-
 @app.route('/photo/<filename>')
 def photo(filename):
     filepath = app.config['scenic'](filename)
