@@ -71,17 +71,74 @@ filters = (
     Filter('High-Resolution Image', 'High-Resolution Images', False),
 )
 
-Category = namedtuple('Category', 'name safe')
+Category = namedtuple('Category', 'name safe selected children')
 categories = (
-  
+    Category('Slope', 'slope', False, (
+        Category('Channels', 'slope-channels', False, (
+             Category('Large Channels', 'slope-channels-large-channels', False, None),
+             Category('Small Channels', 'slope-channels-small-channels', False, None),
+        )),
+        Category('Levees and Splays', 'slope-levees-and-splays', False, None),
+        Category('Mass Transport Deposits', 'slope-mass-transport-deposits', False, None),
+    )),
+    Category('Channel Lobe Transition Zone', 'channel-lobe-transition-zone', False, None),
+    Category('Basin Floor Lobes', 'basin-floor-lobes', False, (
+        Category('Isolated Scour', 'basin-floor-lobes-isolated-scour', False, None),
+        Category('Avulsion Spray', 'basin-floor-lobes-avulsion-spray', False, None),  # TOFIX spray -> splay
+        Category('Feeder Channel', 'basin-floor-lobes-feeder-channel', False, None),
+        Category('Distributary Channel', 'basin-floor-lobes-distributary-channel', False, None),
+        Category('Terminal Splay', 'basin-floor-lobes-terminal-splay', False, None),
+    )),
+    Category('Old Fort Point', 'old-fort-point', False, None),
+    Category('Current Events', 'current-events', False, None),
 )
-
 
 
 @app.route('/content/')
 @app.route('/content/<string:category>/')
 #@login_required
 def topic_overview(category=None):
+
+    cat_name = 'Overview'
+
+    sel_cats = []
+    for cat in categories:
+        name, safe = cat.name, cat.safe
+        scats = None
+
+        if cat.safe == category:
+            sel = True
+            cat_name = cat.name
+        else:
+            sel = False
+
+        if cat.children is not None:
+            scats = []
+            for scat in cat.children:
+                sname, ssafe = scat.name, scat.safe
+                mcats = None
+
+                if scat.safe == category:
+                    sel = ssel = True
+                    cat_name = scat.name
+                else:
+                    ssel = False
+
+                if scat.children is not None:
+                    mcats = []
+                    for mcat in scat.children:
+                        mname, msafe = mcat.name, mcat.safe
+                        if mcat.safe == category:
+                            sel = ssel = msel = True
+                            cat_name = mcat.name
+                        else:
+                            msel = False
+
+                        mcats.append(Category(mname, msafe, msel, None))
+
+                scats.append(Category(sname, ssafe, ssel, mcats))
+
+        sel_cats.append(Category(name, safe, sel, scats))
 
     filter = request.args.get('filter', None)
 
@@ -117,6 +174,8 @@ def topic_overview(category=None):
         category=category,
         data=data,
         filtered=filter is not None,
+        categories=sel_cats,
+        cat_name=cat_name,
     )
 
 

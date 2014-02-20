@@ -1,43 +1,24 @@
 {% extends 'base-full.html' %}
 
-{% set map_nav = [
-  {'name': 'Slope', 'href': '#', 'selected': true, 'children': [
-    {'name': 'Channels', 'href': '#', 'children': [
-      {'name': 'Large Channels', 'href': '#'},
-      {'name': 'Small Channels', 'href': '#'},
-    ]},
-    {'name': 'Levees and Splays', 'selected': true, 'href': '#'},
-    {'name': 'Mass Transport Deposits', 'href': '#'},
-  ]},
-  {'name': 'Channel-Lobe Transition Zone', 'href': '#'},
-  {'name': 'Basin Floor Lobes', 'href': '#', 'children': [
-    {'name': 'Isolated Scour', 'href': '#'},
-    {'name': 'Avulsion Splay', 'href': '#'},
-    {'name': 'Feeder Channel', 'href': '#'},
-    {'name': 'Distributary Channel', 'href': '#'},
-    {'name': 'Terminal Splay', 'href': '#'}
-  ]},
-  {'name': 'Old Fort Point', 'href': '#'},
-  {'name': 'Current Events', 'href': '#'},
-] %}
-
-
 {% block page_content %}
   <nav class="tree">
     <ul>
-      {% for zone in map_nav %}
-        <li{{ ' class="selected"'|safe if zone.selected }}>
-          <a href="{{ zone.href }}">{{ zone.name }}</a>
-          {% if zone.children %}
+      <li{{ ' class="selected"'|safe if cat_name=='Overview' }}>
+        <a href="{{ url_for('topic_overview', filter=request.args.get('filter')) }}">All Categories</a>
+      </li>
+      {% for cat in categories %}
+        <li{{ ' class="selected"'|safe if cat.selected }}>
+          <a href="{{ url_for('topic_overview', category=cat.safe, filter=request.args.get('filter')) }}">{{ cat.name }}</a>
+          {% if cat.children %}
             <ul>
-              {% for subzone in zone.children %}
-                <li{{ ' class="selected"'|safe if subzone.selected }}>
-                  <a href="{{ subzone.href }}">{{ subzone.name }}</a>
-                  {% if subzone.children %}
+              {% for subcat in cat.children %}
+                <li{{ ' class="selected"'|safe if subcat.selected }}>
+                  <a href="{{ url_for('topic_overview', category=subcat.safe, filter=request.args.get('filter')) }}">{{ subcat.name }}</a>
+                  {% if subcat.children %}
                     <ul>
-                      {% for subsub in subzone.children %}
+                      {% for subsub in subcat.children %}
                         <li{{ ' class="selected"'|safe if subsub.selected }}>
-                          <a href="{{ subsub.href }}">{{ subsub.name }}</a>
+                          <a href="{{ url_for('topic_overview', category=subsub.safe, filter=request.args.get('filter')) }}">{{ subsub.name }}</a>
                         </li>
                       {% endfor %}
                     </ul>
@@ -71,7 +52,7 @@
     <div class="col-sm-9 col-lg-10">
       {% block page_main %}
 
-        <h2>Mass Transport</h2>
+        <h2>{{ cat_name }}</h2>
 
         {% for type, records, count in data %}
           {% if records is not none and count > 0 %}
