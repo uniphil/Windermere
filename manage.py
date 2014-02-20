@@ -40,6 +40,32 @@ def load_oldphotos(datafile='import-old/data.json'):
     db.session.commit()
 
 
+@manager.command
+def load_olddocs(datafile='import-old/data.json'):
+    import json
+    from datetime import datetime
+    from website.models import db, Document, DocCategory
+
+    with open(datafile) as f:
+        data = json.load(f)
+
+    for doc_data in data['documents']:
+        doc = Document()
+        doc.file = doc_data['path']
+        doc.title = doc_data['title']
+        doc.description = doc_data['body']
+        doc.added = datetime.utcfromtimestamp(doc_data['timestamp'])
+        doc.type = doc_data['type']
+        for category in doc_data['categories']:
+            cat = DocCategory()
+            cat.name = category
+            cat.document = doc
+            db.session.add(cat)
+        db.session.add(doc)
+
+    db.session.commit()
+
+
 if __name__ == '__main__':
     manager.run()
 

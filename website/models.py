@@ -81,6 +81,17 @@ class ScenicPhoto(db.Model):
 class Document(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     file = db.Column(db.String(220))
+    title = db.Column(db.String(128))
+    description = db.Column(db.Text)
+    added = db.Column(db.DateTime)
+    type = db.Column(db.String(64))
+
+
+class DocCategory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128))
+    document_id = db.Column(db.Integer, db.ForeignKey('document.id'))
+    document = db.relationship('Document', backref=db.backref('categories'))
 
 
 class Photo(db.Model):
