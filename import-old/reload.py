@@ -42,8 +42,21 @@ with Query('photos.sql') as cursor:
         photos.append(photo)
 
 
+documents = {}
 with Query('documents.sql') as cursor:
-    documents = [row_to_obj(row) for row in cursor]
+    for row in cursor:
+        if row['vid'] not in documents:
+            doc = row_to_obj(row)
+            doc['categories'] = []
+            category = doc.pop('category')
+            if category:
+                doc['categories'].append(category)
+            documents[row['vid']] = doc
+        else:
+            documents[row['vid']]['categories'].append(row['category'])
+
+
+print '\n'.join(map(str, documents))
 
 
 data = dict(photos=photos, documents=documents)
