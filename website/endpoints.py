@@ -6,6 +6,7 @@
 import os
 import random
 from collections import namedtuple
+from werkzeug.exceptions import NotFound
 from flask import (request, session, render_template, redirect, url_for, flash,
                    send_from_directory, send_file, abort)
 from flask.helpers import safe_join
@@ -166,8 +167,6 @@ def topic_overview(category=None):
             models.DocCategory.document_id == models.Document.id,
         ))
 
-    print base_q
-
     for f in sel_filters:
         q = base_q.filter_by(type=f.name)
         if f.name == filter:
@@ -189,23 +188,28 @@ def topic_overview(category=None):
     )
 
 
+@app.route('/content/document/<int:id>')
+def document(id):
+    document = models.Document.query.get(id) or abort(404)
+    return document.title
+
+
 @app.route('/photo/<filename>')
 def photo(filename):
     filepath = app.config['scenic'](filename)
     return send_file(filepath)
 
 
-@app.route('/files/<path:filename>')
-def files(filename):
-    print('yo', filename)
-    filepath = safe_join(app.config['UPLOAD_FOLDER'], filename)
-    print('yo2', filepath)
+@app.route('/data/<path:filepath>')
+def files(filepath):
+    folder, filename = filepath.rsplit('/', 1)
+    path = os.path.join(app.config['UPLOAD_FOLDER'], folder)
+    filepath = safe_join(path, filename)
     if not os.path.isabs(filepath):
         filepath = os.path.join(app.root_path, filepath)
-    print('yo3', filepath)
-    # if not os.path.isfile(filepath):
-    #     raise abort(404)
-    print('yo4', filepath)
+    if not os.path.isfile(filepath):
+        print filepath
+        raise NotFound()
     return send_file(filepath)
 
 

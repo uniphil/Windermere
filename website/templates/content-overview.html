@@ -61,7 +61,13 @@
               <ul class="type-summary-list list-unstyled">
                 {% for rec in records %}
                   <li>
-                    <p><a href="#" class="btn btn-default btn-xs ttbutton" data-icon="d" data-toggle="tooltip" title="Download"><span class="text-hide"> Download</span></a> <a href="#">{{ rec.title }}</a>{% if rec.label %} <span class="label label-warning">{{ rec.label }}</span>{% endif %}</p>
+                    <p>
+                      <a href="{{ url_for('files', filepath=rec.file) }}" class="btn btn-default btn-xs ttbutton" data-icon="d" data-toggle="tooltip" title="Download"><span class="text-hide"> Download</span></a>
+                      <a title="{{ rec.description }}" href="{{ url_for('document', id=rec.id) }}">{{ rec.title }}</a>
+                      {% if rec.label %}
+                        <span class="label label-warning">{{ rec.label }}</span>
+                      {% endif %}
+                    </p>
                   </li>
                 {% endfor %}
               </ul>
