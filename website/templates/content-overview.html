@@ -30,11 +30,6 @@
   {'name': 'High-Resolution Images', 'count': 2},
 ] %}
 
-{% macro item(title, summary, label=none) %}
-  <li>
-    <p><a href="#" class="btn btn-default btn-xs ttbutton" data-icon="d" data-toggle="tooltip" title="Download"><span class="text-hide"> Download</span></a> <a href="#">{{ title }}</a>{% if label %} <span class="label label-warning">{{ label }}</span>{% endif %}</p>
-  </li>
-{% endmacro %}
 
 {% block page_content %}
   <nav class="tree">
@@ -71,9 +66,9 @@
     <div class="col-sm-3 col-lg-2">
       <h4>Filter</h4>
       <ul class="nav nav-pills nav-stacked">
-        {% for type in content_types %}
-          <li class="{% if type.active %}active{% endif %}{% if not type.count and not type.active %}disabled{% endif %}">
-            <a href="{{ type.href }}">{{ type.name }}{% if type.count %} <small class="text-muted">{{ type.count }}</small>{% endif %}</a>
+        {% for type, records in data.items() %}
+          <li class="{% if type.active %}active{% endif %}{% if not records.count and not type.active %}disabled{% endif %}">
+            <a href="">{{ type.plural }}{% if records.count %} <small class="text-muted">{{ records.count }}</small>{% endif %}</a>
           </li>
         {% endfor %}
       </ul>
@@ -84,35 +79,25 @@
 
         <h2>Mass Transport</h2>
 
-        <div class="type-summary">
-          <h3>Publications</h3>
-          <ul class="type-summary-list list-unstyled">
-            {{ item('2013 Partners field Trip', 'Fieldguide for the 2013 Partners Field Trip (August 14, 15, 16)', label='New') }}
-            {{ item('Basin Floor Lobe and Fan Model', 'Based on the Ph.D. thesis works of Viktor Terlaky in the Middle and Upper Kaza groups, a hierarchy of basin floor stratigraphic elements is recognized, which in terms of increasing spatial and temporal scale are: (terminal) splay,...') }}
-            {{ item('Crevasse splay and sinuous channel succession (AAPG Atlas, 2007)', 'Detailed description and interpretation of a deep-water crevasse splay and sinuous channel succession(Chapter 128 in the AAPG (2007) Atlas of Deep-Water Outcrops).') }}
-          </ul>
-          <p><a class="btn btn-sm btn-default summary-more">View Publications <span class="text-muted">(7)</span></a></p>
-        </div>
-
-        <div class="type-summary">
-          <h3>Conference Presentations</h3>
-          <ul class="type-summary-list list-unstyled">
-            {{ item('Matrix-rich Sandstones in Base of Slope and Basin Floor Strata', 'Panel #3 AAPG 2013 poster') }}
-            {{ item('Importance of Near-Bed Sediment Concentration on Shelf Bed-load Sedimentary Structures', 'The ubiquity of planar lamination in continental shelf very fine sandstones and siltstones is, as argued for turbidites in deep-marine sedimentary systems, interpreted to be the result of high near-bed sediment concentrations and...') }}
-            {{ item('2013 Partners Meeting -- Basin Floor Elements (V. Terlaky)', 'Presentation by Ph.D. student Viktor Terlaky on the architecture and stratal composition of medial and proximal basin floor deposits.') }}
-          </ul>
-          <p><a class="btn btn-sm btn-default summary-more">View All <span class="text-muted">(2)</span></a></p>
-        </div>
-
-        <div class="type-summary">
-          <h3>Gamma-Ray Spreadsheets</h3>
-          <ul class="type-summary-list list-unstyled">
-            {{ item('Upper Kaza - Jonathan Rocheleau\'s sections', 'Gamma ray profiles of all stratigraphic sections logged in the interval of the Upper Kaza studied by Jonathan Rocheleau (MSc).') }}
-            {{ item('Old Fort Point Fm.', 'Gamma ray data tables for stratigraphic sections of the Old Fort Point Formation in the Southern Canadian Cordillera (Mark Smith)') }}
-            {{ item('Isaac Fm. Channel 3 Castle Creek South', 'Aerial photo of a portion of Isaac Channel 3 overlain by the gamma ray profile of selected stratigraphic sections (Lillian Navarro)') }}
-          </ul>
-          <p><a class="btn btn-sm btn-default summary-more">View All <span class="text-muted">(18)</span></a></p>
-        </div>
+        {% for type, records in data.items() %}
+          {% if records.count > 0 %}
+            <div class="type-summary">
+              <h3>{{ type.name }}</h3>
+              <ul class="type-summary-list list-unstyled">
+                {% for rec in records %}
+                  <li>
+                    <p><a href="#" class="btn btn-default btn-xs ttbutton" data-icon="d" data-toggle="tooltip" title="Download"><span class="text-hide"> Download</span></a> <a href="#">{{ rec.title }}</a>{% if rec.label %} <span class="label label-warning">{{ rec.label }}</span>{% endif %}</p>
+                  </li>
+                {% endfor %}
+              </ul>
+              <p>
+                <a class="btn btn-sm btn-default summary-more">
+                  View {{ type.plural }} <span class="text-muted">({{ records.count }})</span>
+                </a>
+              </p>
+            </div>
+          {% endif %}
+        {% endfor %}
 
       {% endblock %}
     </div>

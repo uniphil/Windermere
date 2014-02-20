@@ -86,6 +86,9 @@ class Document(db.Model):
     added = db.Column(db.DateTime)
     type = db.Column(db.String(64))
 
+    def __repr__(self):
+        return '<Document: {}...>'.format(self.title[:21])
+
 
 class DocCategory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
