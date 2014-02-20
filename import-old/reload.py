@@ -42,21 +42,21 @@ with Query('photos.sql') as cursor:
         photos.append(photo)
 
 
-documents = {}
+
 with Query('documents.sql') as cursor:
+    vkey_documents = {}
     for row in cursor:
-        if row['vid'] not in documents:
+        if row['vid'] not in vkey_documents:
             doc = row_to_obj(row)
             doc['categories'] = []
             category = doc.pop('category')
             if category:
                 doc['categories'].append(category)
-            documents[row['vid']] = doc
+            vkey_documents[row['vid']] = doc
         else:
-            documents[row['vid']]['categories'].append(row['category'])
+            vkey_documents[row['vid']]['categories'].append(row['category'])
+    documents = vkey_documents.values()
 
-
-print '\n'.join(map(str, documents))
 
 
 data = dict(photos=photos, documents=documents)

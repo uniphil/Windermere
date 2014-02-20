@@ -941,8 +941,8 @@
       "nid": 258
     }
   ], 
-  "documents": {
-    "33": {
+  "documents": [
+    {
       "body": "This paper was published on the CD-ROM included in the AAPG Deep-Water Atlas (2007). It is a detailed overview of the regional and local stratigraphy of the deep-water part of the Neoproterozoic Windermere Supergroup in the southern Canadian Cordillera.", 
       "vid": 33, 
       "title": "Windermere Supergroup Overview AAPG Atlas 2007", 
@@ -965,7 +965,7 @@
         "Old Fort Point"
       ]
     }, 
-    "34": {
+    {
       "body": "This paper, published in JMPG (2007), for the first time, describes the detailed architecture of inner-bend channel margin deposits (i.e. point bars in a sinuous channel). Although generally assumed to be similar to fluvial point bar deposits, deep-marine deposits differ in a number of important ways -- differences that have important reservoir quality and continuity ramifications. ", 
       "vid": 34, 
       "title": "Deep marine lateral accretion deposits", 
@@ -979,7 +979,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "35": {
+    {
       "body": "Experimental study by Suzanne Leclair (PDF) and Bill Arnott investigating the effects of sediment concentration on the characteristics of sediment deposition in high concentration turbidity currents. Published in JSR 2005. ", 
       "vid": 35, 
       "title": "High concentration turbidity currents", 
@@ -992,7 +992,7 @@
         "Experimental"
       ]
     }, 
-    "39": {
+    {
       "body": "During the 2009 partners meeting in Calgary it was suggested by Dennis Meloche (Devon) that we compile a Powerpoint presentation that captured some of the highlights of our research since its inception in 2001.  This file was distributed to each of the partner companies in late Spring 2009. ", 
       "vid": 39, 
       "title": "Windermere Contributions to 2009", 
@@ -1006,7 +1006,7 @@
         "Miscellaneous"
       ]
     }, 
-    "41": {
+    {
       "body": "A list of literature contributions made by our research group until late 2009. ", 
       "vid": 41, 
       "title": "2009 Windermere publication list", 
@@ -1019,7 +1019,7 @@
         "Current Events"
       ]
     }, 
-    "45": {
+    {
       "body": "Partners meeting 2009.  Held in Houston in October 2008 and Calgary in February 2009.  Presenters were:\nBill Arnott -- Introduction to the Windermere turbidite system; details of basin floor architectural elements in the Upper Kaza Group strata; highly sinuous channel deposits (Isaac Formation)\nViktor Terlaky -- basin floor deposits (Middle Kaza Group) -- separate Powerpoint\nShann Khan -- levee deposits (Isaac Formation) -- separate Powerpoint\n", 
       "vid": 45, 
       "title": "Partners Meeting 2009", 
@@ -1042,7 +1042,7 @@
         "Miscellaneous"
       ]
     }, 
-    "46": {
+    {
       "body": "Introduction to Windermere turbidite system at the 2010 Partners Meeting (Houston, February)", 
       "vid": 46, 
       "title": "Introduction to Partners Meeting 2010", 
@@ -1065,7 +1065,7 @@
         "Miscellaneous"
       ]
     }, 
-    "47": {
+    {
       "body": "Preliminary test of experimental apparatus and work flow to investigate the effects of sediment concentration on fluid turbulence in natural sediment-transporting turbidity currents.", 
       "vid": 47, 
       "title": "Experiments investigating effects of sediment concentration on turbulence in turbidity currents", 
@@ -1078,7 +1078,7 @@
         "Experimental"
       ]
     }, 
-    "48": {
+    {
       "body": "Video of first experimental flow", 
       "vid": 48, 
       "title": "Experiment movie", 
@@ -1091,7 +1091,7 @@
         "Experimental"
       ]
     }, 
-    "50": {
+    {
       "body": "Based on a poster presented at the AAPG Annual Meeting in Denver, CO 2009 (poster was selected as one of Top 10 posters at the meeting).  It is a comparative synthesis of large scale leveed channels (Isaac Channel 3) --  Shann Khan (levee deposits) and Lilian Navarro (channel deposits), and small scale channels -- Bill Arnott (Isaac Channel 2).", 
       "vid": 50, 
       "title": "Architecture of large vs. small scale leveed channels (2010)", 
@@ -1105,7 +1105,7 @@
         "Slope / Channels / Small Channels"
       ]
     }, 
-    "51": {
+    {
       "body": "Update of ongoing research on the basin floor deposits in the Upper and Middle Kaza groups by  Ph.D. student Viktor Terlaky and M.Sc. student Jonathan Rocheleau given at the 2010 Houston Partners Meeting. ", 
       "vid": 51, 
       "title": "Basin Floor deposits of the Upper and Middle Kaza (2010)", 
@@ -1122,7 +1122,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "52": {
+    {
       "body": "Discussion by Ph.D. student Shann Khan on the origin of levees and their topography -- topography that is built from horizontal beds but creates seismic reflectors that dip. Assistance on the seismic modelling was provided by Dr. Andre Pugin, Geological Survey of Canada (Ottawa).", 
       "vid": 52, 
       "title": "Origin of levees and levee topgraphy (2010)", 
@@ -1135,7 +1135,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "53": {
+    {
       "body": "Architectural and dimensional characteristics of an outer bend levee (Isaac Channel 3, Castle Creek south)", 
       "vid": 53, 
       "title": "Stratal architecture of an outer bend levee (2009) ", 
@@ -1148,7 +1148,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "54": {
+    {
       "body": "Preliminary observations of sandstone-rich basin floor deposits in the Middle Kaza", 
       "vid": 54, 
       "title": "Lithofacies of sand-rich basin floor deposits (2009)", 
@@ -1161,7 +1161,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "55": {
+    {
       "body": "Detailed stratigraphic architecture of a thick channel deposit associated with a continental margin channel-levee complex --(Isaac Channel 5), Castle Creek south (Chapter 125 AAPG Deep Water Atlas, 2007).  ", 
       "vid": 55, 
       "title": "Schwarz and Arnott 2007 AAPG Atlas", 
@@ -1175,7 +1175,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "56": {
+    {
       "body": "Discussion on the effects of high sediment concentrations on turbidite deposition. Data from flume-based experiments is used to provide examples of these effects.", 
       "vid": 56, 
       "title": "Character of deposition from shallow- and deep-marine suspended-sediment-laden gravity flows (2007)", 
@@ -1189,7 +1189,7 @@
         "Experimental"
       ]
     }, 
-    "57": {
+    {
       "body": "AAPG presentation that outlines several proposed mechanisms for the deposition of the Bouma Ta & Lowe S divisions.", 
       "vid": 57, 
       "title": "Graded and massive beds: a 3D mosaic of coalesced, rapidly-deposited, \"pod\"-like elements (2008)", 
@@ -1202,7 +1202,7 @@
         "Miscellaneous"
       ]
     }, 
-    "58": {
+    {
       "body": "Description of the characteristics of MTC deposits in outcrop. Discussion on the timing of flow inception and deposition.", 
       "vid": 58, 
       "title": "Stratigraphic architecture of deep-marine mass transport deposits (2006)", 
@@ -1215,7 +1215,7 @@
         "Slope / Mass Transport Deposits"
       ]
     }, 
-    "59": {
+    {
       "body": "Anatomy and evolution of a slope channel-complex set (Neoproterozoic Isaac Formation, Windermere Supergroup, Southern Canadian Cordillera): Implications for reservoir characterization. (Published in the Journal of Sedimentary Research, v.77, 2007)", 
       "vid": 59, 
       "title": "Schwarz & Arnott 2007 JSR", 
@@ -1230,7 +1230,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "60": {
+    {
       "body": "Stratigraphic architecture and depositional processes of a proximal crevasse splay and genetically related, sinuous channel fill, Isaac Formation, British Columbia, Canada. (Published on the AAPG Deep-water Atlas 2007 CD-ROM)", 
       "vid": 60, 
       "title": "Arnott 2007 AAPG Atlas", 
@@ -1244,7 +1244,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "61": {
+    {
       "body": "Depositional architecture of a deep-marine channel-levee complex: Isaac Formation (Windermere Supergroup), Southern Canadian Cordillera. (Published on the AAPG Deep-water Atlas 2007 CD-ROM) ", 
       "vid": 61, 
       "title": "Navarro, Khan, and Arnott 2007 AAPG Atlas", 
@@ -1258,7 +1258,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "63": {
+    {
       "body": "Architecture and sedimentology of a channel and slide complex in the Neoproterozoic Isaac Formation, British Columbia.", 
       "vid": 63, 
       "title": "Marion 2005 BSc. Thesis", 
@@ -1273,7 +1273,7 @@
         "Slope / Mass Transport Deposits"
       ]
     }, 
-    "64": {
+    {
       "body": "Stratigraphic architecture, sedimentology, and evolution of a slope-channel complex set: Isaac Channel 6, Windermere Supergroup, Cariboo Mountains, British Columbia, Canada.", 
       "vid": 64, 
       "title": "Tan BSc. Thesis", 
@@ -1286,7 +1286,7 @@
         "Slope / Channels / Small Channels"
       ]
     }, 
-    "65": {
+    {
       "body": "Depositional architecture and evolution of deep-water base-of-slope and slope channel complexes in a passive-margin setting: Isaac Formation, Windermere Supergroup (Neoproterozoic), Southern Canadian Cordillera.", 
       "vid": 65, 
       "title": "Navarro MSc. Thesis", 
@@ -1299,7 +1299,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "66": {
+    {
       "body": "Internal architecture of an ancient deep-water, passive-margin, basin-floor fan system, Upper Kaza Group, Windermere Supergroup, Castle Creek, British Columbia.", 
       "vid": 66, 
       "title": "Meyer MSc. Thesis", 
@@ -1313,7 +1313,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "67": {
+    {
       "body": "Architecture of deep-marine interchannel deposits: Isaac Formation, Windermere Supergroup (Neoproterozoic), Southern Canadian Cordillera.", 
       "vid": 67, 
       "title": "Davis MSc. Thesis", 
@@ -1326,7 +1326,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "68": {
+    {
       "body": "Depositional architecture of a near-slope turbidite succession: Upper Kaza Group, Windermere Supergroup, Castle Creek, British Columbia, Canada.", 
       "vid": 68, 
       "title": "Rocheleau MSc. Thesis", 
@@ -1342,7 +1342,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "69": {
+    {
       "body": "Stratigraphic and geochemical evolution of the Old Fort Point Formation, Southern Canadian Cordillera: the deep-marine perspective of the Ediacaran post-glacial environmental change.", 
       "vid": 69, 
       "title": "Smith PhD. Thesis", 
@@ -1355,7 +1355,7 @@
         "Old Fort Point"
       ]
     }, 
-    "71": {
+    {
       "body": "Architecture and depositional evolution of a Neoproterozoic deep marine slope channel complex: Isaac Formation, Winderemere Supergroup, Southern Canadian Cordillera.", 
       "vid": 71, 
       "title": "Anthony BSc. Thesis", 
@@ -1368,7 +1368,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "72": {
+    {
       "body": "Depositional history and sequence stratigraphic context of a coarse-grained commonly chaotic Neoproterozoic (Windermere Supergroup)stratal succession situated in the lower Isaac Formation, East-central British Columbia. ", 
       "vid": 72, 
       "title": "Laurin BSc. Thesis", 
@@ -1381,7 +1381,7 @@
         "Slope / Mass Transport Deposits"
       ]
     }, 
-    "73": {
+    {
       "body": "The architecture and sedimentology of two submarine debris flow deposits in the Neoproterozoic Isaac Formation, East-central British Columbia.", 
       "vid": 73, 
       "title": "Wallace BSc. Thesis", 
@@ -1394,7 +1394,7 @@
         "Slope / Mass Transport Deposits"
       ]
     }, 
-    "74": {
+    {
       "body": "Detailed discussion of the characteristics of both overbank and crevasse splay deposits. Using outcrop examples from the Castle Creek site, outlines the depositional model for both elements and situates them within the channel-levee complex. Presented at the 2011 AAPG Annual Meeting.", 
       "vid": 74, 
       "title": "Differentiating deep-marine overbank from crevasse splay deposits (2011)", 
@@ -1407,7 +1407,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "75": {
+    {
       "body": "On the nature of coherent turbulent structures in channel bends: burst-sweep orientations in three-dimensional flow fields.", 
       "vid": 75, 
       "title": "Tilston et al. 2009 IAHR Congress", 
@@ -1420,7 +1420,7 @@
         "Experimental"
       ]
     }, 
-    "76": {
+    {
       "body": "Coarse-tail graded, structureless strata: indicators of an internal hydraulic jump.", 
       "vid": 76, 
       "title": "Leclair and Arnott 2003 GCSEPM", 
@@ -1433,7 +1433,7 @@
         "Experimental"
       ]
     }, 
-    "77": {
+    {
       "body": "Hydraulic-jump and hyperconcentrated-flow deposits of a glacigenic subaqueous fan: Oak Ridges Moraine, Southern Ontario, Canada. (Published in the Journal of Sedimentary Research, v.73, 2003) ", 
       "vid": 77, 
       "title": "Russell and Arnott 2003 JSR", 
@@ -1446,7 +1446,7 @@
         "Miscellaneous"
       ]
     }, 
-    "78": {
+    {
       "body": "Stratal architecture and temporal evolution of a passive margin mass-transport deposit, Neoproterozoic Isaac Formation, Cariboo Mountains, British Columbia, Canada. (Published within SEPM special publication 96)", 
       "vid": 78, 
       "title": "Arnott, Wallace, and Laurin 2011 SEPM", 
@@ -1459,7 +1459,7 @@
         "Slope / Mass Transport Deposits"
       ]
     }, 
-    "79": {
+    {
       "body": "Outlines the characteristics of both large- and small-scale channels and discusses the flow processes that would have occurred within them. Additionally, the significance of these channels with regards to sequence stratigraphy is discussed. Presented at the Geological Society's Internal architecture, bedforms and geometry of turbidite channels conference in London.", 
       "vid": 79, 
       "title": "Contrasting the stratal architecture of highly-confined and poorly-confined deep-marine sinuous channel systems (2011)", 
@@ -1473,7 +1473,7 @@
         "Slope / Channels / Small Channels"
       ]
     }, 
-    "80": {
+    {
       "body": "Deep-marine sediments and sedimentary systems. (Chapter 12 in Facies Models 4)", 
       "vid": 80, 
       "title": "Arnott 2010 Facies Models Chapter", 
@@ -1497,7 +1497,7 @@
         "Miscellaneous"
       ]
     }, 
-    "81": {
+    {
       "body": "Stratigraphic architecture and sedimentology of interstratified splay, levee and channel deposits: Neoproterozoic Isaac Formation (Windermere Supergroup), Southern Canadian Cordillera, British Columbia.", 
       "vid": 81, 
       "title": "Altosaar BSc. Thesis", 
@@ -1512,7 +1512,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "82": {
+    {
       "body": "A summary of sediment flume experiments conducted in Quebec City by Mike Tilston (PhD student) and Dr. Arnott. (Presented at AESRC 2011 conference)", 
       "vid": 82, 
       "title": "Sediment gravity currents: a look at the role of grain size and concentration on flow structure, sediment transport and bedform development (2011)", 
@@ -1525,7 +1525,7 @@
         "Experimental"
       ]
     }, 
-    "83": {
+    {
       "body": "Summary of turbulence experiments carried out in a bend flume at the University of Ottawa by PhD student Mike Tilston, followed by a discussion of the results. (Presented at the 2009 IAHR conference)", 
       "vid": 83, 
       "title": "On the nature of coherent turbulent structures in channel bends: burst-sweep orientations in three-dimensional flow fields (2009)", 
@@ -1538,7 +1538,7 @@
         "Experimental"
       ]
     }, 
-    "84": {
+    {
       "body": "Summary and discussion of the latest results from flume experiments conducted in Quebec City by PhD student Mike Tilston. (Presented at the 2011 CFS conference in Vancouver)", 
       "vid": 84, 
       "title": "Coherent turbulent structures and sediment transport dynamics in unsteady, particle-laden density currents (2011)", 
@@ -1551,7 +1551,7 @@
         "Experimental"
       ]
     }, 
-    "85": {
+    {
       "body": "Aerial photo of a portion of Isaac Channel 1 overlain by the gamma ray profile of selected stratigraphic sections (Lillian Navarro) ", 
       "vid": 85, 
       "title": "Isaac Fm. Channel 1 Castle Creek South", 
@@ -1564,7 +1564,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "86": {
+    {
       "body": "Aerial photo of a portion of Isaac Channel 1 overlain by the gamma ray profile of selected stratigraphic sections (Lillian Navarro) ", 
       "vid": 86, 
       "title": "Isaac Fm. Channel 1 Castle Creek - Southeast Drainage", 
@@ -1577,7 +1577,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "87": {
+    {
       "body": "Aerial photo of a portion of Isaac Channel 3 overlain by the gamma ray profile of selected stratigraphic sections (Lillian Navarro) ", 
       "vid": 87, 
       "title": "Isaac Fm. Channel 3 Castle Creek - Southeast Drainage", 
@@ -1590,7 +1590,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "88": {
+    {
       "body": "Aerial photo of a portion of Isaac Channel 3 overlain by the gamma ray profile of selected stratigraphic sections (Lillian Navarro) ", 
       "vid": 88, 
       "title": "Isaac Fm. Channel 3 Castle Creek - Intermoraine (NW of SE drainage)", 
@@ -1603,7 +1603,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "89": {
+    {
       "body": "Aerial photo of a portion of Isaac Channel 3 overlain by the gamma ray profile of selected stratigraphic sections (Lillian Navarro) ", 
       "vid": 89, 
       "title": "Isaac Fm. Channel 3 Castle Creek South ", 
@@ -1616,7 +1616,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "90": {
+    {
       "body": "Gamma ray data tables for stratigraphic sections of the Old Fort Point Formation in the Southern Canadian Cordillera (Mark Smith)", 
       "vid": 90, 
       "title": "Old Fort Point Fm.", 
@@ -1629,7 +1629,7 @@
         "Old Fort Point"
       ]
     }, 
-    "91": {
+    {
       "body": "Aerial photo highlighting the study area of Andres Altosaar (BSc).", 
       "vid": 91, 
       "title": "Altosaar log location", 
@@ -1642,7 +1642,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "92": {
+    {
       "body": "Stratigraphic logs and correlations of Andres Altosaar (BSc).", 
       "vid": 92, 
       "title": "Altosaar correlation panel", 
@@ -1655,7 +1655,7 @@
         "Channel Lobe Transition Zone"
       ]
     }, 
-    "93": {
+    {
       "body": "Correlation and depositional model of Andres Altosaar (BSc).", 
       "vid": 93, 
       "title": "Altosaar correlation and interpretation", 
@@ -1668,7 +1668,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "94": {
+    {
       "body": "Aerial photo of Isaac Channel 1 outlining the study area of Dave Anthony (BSc) in relation to previous work done there by Lillian Navarro (MSc).", 
       "vid": 94, 
       "title": "Anthony study area and units", 
@@ -1681,7 +1681,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "95": {
+    {
       "body": "Stratal architecture and correlations as an overlay on the aerial photo of the base of Isaac Channel 1. Created by Dave Anthony (BSc).", 
       "vid": 95, 
       "title": "Anthony stratigraphic architecture 1", 
@@ -1694,7 +1694,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "96": {
+    {
       "body": "Stratigraphic correlations within the units at the base of Isaac Channel 1. Created by Dave Anthony (BSc).", 
       "vid": 96, 
       "title": "Anthony correlation panel 1", 
@@ -1707,7 +1707,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "97": {
+    {
       "body": "Stratal architecture and correlations as an overlay on the aerial photo of the upper portion of Isaac Channel 1. Created by Dave Anthony (BSc). ", 
       "vid": 97, 
       "title": "Anthony stratigraphic architecture 2", 
@@ -1720,7 +1720,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "98": {
+    {
       "body": "Stratigraphic correlations within the units in the upper portion of Isaac Channel 1. Created by Dave Anthony (BSc). ", 
       "vid": 98, 
       "title": "Anthony correlation panel 2", 
@@ -1733,7 +1733,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "99": {
+    {
       "body": "Correlation panel and aerial photo displaying the stratal architecture of Isaac Channel 2 and interpretation thereof. Created by Dr. Arnott.", 
       "vid": 99, 
       "title": "Arnott Isaac Fm. Channel 2 Correlations", 
@@ -1746,7 +1746,7 @@
         "Slope / Channels / Small Channels"
       ]
     }, 
-    "100": {
+    {
       "body": "Aerial photo of Isaac Channel 6 showing the study area, stratigraphic logs, and interpretations of Irving Tan (BSc).", 
       "vid": 100, 
       "title": "Tan Isaac Fm. Channel 6 aerial photo", 
@@ -1759,7 +1759,7 @@
         "Slope / Channels / Small Channels"
       ]
     }, 
-    "101": {
+    {
       "body": "Stratigraphic correlations within Isaac Channel 6. Created by Irving Tan (BSc).", 
       "vid": 101, 
       "title": "Tan Isaac fm. Channel 6 correlation panel", 
@@ -1772,7 +1772,7 @@
         "Slope / Channels / Small Channels"
       ]
     }, 
-    "102": {
+    {
       "body": "Aerial photo of a portion of the Upper Kaza showing the location of the stratigraphic logs within the study area of Jonathan Rocheleau (MSc).", 
       "vid": 102, 
       "title": "Rocheleau study area and log locations", 
@@ -1783,7 +1783,7 @@
       "type": null, 
       "categories": []
     }, 
-    "103": {
+    {
       "body": "Stratigraphic correlations within a feeder channel unit in the Upper Kaza. Created by Jonathan Rocheleau (MSc).", 
       "vid": 103, 
       "title": "Rocheleau feeder channel panel", 
@@ -1796,7 +1796,7 @@
         "Basin Floor Lobes / Feeder Channel"
       ]
     }, 
-    "104": {
+    {
       "body": "Stratigraphic correlations within the lowermost depositional lobe in Jonathan Rocheleau's study area. Immediately overlies stratigraphy of the feeder channel panel.", 
       "vid": 104, 
       "title": "Rocheleau lobe 1 correlation panel", 
@@ -1809,7 +1809,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "105": {
+    {
       "body": "Stratigraphic correlations within an interlobe unit in Jonathan Rocheleau's study area. Immediately overlies stratigraphy of the Lobe 1 panel. ", 
       "vid": 105, 
       "title": "Rocheleau interlobe 1 correlation panel", 
@@ -1823,7 +1823,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "106": {
+    {
       "body": "Stratigraphic correlations within the second depositional lobe in Jonathan Rocheleau's study area. Immediately overlies stratigraphy of the Interlobe 1 panel.", 
       "vid": 106, 
       "title": "Rocheleau lobe 2 correlation panel ", 
@@ -1836,7 +1836,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "107": {
+    {
       "body": "Stratigraphic correlations within the second interlobe unit in Jonathan Rocheleau's study area. Immediately overlies stratigraphy of the Lobe 2 panel.", 
       "vid": 107, 
       "title": "Rocheleau interlobe 2 correlation panel ", 
@@ -1850,7 +1850,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "108": {
+    {
       "body": "Stratigraphic correlations within the third depositional lobe in Jonathan Rocheleau's study area. Immediately overlies stratigraphy of the Interlobe 2 panel. ", 
       "vid": 108, 
       "title": "Rocheleau lobe 3 correlation panel ", 
@@ -1863,7 +1863,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "109": {
+    {
       "body": "Aerial photo indicating the location of Leena Davis'(MSc)study area in relation to the Isaac Formation's channel complexes.", 
       "vid": 109, 
       "title": "Davis study area", 
@@ -1876,7 +1876,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "110": {
+    {
       "body": "Figure showing the location of Leena Davis' (MSc) stratigraphic logs and the gamma ray profiles of selected logs.", 
       "vid": 110, 
       "title": "Davis log locations and gamma ray profiles", 
@@ -1889,7 +1889,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "111": {
+    {
       "body": "Stratigraphic correlations within the study area of Leena Davis (MSc).", 
       "vid": 111, 
       "title": "Davis full correlation panel", 
@@ -1902,7 +1902,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "112": {
+    {
       "body": "Distribution and correlation of architectural elements within the study area of Leena Davis (MSc).", 
       "vid": 112, 
       "title": "Davis stratal element distribution", 
@@ -1915,7 +1915,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "113": {
+    {
       "body": "Aerial photo index for Isaac Formation Channels 1 & 3. Created by Lillian Navarro (MSc).", 
       "vid": 113, 
       "title": "Navarro aerial photo index", 
@@ -1928,7 +1928,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "114": {
+    {
       "body": "Aerial photo of stratigraphic log locations within Isaac Channel 1 in Castle Creek South. Created by Lillian Navarro (MSc).", 
       "vid": 114, 
       "title": "Navarro Isaac Channel 1 log locations", 
@@ -1941,7 +1941,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "115": {
+    {
       "body": "Aerial photo of stratigraphic log locations within Isaac Channel 1 in Castle Creek - Southeast drainage. Created by Lillian Navarro (MSc). ", 
       "vid": 115, 
       "title": "Navarro Isaac Channel 1 log locations #2", 
@@ -1954,7 +1954,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "116": {
+    {
       "body": "Aerial photo of stratigraphic log locations within Isaac Channel 3 in Castle Creek - Southeast drainage. Created by Lillian Navarro (MSc). ", 
       "vid": 116, 
       "title": "Navarro Isaac Channel 3 log locations ", 
@@ -1967,7 +1967,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "117": {
+    {
       "body": "Aerial photo of stratigraphic log locations within Isaac Channel 3 in Castle Creek South. Created by Lillian Navarro (MSc). ", 
       "vid": 117, 
       "title": "Navarro Isaac Channel 3 log locations #2", 
@@ -1980,7 +1980,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "118": {
+    {
       "body": "Aerial photo of stratigraphic log locations within Isaac Channel 3 in Castle Creek - intermoraine area (situated in between the southeast drainage and Castle Creek south). Created by Lillian Navarro (MSc). ", 
       "vid": 118, 
       "title": "Navarro Isaac Channel 3 log locations #3", 
@@ -1993,7 +1993,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "119": {
+    {
       "body": "Correlation panel showing the major channel units within Isaac Fm. Channel 1. Created by Lillian Navarro (MSc).", 
       "vid": 119, 
       "title": "Navarro Isaac Channel 1 correlations", 
@@ -2006,7 +2006,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "120": {
+    {
       "body": "Correlation panel showing the major channel units within Isaac Fm. Channel 3 in the southeast drainage. Created by Lillian Navarro (MSc).", 
       "vid": 120, 
       "title": "Navarro Isaac Channel 3 correlations ", 
@@ -2019,7 +2019,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "121": {
+    {
       "body": "Type section for the Old Fort Point Formation, detailing its three members, main lithofacies, and sedimentary features. Created by Mark Smith (PhD).", 
       "vid": 121, 
       "title": "Smith OFP type section", 
@@ -2032,7 +2032,7 @@
         "Old Fort Point"
       ]
     }, 
-    "122": {
+    {
       "body": "Stratigraphic correlation panel for the Old Fort Point Formation at the Lake Louise field area. Created by Mark Smith (PhD).", 
       "vid": 122, 
       "title": "Smith OFP correlation panel - Lake Louise", 
@@ -2045,7 +2045,7 @@
         "Old Fort Point"
       ]
     }, 
-    "123": {
+    {
       "body": "Stratigraphic correlation panel for the Old Fort Point Formation based on outcrops both in Jasper and the Cariboo Mountains. Created by Mark Smith (PhD). ", 
       "vid": 123, 
       "title": "Smith OFP correlation panel -  Jasper/Cariboo Mountains", 
@@ -2058,7 +2058,7 @@
         "Old Fort Point"
       ]
     }, 
-    "124": {
+    {
       "body": "Stratigraphic correlation panel for the Old Fort Point Formation based on outcrops in the Purcell Mountains. Created by Mark Smith (PhD). ", 
       "vid": 124, 
       "title": "Smith OFP correlation panel - Purcell Mountains", 
@@ -2071,7 +2071,7 @@
         "Old Fort Point"
       ]
     }, 
-    "125": {
+    {
       "body": "Correlation panel showing the stratal architecture and interpretation for the proximal levee deposits of Isaac Fm. Channel 3. Created by Shann Khan (PhD student).", 
       "vid": 125, 
       "title": "Khan Isaac Channel 3 Levee correlation panel", 
@@ -2084,7 +2084,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "126": {
+    {
       "body": "Combining aerial photogrammetry and terrestrial lidar for reservoir analog modeling. (Published in Photogrammetric Engineering & Remote Sensing v.76, #8, 2010)", 
       "vid": 126, 
       "title": "Buckley et al. 2010 ", 
@@ -2100,7 +2100,7 @@
         "Miscellaneous"
       ]
     }, 
-    "127": {
+    {
       "body": "Summary of field data collected by Hughes Longupe (post-doc) from a portion of the Upper Kaza Group at Castle Creek. Addresses reservoir implications of interpreted lithofacies and stratal architecture. (Presented at the 2007 CSPG CSEG conference)", 
       "vid": 127, 
       "title": "Detailed architecture of deepwater sheet sand and associated fine-grained sediments: example from the Upper Kaza Group, British Columbia (2007)", 
@@ -2113,7 +2113,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "128": {
+    {
       "body": "Details characteristics and correlations of Middle Kaza Group Strata at the Mt. Quanstrom study area. Also contains highly detailed stratigraphy of selected units. (Presented at the 2008 GSA conference by Viktor Terlaky (PhD student))", 
       "vid": 128, 
       "title": "Stratigraphy and architecture of distal basin-floor strata, Neoproterozoic Kaza Group, British Columbia, Canada (2008)", 
@@ -2126,7 +2126,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "129": {
+    {
       "body": "Details characteristics of both Upper and Middle Kaza Group stratigraphy and outlines their differences while situating them within a deep-marine fan system model. (Presented at the 2010 AAPG annual conference by Viktor Terlaky (PhD student))", 
       "vid": 129, 
       "title": "Facies, architecture and compartmentalization of basin-floor deposits: Upper and Middle Kaza Groups, British Columbia, Canada (2010)", 
@@ -2143,7 +2143,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "130": {
+    {
       "body": "Details characteristics of both Upper and Middle Kaza Group stratigraphy and outlines their differences. Presents a detailed depositional model for a deep-marine lobe complex. (Presented at the 2011 GAC-MAC conference in Ottawa by Viktor Terlaky (PhD student)) ", 
       "vid": 130, 
       "title": "Stratigraphy, architecture and sedimentary model of deep-marine basin-floor deposits of the Neoproterozoic Upper and Middle Kaza Group (Windermere Supergroup), British Columbia (2011)", 
@@ -2160,7 +2160,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "131": {
+    {
       "body": "Presents the uppermost interval of Upper Kaza Group stratigraphy at Castle Creek as an outcrop example of a Channel-to-Lobe Transition Zone (CLTZ) and detailed characteristics thereof. (Presented at the 2011 GAC-MAC conference in Ottawa by Lillian Navarro (PhD student))", 
       "vid": 131, 
       "title": "The transition from Neoproterozic Kaza to Cariboo groups in the southeastern Canadian Cordillera: outcrop expression of the transition from basin-floor proximal lobes to slope channels (2011)", 
@@ -2173,7 +2173,7 @@
         "Channel Lobe Transition Zone"
       ]
     }, 
-    "132": {
+    {
       "body": "Gamma ray profiles of all stratigraphic sections logged in the interval of the Upper Kaza studied by Jonathan Rocheleau (MSc).", 
       "vid": 132, 
       "title": "Upper Kaza - Jonathan Rocheleau's sections", 
@@ -2189,7 +2189,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "133": {
+    {
       "body": "Stratal attributes and evolution of asymmetric inner- and outer-bend levee deposits associated with an ancient deep-water channel-levee complex within the Isaac Formation, southern Canada. (Published in Marine and Petroleum Geology, v.28, 2011)", 
       "vid": 133, 
       "title": "Stratal architecture of inner and outer bend levees (MPG, 2011)", 
@@ -2202,7 +2202,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "164": {
+    {
       "body": "Abstract for an oral presentation given at the 2008 AAPG Annual Convention and exhibition in San Antonio.", 
       "vid": 164, 
       "title": "Graded and massive beds", 
@@ -2215,7 +2215,7 @@
         "Miscellaneous"
       ]
     }, 
-    "165": {
+    {
       "body": "Abstract for an oral presentation given at the 2008 AAPG conference in San Antonio.", 
       "vid": 165, 
       "title": "Architectural attributes of an ancient deep-marine sinuous channel complex", 
@@ -2228,7 +2228,7 @@
         "Slope / Channels / Small Channels"
       ]
     }, 
-    "166": {
+    {
       "body": "Abstract for an oral presentation given at an AAPG conference in 2009.", 
       "vid": 166, 
       "title": "Stratal acrhitecture of highly and poorly confined deep-marine sinuous channels", 
@@ -2242,7 +2242,7 @@
         "Slope / Channels / Small Channels"
       ]
     }, 
-    "167": {
+    {
       "body": "Abstract for an oral presentation given at the 2011 GAC-MAC conference in Ottawa. ", 
       "vid": 167, 
       "title": "Laterally accreting, deep-marine sinuous channels", 
@@ -2256,7 +2256,7 @@
         "Slope / Channels / Small Channels"
       ]
     }, 
-    "168": {
+    {
       "body": "Abstract for an oral presentation given at the ISC conference in 2010.", 
       "vid": 168, 
       "title": "Stratal acrhitecture of highly and poorly confined deep-marine sinuous channels", 
@@ -2270,7 +2270,7 @@
         "Slope / Channels / Small Channels"
       ]
     }, 
-    "169": {
+    {
       "body": "Abstract for an oral presentation given at an AAPG conference in 2011.", 
       "vid": 169, 
       "title": "Differentiating deep-marine overbank from crevasse splay deposits ", 
@@ -2283,7 +2283,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "170": {
+    {
       "body": "Abstract for an oral presentation given at the ISC conference in 2011. ", 
       "vid": 170, 
       "title": "Differentiating deep-marine overbank from crevasse splay deposits", 
@@ -2296,7 +2296,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "171": {
+    {
       "body": "Abstract for a presentation given at the 2008 AAPG conference in San Antonio. ", 
       "vid": 171, 
       "title": "Levee asymmetry in a deep-water channel bend", 
@@ -2309,7 +2309,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "172": {
+    {
       "body": "Abstract for an poster presentation given at the 2007 AAPG conference in Long Beach. ", 
       "vid": 172, 
       "title": "Detailed architecture of a basin floor sheet-like deposit", 
@@ -2320,7 +2320,7 @@
       "type": null, 
       "categories": []
     }, 
-    "173": {
+    {
       "body": "Abstract for a presentation given at the 2007 CSPG CSEG conference. ", 
       "vid": 173, 
       "title": "Detailled Architecture of Deepwater Sheet Sand and Associated Fine-Grained Sediments", 
@@ -2333,7 +2333,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "174": {
+    {
       "body": "Abstract for a poster presentation given at the 2009 GSA 44th annual meeting.", 
       "vid": 174, 
       "title": "Geochemistry of Neoproterozoic Mudrocks from the Windermere Supergroup", 
@@ -2355,7 +2355,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "175": {
+    {
       "body": "Abstract for a presentation given at the 2008 AAPG conference in San Antonio. ", 
       "vid": 175, 
       "title": "Architectural Hierarchy, Processes and Reservoir Implications of Channel-Mouth Lobe Complexes", 
@@ -2368,7 +2368,7 @@
         "Channel Lobe Transition Zone"
       ]
     }, 
-    "176": {
+    {
       "body": "Abstract for a presentation given at the 2008 AAPG conference in San Antonio. ", 
       "vid": 176, 
       "title": "Stratigraphic Architecture of the Transition from Basin Floor to Slope", 
@@ -2381,7 +2381,7 @@
         "Channel Lobe Transition Zone"
       ]
     }, 
-    "177": {
+    {
       "body": "Abstract for a presentation given at the 2011 GAC-MAC conference in Ottawa. ", 
       "vid": 177, 
       "title": "Outcrop expressions of the transition from basin-floor proximal lobes to slope channels", 
@@ -2394,7 +2394,7 @@
         "Channel Lobe Transition Zone"
       ]
     }, 
-    "178": {
+    {
       "body": "Abstract for a poster presentation given at the 2009 AAPG conference in Denver.", 
       "vid": 178, 
       "title": "Detailed Architecture of Proximal Basin-Floor Lobe Deposits", 
@@ -2409,7 +2409,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "179": {
+    {
       "body": "Abstract for a presentation given at the 2008 AAPG conference in San Antonio. ", 
       "vid": 179, 
       "title": "Comparison of Basin-Floor Deposits along a Proximal to More Distal Transect", 
@@ -2426,7 +2426,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "180": {
+    {
       "body": "Abstract for an oral presentation given at the 2010 AAPG conference in New Orleans. ", 
       "vid": 180, 
       "title": "Facies, Architecture and Compartmentalization of Basin-Floor Deposits", 
@@ -2443,7 +2443,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "181": {
+    {
       "body": "Abstract for a poster presentation given at the 2010 AAPG conference in New Orleans.", 
       "vid": 181, 
       "title": "Facies, Detailed Analysis of Small and Large Scale Architectural Elements in Deep-Marine Basin-Floor Deposits", 
@@ -2460,7 +2460,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "182": {
+    {
       "body": "Abstract for an oral presentation given at the 2008 GSA annual meeting. ", 
       "vid": 182, 
       "title": "Stratigraphy and architecture of distal basin-floor strata", 
@@ -2471,7 +2471,7 @@
       "type": null, 
       "categories": []
     }, 
-    "183": {
+    {
       "body": "Abstract for a presentation given at the 2011 GAC-MAC conference in Ottawa. ", 
       "vid": 183, 
       "title": "Stratigraphy, Architecture and Sedimentary Model of Deep-Marine Basin-Floor Deposits", 
@@ -2488,7 +2488,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "184": {
+    {
       "body": "Abstract for a presentation given at the 2009 IAHR conference in Vancouver. ", 
       "vid": 184, 
       "title": "On the Nature of Coherent Turbulent Structures in Channel Bends", 
@@ -2501,7 +2501,7 @@
         "Experimental"
       ]
     }, 
-    "185": {
+    {
       "body": "Abstract for a poster presentation given at the 2010 AAPG conference in New Orleans. ", 
       "vid": 185, 
       "title": "The Role of Grain Size on Flow Structure and Concentration Profiles in Sediment Gravity Currents", 
@@ -2514,7 +2514,7 @@
         "Experimental"
       ]
     }, 
-    "186": {
+    {
       "body": "Abstract for a presentation given at the 2011 AESRC conference in Ottawa. ", 
       "vid": 186, 
       "title": "The role of gain size on flow structure and concentration profiles in sediment gravity currents", 
@@ -2527,7 +2527,7 @@
         "Experimental"
       ]
     }, 
-    "187": {
+    {
       "body": "Abstract for a presentation given at the 2011 CFSII conference in Vancouver. ", 
       "vid": 187, 
       "title": "Coherent turbulent structures and sediment transport dynamics in unsteady, particle laden density currents", 
@@ -2540,7 +2540,7 @@
         "Experimental"
       ]
     }, 
-    "262": {
+    {
       "body": "A compilation of work conducted over the past several years by a number of graduate and undergraduate students, postdocs and me investigating the various Isaac slope channels at Castle Creek (informally termed channels 1-6 and each representing composite units several 10s to >100 m in thickness).  Our work has shown that although seemingly complex these stratal units consist of a recurring succession of a small number of different channel types, each with a unique internal stratigraphy.  Further, it is proposed that these different channel types are a reflection of systematic changes in the formative through-going channel flows, specifically changes in flow volume, degree of vertical density stratification, and very importantly, grain size distribution.", 
       "vid": 262, 
       "title": "AAPG 2012 - Temporal Evolution of Continental Slope Channels  a Matter of Sediment Volume and Grain Size Distribution (Oral)", 
@@ -2554,7 +2554,7 @@
         "Slope / Channels / Small Channels"
       ]
     }, 
-    "263": {
+    {
       "body": "For years we have recognized these distinctive strata throughout slope and basin-floor strata exposed at Castle Creek and Mt. Quanstrom  although they are sandstones they weather like a mudstone (consequence of their high (30-50%) matrix content), and have a distinctive green colour (due to the occurrence of authigenic chlorite (alteration of primary clay minerals)).  In most cases these strata form a few to several bed sliver generally at the base of a much thicker succession of sandstone (splay, distributary channel, slope channel etc.).  Although individual beds have been captured and described in the countless number of individual strata logs measured in both study areas, it was always the unit (i.e. bed set) that was traced laterally with little attention paid to its internal stratigraphy.  \n\nThis poster illustrates the results of a detailed analysis of a single matrix-rich sandstone unit  6 m thick and almost 1 km wide.  Of note is that in many ways, but importantly very different in others, our structureless, matrix-rich sandstones resemble matrix-rich strata previously termed linked debrites, slurry beds, transitional flows, etc.  However based on stratigraphic associations and internal facies architecture, and its variation laterally, the origin of our matrix-rich sandstones bear little resemblance to that proposed for other matrix-rich sandstones.  In our experience (and interpretation) the matrix-rich sandstones described here do NOT mark the distal fringe or ~low-energy part of a depositional system, but instead represent its abrupt, energetic initiation  these are harbinger beds! ", 
       "vid": 263, 
       "title": "AAPG 2012 - Matrix-rich Sandstones of the Neoproterozoic Windermere Supegroup, B.C., Canada: The Energetic Initiation of the Local Sedimentary System (Poster)", 
@@ -2567,7 +2567,7 @@
         "Basin Floor Lobes / Avulsion Spray"
       ]
     }, 
-    "264": {
+    {
       "body": "The geological literature is replete with references to the assumed deleterious effect of sediment concentration on turbidity currents  specifically increased sediment concentration damps turbulence.  Mikes work shows that although this effect is indeed observed, the effect is far less dramatic than previously imagined, and by no means restricted to the region below the velocity core (i.e. in the lower part of the flow).  Results show that turbulence is a full-flow-depth phenomenon and that for a single sediment concentration becomes increasingly damped in progressively finer-grained suspensions  in other words, its more a function of the number of particles in suspension compared to their total suspended volume or mass concentration.  This, then, suggests that turbidity currents with similar sediment concentration (by mass, or similarly volume) but different grain size distributions, will exhibit very different sediment transport and depositional characteristics.  ", 
       "vid": 264, 
       "title": "AAPG 2012 - Effects of Grain Size and Sediment Concentration on Turbulence and Sediment Transport Dynamics in Unsteady Turbidity Currents (Poster)", 
@@ -2580,7 +2580,7 @@
         "Experimental"
       ]
     }, 
-    "265": {
+    {
       "body": "Oral presentation discussing a novel set of experiments using a CT scanner and acoustic profiler velocimeter whose objective is to investigate the influence of sediment concentration and grain size on sediment transport and depositional dynamics of turbidity currents.  Presentation given at the Windermere Consortium's 2012 Houston Partner's Meeting.", 
       "vid": 265, 
       "title": "Effects of sediment concentration and grain size on the dynamics and depositional characteristics of natural turbidity currents (Oral)", 
@@ -2593,7 +2593,7 @@
         "Experimental"
       ]
     }, 
-    "266": {
+    {
       "body": "Although they make up a significant part of the sand- and gravel-rich part of the continental sedimentary record, dunes and dune cross-stratification are rare in the deep-marine record. Recognition of this paradox dates back to the mid 1960s and early 1970s, but still in 2012 the question still remains -- WHY?  Based on observations from the Windermere Supergroup, and other ancient deep-water outcrops, this paper is a thought experiment that proposes that the key to the paradox may lie in the inhibition of the inception and amplification of the formative bed defects from which dunes, and in some cases even ripples, develop.  ", 
       "vid": 266, 
       "title": "Turbidites - and the case of the missing dunes (JSR 2012)", 
@@ -2606,7 +2606,7 @@
         "Miscellaneous"
       ]
     }, 
-    "267": {
+    {
       "body": "Ph.D. thesis investigating the stratigraphic composition and origin of deep-marine channel-margin levees.  Presented also is an experiment investigation of the depositional conditions of climbing and non-climbing ripples -- what exactly is \"high\" rates of sediment fallout. As it turns out, not all that high. ", 
       "vid": 267, 
       "title": "Khan Ph.D. thesis", 
@@ -2620,7 +2620,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "268": {
+    {
       "body": "Synthesis of basin floor architectural elements, including distributary channels, terminal splays, feeder (trunk) channels, crevasse splays (harbinger beds), and intra and interlobe fine grained strata -- Ph.D. thesis research of Viktor Terlaky.", 
       "vid": 268, 
       "title": "Basin Floor (Terlaky) Houston Partners Meeting 2012", 
@@ -2637,7 +2637,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "269": {
+    {
       "body": "The general view of the geological community is that deep-marine levees are built up by successive layers of sediment that continuously thin away from the channel.  Here, however, it is proposed that levee topography is instead related to spatial difference in sedimentation, and how those patterns change through time -- the net effect being the build up of positive and laterally diminishing levee topography.", 
       "vid": 269, 
       "title": "Alternative model for the origin of levee topography (AAPG 2011)", 
@@ -2650,7 +2650,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "270": {
+    {
       "body": "Published in the Geological Society, London Memoirs 2011, v. 36, this paper presents data from the Ph.D. thesis of Mark Smith (2007) and discusses the possible correlation of glacigenic deposits in the Windermere Supergroup of western North America. ", 
       "vid": 270, 
       "title": "Neoproterozoic Glaciations in the Windermere Supergroup", 
@@ -2663,7 +2663,7 @@
         "Old Fort Point"
       ]
     }, 
-    "272": {
+    {
       "body": "Brief introduction to the Windermere Supergroup and the Caslre Creek study area (Chapter 22 in the AAPG (2007) Atlas of Deep-Water Outcrops)", 
       "vid": 272, 
       "title": "Windermere Intro (AAPG Atlas 2007)", 
@@ -2686,7 +2686,7 @@
         "Old Fort Point"
       ]
     }, 
-    "273": {
+    {
       "body": "Brief description and architectural element database of sinuous channel deposits in Isaac Channel 2 (Chapter 24 in the AAPG (2007) Atlas of Deep-Water Outcrops)", 
       "vid": 273, 
       "title": "Isaac Channel 2 -- sinuous channel deposits (AAPG Atlas, 2007)", 
@@ -2699,7 +2699,7 @@
         "Slope / Channels / Small Channels"
       ]
     }, 
-    "274": {
+    {
       "body": "Brief description and architectural element database of a leveed channel complex (Chapter 25 in the AAPG (2007) Atlas of Deep-Water Outcrops).  See fuller development in Isaac Channel 3 paper (Navarro et al. AAPG Atlas, 2007).", 
       "vid": 274, 
       "title": "Isaac Channel 3 -- leveed channel complex (AAPG Atlas, 2007)", 
@@ -2713,7 +2713,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "275": {
+    {
       "body": "Brief description and architectural element database of a thick slope channel complex (Chapter 26 in the AAPG (2007) Atlas of Deep-Water Outcrops).  For a more detailed discussion see Schwarz and Arnott AAPG 2007, and JSR 2007.", 
       "vid": 275, 
       "title": "Isaac Channel 5 -- slope channel complex (AAPG Atlas, 2007)", 
@@ -2726,7 +2726,7 @@
         "Slope / Channels / Large Channels"
       ]
     }, 
-    "276": {
+    {
       "body": "Detailed description with architectural element database of a multi-unit mass-transport deposits in slope strata of the Isaac Formation (Chapter 31 in the AAPG (2007) Atlas of Deep-Water Outcrops).", 
       "vid": 276, 
       "title": "Isaac MTD (AAPG Atlas, 2007)", 
@@ -2739,7 +2739,7 @@
         "Slope / Mass Transport Deposits"
       ]
     }, 
-    "277": {
+    {
       "body": "Detailed description and interpretation of a deep-water crevasse splay and sinuous channel succession(Chapter 128 in the AAPG (2007) Atlas of Deep-Water Outcrops).", 
       "vid": 277, 
       "title": "Crevasse splay and sinuous channel succession (AAPG Atlas, 2007)", 
@@ -2754,7 +2754,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "278": {
+    {
       "body": "Brief description and architectural element database of a crevasse splay and sinuous channel succession(Chapter 29 in the AAPG (2007) Deep Water Atlas).  For a more detailed account see paper entitled: Crevasse splays and sinuous channel fills (Arnott 2007 Chapter 128 AAPG Atlas).", 
       "vid": 278, 
       "title": "Crevasse Splay and channel deposits (AAPG Atlas, 2007)", 
@@ -2769,7 +2769,7 @@
         "Slope / Levees and Splays"
       ]
     }, 
-    "279": {
+    {
       "body": "Brief description and architectural element database of a slope channel and levee complex (Chapter 27 in the AAPG (2007) Deep Water Atlas). ", 
       "vid": 279, 
       "title": "Isaac Channel 6 -- Slope Channel and levee (AAPG Atlas 2007)", 
@@ -2782,7 +2782,7 @@
         "Slope / Channels / Small Channels"
       ]
     }, 
-    "280": {
+    {
       "body": "This paper is the culmination of work conducted on basin floor strata of the Middle and Upper Kaza groups over the past few years by Viktor Terlaky and Jonathan Rocheleau.  Their work builds on the early M.Sc. work of Lori Meyer that focused on the Upper Kaza at Castle Creek. The paper is a descriptive account of each of the 7 recurring architectural elements recognized in basin floor strata of the Windermere Supergroup.   ", 
       "vid": 280, 
       "title": "Basin Floor Stratal Elements", 
@@ -2799,7 +2799,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "281": {
+    {
       "body": "A common facies observed in deep-water slope and especially basin-floor rocks of the Neoproterozoic Windermere Supergroup (British Columbia, Canada) is structureless, coarse-tail graded, medium to coarse sandstone with 30 to up to >50% mud matrix content (i.e. matrix rich). These strata are interpreted to result from rapid charging of the flow by scouring caused by a plane wall jet or hydraulic jump, and furthermore herald the energetic initiation of the local sedimentary system.", 
       "vid": 281, 
       "title": "Matrix-rich Sandstones -- stratal indicators of avulsive activation (submitted to Sedimentology Feb 2013)", 
@@ -2812,7 +2812,7 @@
         "Basin Floor Lobes / Avulsion Spray"
       ]
     }, 
-    "282": {
+    {
       "body": "Presentation by Ph.D. student Viktor Terlaky on the architecture and stratal composition of medial and proximal basin floor deposits.", 
       "vid": 282, 
       "title": "2013 Partners Meeting -- Basin Floor Elements (V. Terlaky)", 
@@ -2829,7 +2829,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "283": {
+    {
       "body": "Experimental project using a 3D velocity profiler and a 2 Hz CTscanner (to measure real-time sediment concentration). Results show that in addition to increasing sediment concentration, grain size plays a major and arguably more important role in influencing turbulence in turbidity currents.   ", 
       "vid": 283, 
       "title": "2013 Partners Meeting -- Effect of sediment concentration on turbulent sediment suspensions (M. Tilston)", 
@@ -2842,7 +2842,7 @@
         "Experimental"
       ]
     }, 
-    "284": {
+    {
       "body": "B.Sc. thesis of Ms. Michelle English (2013) investigating the vertical, but more importantly, lateral relationship between matrix-poor and -rich sandstones. These different stratal types are interpreted to represent, respectively, deposition within the axis and along the margins of a basin-floor (Upper Kaza Group) avulsion splay complex. ", 
       "vid": 284, 
       "title": "English B.Sc. thesis", 
@@ -2855,7 +2855,7 @@
         "Basin Floor Lobes / Avulsion Spray"
       ]
     }, 
-    "285": {
+    {
       "body": "The ubiquity of planar lamination in continental shelf very fine sandstones and siltstones is, as argued for turbidites in deep-marine sedimentary systems, interpreted to be the result of high near-bed sediment concentrations and the inability of bed-defects to initiate and subsequently amplify.", 
       "vid": 285, 
       "title": "Importance of Near-Bed Sediment Concentration on Shelf Bed-load Sedimentary Structures", 
@@ -2869,7 +2869,7 @@
         "Experimental"
       ]
     }, 
-    "286": {
+    {
       "body": "Distinctively red-weathered (Fe-rich carbonate cement), medium-scale cross-stratified sandstones are common in basin-floor strata of the Upper Kaza. Although resembling dune cross-stratification, a number of important sedimentological inconsistencies are noted. Instead, these strata are interpreted to be related to hydraulic jumps associated with laterally-separated cyclic steps -- cross-stratification formed by a single (or less commonly stacked) migrating antidune unit bars immediately downflow of the jump.", 
       "vid": 286, 
       "title": "Dune or Dune-like Cross-stratification in Deep-Marine Sandstones", 
@@ -2883,7 +2883,7 @@
         "Miscellaneous"
       ]
     }, 
-    "287": {
+    {
       "body": "Matrix-rich sandstones are being increasingly recognized in the deep-marine sedimentary rocks andare typically reported from the distal or lateral periphery of the transport system. Here, however, these strata are interpreted to be an integral part of the more axial, sand-rich part of the transport system. Moreover, they are thought to represent the intiation of the local, high-energy sedimentary system.  ", 
       "vid": 287, 
       "title": "Matrix-rich Sandstones in Base of Slope and Basin Floor Strata (Panel #1)", 
@@ -2896,7 +2896,7 @@
         "Basin Floor Lobes / Avulsion Spray"
       ]
     }, 
-    "288": {
+    {
       "body": "Panel #2 of AAPG 2013 poster ", 
       "vid": 288, 
       "title": "Matrix-rich Sandstones in Base of Slope and Basin Floor Strata (Panel #2)", 
@@ -2909,7 +2909,7 @@
         "Basin Floor Lobes / Avulsion Spray"
       ]
     }, 
-    "289": {
+    {
       "body": "Panel #3 AAPG 2013 poster", 
       "vid": 289, 
       "title": "Matrix-rich Sandstones in Base of Slope and Basin Floor Strata (Panel #3)", 
@@ -2922,7 +2922,7 @@
         "Basin Floor Lobes / Avulsion Spray"
       ]
     }, 
-    "290": {
+    {
       "body": "Based on the Ph.D. thesis works of Viktor Terlaky in the Middle and Upper Kaza groups, a hierarchy of basin floor stratigraphic elements is recognized, which in terms of increasing spatial and temporal scale are: (terminal) splay, lobe, lobe complex, fan, fan complex.", 
       "vid": 290, 
       "title": "Basin Floor Lobe and Fan Model", 
@@ -2939,7 +2939,7 @@
         "Basin Floor Lobes / Terminal Splay"
       ]
     }, 
-    "291": {
+    {
       "body": "Matrix-rich sandstones have been increasingly recognized in the deep-marine sedimentary record, but generally in the distal parts of the transport system. In this contribution it is argued that similar strata form also in the proximal parts of the system, and herald the onset of sand-rich sedimentation -- matrix-rich sandstones = avulsion splays.", 
       "vid": 291, 
       "title": "Matrix-rich Sandstones -- the initiation of basin floor sedimentation", 
@@ -2952,7 +2952,7 @@
         "Basin Floor Lobes / Avulsion Spray"
       ]
     }, 
-    "293": {
+    {
       "body": "Fieldguide for the 2013 Partners Field Trip (August 14, 15, 16)", 
       "vid": 293, 
       "title": "2013 Windermere Partners Field Trip", 
@@ -2965,5 +2965,5 @@
         "Current Events"
       ]
     }
-  }
+  ]
 }
