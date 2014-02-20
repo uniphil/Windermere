@@ -111,8 +111,6 @@ def topic_overview(category=None):
         if cat.safe == category:
             sel = True
             cat_name = cat.name
-            if cat.children is None:
-                cat_filters.append(cat.safe)
         else:
             sel = False
 
@@ -127,8 +125,6 @@ def topic_overview(category=None):
                     cat_name = scat.name
                 else:
                     ssel = False
-                if sel and scat.children is None:
-                    cat_filters.append(scat.safe)
 
                 if scat.children is not None:
                     mcats = []
@@ -139,11 +135,17 @@ def topic_overview(category=None):
                             cat_name = mcat.name
                         else:
                             msel = False
-                        if ssel and mcat.children is None:
+                        if msel and mcat.children is None:
                             cat_filters.append(mcat.safe)
 
                         mcats.append(Category(mname, msafe, msel, None))
+
+                if ssel and scat.children is None:
+                    cat_filters.append(scat.safe)
                 scats.append(Category(sname, ssafe, ssel, mcats))
+
+        if sel and cat.children is None:
+            cat_filters.append(cat.safe)
         sel_cats.append(Category(name, safe, sel, scats))
 
 
@@ -166,6 +168,8 @@ def topic_overview(category=None):
             ),
             models.DocCategory.document_id == models.Document.id,
         ))
+
+    print base_q
 
     for f in sel_filters:
         q = base_q.filter_by(type=f.name)
