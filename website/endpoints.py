@@ -64,11 +64,16 @@ def restricted():
 
 Filter = namedtuple('Filter', 'name plural active')
 filters = (
-    Filter('Presentation', 'Presentations', filter=='Presentation'),
-    Filter('Publication', 'Publications', filter=='Publication'),
-    Filter('Abstract', 'Abstracts', filter=='Abstract'),
-    Filter('Thesis', 'Theses', filter=='Thesis'),
-    Filter('High-Resolution Image', 'High-Resolution Images', filter=='High-Resolution Image'),
+    Filter('Presentation', 'Presentations', False),
+    Filter('Publication', 'Publications', False),
+    Filter('Abstract', 'Abstracts', False),
+    Filter('Thesis', 'Theses', False),
+    Filter('High-Resolution Image', 'High-Resolution Images', False),
+)
+
+Category = namedtuple('Category', 'name safe')
+categories = (
+  
 )
 
 
@@ -80,6 +85,12 @@ def topic_overview(category=None):
 
     filter = request.args.get('filter', None)
 
+    sel_filters = []
+    for f in filters:
+        if f.name == filter:
+            f = Filter(f.name, f.plural, True)
+        sel_filters.append(f)
+
     data = []
     base_q = models.Document.query.order_by(models.Document.added.asc())
     if category:
@@ -90,7 +101,7 @@ def topic_overview(category=None):
 
     print base_q
 
-    for f in filters:
+    for f in sel_filters:
         q = base_q.filter_by(type=f.name)
         if f.name == filter:
             recs = q.all()
