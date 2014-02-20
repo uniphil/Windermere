@@ -49,6 +49,9 @@ def load_olddocs(datafile='import-old/data.json'):
     with open(datafile) as f:
         data = json.load(f)
 
+    def nice_to_safe(name):
+        return name.replace('/ ', '').lower().replace(' ', '-')
+
     for doc_data in data['documents']:
         doc = Document()
         doc.file = doc_data['path']
@@ -59,6 +62,7 @@ def load_olddocs(datafile='import-old/data.json'):
         for category in doc_data['categories']:
             cat = DocCategory()
             cat.name = category
+            cat.safe = nice_to_safe(category)
             cat.document = doc
             db.session.add(cat)
         db.session.add(doc)

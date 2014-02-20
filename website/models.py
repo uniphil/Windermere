@@ -93,6 +93,7 @@ class Document(db.Model):
 class DocCategory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128))
+    safe = db.Column(db.String(128))
     document_id = db.Column(db.Integer, db.ForeignKey('document.id'))
     document = db.relationship('Document', backref=db.backref('categories'))
 
