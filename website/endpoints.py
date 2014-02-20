@@ -100,6 +100,7 @@ categories = (
 def topic_overview(category=None):
 
     cat_name = 'Overview'
+    cat_filters = []
 
     sel_cats = []
     for cat in categories:
@@ -109,6 +110,8 @@ def topic_overview(category=None):
         if cat.safe == category:
             sel = True
             cat_name = cat.name
+            if cat.children is None:
+                cat_filters.append(cat.safe)
         else:
             sel = False
 
@@ -123,6 +126,8 @@ def topic_overview(category=None):
                     cat_name = scat.name
                 else:
                     ssel = False
+                if sel and scat.children is None:
+                    cat_filters.append(scat.safe)
 
                 if scat.children is not None:
                     mcats = []
@@ -133,12 +138,13 @@ def topic_overview(category=None):
                             cat_name = mcat.name
                         else:
                             msel = False
+                        if ssel and mcat.children is None:
+                            cat_filters.append(mcat.safe)
 
                         mcats.append(Category(mname, msafe, msel, None))
-
                 scats.append(Category(sname, ssafe, ssel, mcats))
-
         sel_cats.append(Category(name, safe, sel, scats))
+
 
     filter = request.args.get('filter', None)
 
@@ -149,10 +155,14 @@ def topic_overview(category=None):
         sel_filters.append(f)
 
     data = []
-    base_q = models.Document.query.order_by(models.Document.added.asc())
+    base_q = models.Document.query \
+                .distinct() \
+                .order_by(models.Document.added.asc())
     if category:
         base_q = base_q.filter(models.db.and_(
-            models.DocCategory.safe == category,
+            models.db.or_(
+                *(models.DocCategory.safe == c for c in cat_filters)
+            ),
             models.DocCategory.document_id == models.Document.id,
         ))
 
