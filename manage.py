@@ -19,6 +19,27 @@ manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
 
+@manager.command
+def load_oldphotos(datafile='import-old/data.json'):
+    import json
+    from datetime import datetime
+    from website.models import db, ScenicPhoto
+
+    with open(datafile) as f:
+        data = json.load(f)
+
+    for photo_data in data['photos']:
+        photo = ScenicPhoto()
+        photo.photo = photo_data['filepath']
+        photo.title = photo_data['title']
+        photo.description = photo_data['body']
+        photo.added = datetime.utcfromtimestamp(photo_data['timestamp'])
+        photo.featured = False
+        db.session.add(photo)
+
+    db.session.commit()
+
+
 if __name__ == '__main__':
     manager.run()
 
