@@ -12,7 +12,7 @@
         {% if current_user.is_authenticated() %}
           Access unlocked for {{ current_user.name }}
           {% if request.path == '/' %}
-            <a href="{{ url_for('topic_overview', coarse='lalala') }}" class="btn btn-primary navbar-button"><span data-icon="r"></span>&nbsp;&nbsp;&nbsp;Content Browser</a>
+            <a href="{{ url_for('topic_overview') }}" class="btn btn-primary navbar-button"><span data-icon="r"></span>&nbsp;&nbsp;&nbsp;Content Browser</a>
           {% endif %}
           <a href="{{ url_for('lock') }}" class="btn btn-warning navbar-button ttbuttonbot" data-toggle="tooltip" title="Lock Access"><span data-icon="u"></span><span class="text-hide">Lock Access</span></a> 
         {% else %}
