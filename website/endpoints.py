@@ -169,8 +169,6 @@ def topic_overview(category=None):
             models.DocCategory.document_id == models.Document.id,
         ))
 
-    print base_q
-
     for f in sel_filters:
         q = base_q.filter_by(type=f.name)
         if f.name == filter:
@@ -212,7 +210,6 @@ def files(filepath):
     if not os.path.isabs(filepath):
         filepath = os.path.join(app.root_path, filepath)
     if not os.path.isfile(filepath):
-        print filepath
         raise NotFound()
     return send_file(filepath)
 
