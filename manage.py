@@ -59,6 +59,7 @@ def load_olddocs(datafile='import-old/data.json'):
         doc.description = doc_data['body']
         doc.added = datetime.utcfromtimestamp(doc_data['timestamp'])
         doc.type = doc_data['type']
+        doc.authors = doc_data['author']
         for category in doc_data['categories']:
             cat = DocCategory()
             cat.name = category

@@ -85,6 +85,7 @@ class Document(db.Model):
     description = db.Column(db.Text)
     added = db.Column(db.DateTime)
     type = db.Column(db.String(64))
+    authors = db.Column(db.String(128))
 
     def __repr__(self):
         return '<Document: {}...>'.format(self.title[:21])
