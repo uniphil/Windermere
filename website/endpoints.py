@@ -187,6 +187,7 @@ def topic_overview(category=None):
         filtered=filter is not None,
         categories=sel_cats,
         cat_name=cat_name,
+        list_details=(filter is not None),
     )
 
 
