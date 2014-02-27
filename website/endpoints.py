@@ -194,7 +194,7 @@ def topic_overview(category=None):
 @app.route('/content/document/<int:id>')
 def document(id):
     document = models.Document.query.get(id) or abort(404)
-    return document.title
+    return render_template('content-detail.html', doc=document)
 
 
 @app.route('/photo/<filename>')

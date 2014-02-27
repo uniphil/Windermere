@@ -1,52 +1,57 @@
 {% extends 'base-full.html' %}
 
 {% block page_content %}
-  <nav class="tree">
-    <ul>
-      <li{{ ' class="selected"'|safe if cat_name=='Overview' }}>
-        <a href="{{ url_for('topic_overview', filter=request.args.get('filter')) }}">All Categories</a>
-      </li>
-      {% for cat in categories %}
-        <li{{ ' class="selected"'|safe if cat.selected }}>
-          <a href="{{ url_for('topic_overview', category=cat.safe, filter=request.args.get('filter')) }}">{{ cat.name }}</a>
-          {% if cat.children %}
-            <ul>
-              {% for subcat in cat.children %}
-                <li{{ ' class="selected"'|safe if subcat.selected }}>
-                  <a href="{{ url_for('topic_overview', category=subcat.safe, filter=request.args.get('filter')) }}">{{ subcat.name }}</a>
-                  {% if subcat.children %}
-                    <ul>
-                      {% for subsub in subcat.children %}
-                        <li{{ ' class="selected"'|safe if subsub.selected }}>
-                          <a href="{{ url_for('topic_overview', category=subsub.safe, filter=request.args.get('filter')) }}">{{ subsub.name }}</a>
-                        </li>
-                      {% endfor %}
-                    </ul>
-                  {% endif %}
-                </li>
-              {% endfor %}
-            </ul>
-          {% endif %}
+
+  {% block page_top %}
+    <nav class="tree">
+      <ul>
+        <li{{ ' class="selected"'|safe if cat_name=='Overview' }}>
+          <a href="{{ url_for('topic_overview', filter=request.args.get('filter')) }}">All Categories</a>
         </li>
-      {% endfor %}
-    </ul>
-  </nav>
+        {% for cat in categories %}
+          <li{{ ' class="selected"'|safe if cat.selected }}>
+            <a href="{{ url_for('topic_overview', category=cat.safe, filter=request.args.get('filter')) }}">{{ cat.name }}</a>
+            {% if cat.children %}
+              <ul>
+                {% for subcat in cat.children %}
+                  <li{{ ' class="selected"'|safe if subcat.selected }}>
+                    <a href="{{ url_for('topic_overview', category=subcat.safe, filter=request.args.get('filter')) }}">{{ subcat.name }}</a>
+                    {% if subcat.children %}
+                      <ul>
+                        {% for subsub in subcat.children %}
+                          <li{{ ' class="selected"'|safe if subsub.selected }}>
+                            <a href="{{ url_for('topic_overview', category=subsub.safe, filter=request.args.get('filter')) }}">{{ subsub.name }}</a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  {% endblock %}
 
 
   <div class="row">
 
     <div class="col-sm-3 col-lg-2">
-      <h4>Filter</h4>
-      <ul class="nav nav-pills nav-stacked">
-          <li class="{% if not filtered %}active{% endif %}">
-            <a href=".?">Everything</a>
-          </li>
-        {% for type, records, count in data %}
-          <li class="{% if type.active %}active{% endif %}{% if not count and not type.active %}disabled{% endif %}">
-            <a href=".?filter={{ type.name }}">{{ type.plural }}{% if count %} <small class="text-muted">{{ count }}</small>{% endif %}</a>
-          </li>
-        {% endfor %}
-      </ul>
+      {% block side %}
+        <h4>Filter</h4>
+        <ul class="nav nav-pills nav-stacked">
+            <li class="{% if not filtered %}active{% endif %}">
+              <a href=".?">Everything</a>
+            </li>
+          {% for type, records, count in data %}
+            <li class="{% if type.active %}active{% endif %}{% if not count and not type.active %}disabled{% endif %}">
+              <a href=".?filter={{ type.name }}">{{ type.plural }}{% if count %} <small class="text-muted">{{ count }}</small>{% endif %}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endblock %}
     </div>
 
     <div class="col-sm-9 col-lg-10">
@@ -80,7 +85,7 @@
                       <p>
                         {% if rec.authors %}<strong>{{ rec.authors }}:</strong> {% endif %}
                         {{ rec.description[:183] }}{% if (rec.description | length) > 183 %}&hellip;{% endif %}
-                        <a class="btn btn-default btn-xs" href="">Full Details</a>
+                        <a class="btn btn-default btn-xs" href="{{ url_for('document', id=rec.id) }}">Full Details</a>
                       </p>
                       <hr />
 

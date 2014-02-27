@@ -1,0 +1,56 @@
+{% extends 'content-overview.html' %}
+
+{% block page_top %}
+  <a href="javascript:history.go(-1)">&laquo; back</a>
+{% endblock %}
+
+{% block side %}
+
+  <h3>Details</h3>
+
+  <dl>
+    <dt>Authors</dt>
+    <dd>
+      <p>{{ doc.authors }}</p>
+    </dd>
+
+    <dt>Uploaded</dt>
+    <dd>
+      <p>{{ doc.added }}</p>
+    </dd>
+
+    <dt>Type</dt>
+    <dd>
+      <p>{{ doc.type }}</p>
+    </dd>
+
+    <dt>Categories</dt>
+    <dd>
+      {% if doc.categories %}
+        <ul class="list-unstyled">
+          {% for cat in doc.categories %}
+            <li>
+              {{ cat.name }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </dd>
+
+    <dt>Download</dt>
+    <dd>
+      <p><a href="">{{ doc.filename }}</a></p>
+    </dd>
+  </dl>
+
+{% endblock %}
+
+{% block page_main %}
+
+  <h2>{{ doc.title }}</h2>
+
+  <p>{{ doc.description }}</p>
+
+  <p><a href="{{ url_for('files', filepath=doc.file) }}" class="btn btn-primary btn" data-icon="d" title="Download"> Download</a></p>
+
+{% endblock %}

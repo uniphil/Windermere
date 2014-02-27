@@ -7,7 +7,7 @@
 
 from math import ceil
 from PIL import Image
-from os import urandom
+from os import urandom, path
 from base64 import urlsafe_b64encode as b64encode
 from passlib.hash import pbkdf2_sha256
 from flask.ext.login import UserMixin
@@ -90,6 +90,10 @@ class Document(db.Model):
     def __repr__(self):
         return '<Document: {}...>'.format(self.title[:21])
 
+    @property
+    def filename(self):
+        return path.split(self.file)[-1]
+
 
 class DocCategory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -97,6 +101,9 @@ class DocCategory(db.Model):
     safe = db.Column(db.String(128))
     document_id = db.Column(db.Integer, db.ForeignKey('document.id'))
     document = db.relationship('Document', backref=db.backref('categories'))
+
+    def __repr__(self):
+        return '<DocCategory: {}>'.format(self.name)
 
 
 class Photo(db.Model):
