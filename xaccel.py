@@ -9,6 +9,7 @@
 
 from distutils.sysconfig import get_python_lib
 LIBS = get_python_lib()
+print('original LIBS:', LIBS)
 
 if '/local/lib/python' not in LIBS:
     import os
