@@ -10,6 +10,7 @@
 """
 
 import os
+from datetime import datetime
 from PIL import Image
 from werkzeug import secure_filename
 from flask import request, flash, redirect, url_for
@@ -92,7 +93,7 @@ class AccountsView(AdminView):
         errors = []
         if request.method == 'POST':
             if request.form.get('key'):
-                partner.key = form.key.data
+                partner.key = request.form['key']
                 partner.last_keychange = datetime.now()
                 models.db.session.add(partner)
                 models.db.session.commit()
