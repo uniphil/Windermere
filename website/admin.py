@@ -171,19 +171,29 @@ class AccountsView(AdminView):
 
 @wrap_file_field('photo', 'scenic', endpoint='uploaded_file', photo=True)
 class PhotoView(sqla.ModelView):
-    """Scenic photos"""
+    """Public scenic photos"""
+    list_template = 'admin/photos/index.html'
     column_list = ('title', 'added', 'featured')
 
 
 @wrap_file_field('photo', 'people', endpoint='uploaded_file', photo=True)
 class PeopleView(sqla.ModelView):
-    """See all the people"""
+    """Researchers to list on home page"""
     column_list = ('name', 'current')
     column_searchable_list = ('name',)
 
 
-admin = Admin(app, name='Windermere Admin', index_view=HomeView(name="Windermere Admin"))
+admin = Admin(app,
+    name='Windermere Admin',
+    index_view=HomeView(name="Windermere Admin"),
+    base_template='admin/master.html')
 admin.add_view(DocumentView(name='Documents'))
-admin.add_view(PeopleView(models.Person, models.db.session, name='People'))
-admin.add_view(PhotoView(models.ScenicPhoto, models.db.session, name='Photos'))
+admin.add_view(PeopleView(models.Person,
+                          models.db.session,
+                          name='People',
+                          endpoint='people'))
+admin.add_view(PhotoView(models.ScenicPhoto,
+                         models.db.session,
+                         name='Photos',
+                         endpoint='photos'))
 admin.add_view(AccountsView(name='Accounts', endpoint='accounts'))

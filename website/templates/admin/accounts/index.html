@@ -1,78 +1,78 @@
-{% extends 'admin/w_master.html' %}
+{% extends admin_base_template %}
 
 {% block body %}
-    <section>
-        <h2>Partners <small>Access to restricted content</small></h2>
-        <table class="table table-hover">
-            {% for partner in partners %}
-                <tr>
-                    <td></td>
-                    <th>Access Key</th>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th>{{ partner.name }}</th>
-                    <td>
-                        <code>{{ partner.key }}</code> <span class="muted">set {{ partner.last_keychange|since }}</span>
-                    </td>
-                    <td>
-                        <div class="pull-right">
-                            <a href="{{ url_for('accounts.edit_partner', id=partner.id) }}" class="btn btn-small btn-link row-hover-show" title="Edit Partner"><i class="icon-pencil"></i></a>
-                        </div>
-                    </td>
-                </tr>
+  <section>
+    <h2>Partners <small>Access to restricted content</small></h2>
+    <table class="table table-hover">
+      {% for partner in partners %}
+        <tr>
+          <td></td>
+          <th>Access Key</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>{{ partner.name }}</th>
+          <td>
+            <code>{{ partner.key }}</code> <span class="muted">set {{ partner.last_keychange|since }}</span>
+          </td>
+          <td>
+            <div class="pull-right">
+              <a href="{{ url_for('accounts.edit_partner', id=partner.id) }}" class="btn btn-small btn-link row-hover-show" title="Edit Partner"><i class="icon-pencil"></i></a>
+            </div>
+          </td>
+        </tr>
+      {% else %}
+        <tr>
+          <td colspan="4">
+            <div class="alert">
+              <strong>No Partners!</strong> There are no partners in the database. Please get an admin to initialize the database.
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  </section>
+  <section>
+    <h2>Admins <small>Manage content and accounts</small></h2>
+    <table class="table table-hover">
+      <tr>
+        <td></td>
+        <th>Username</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+      {% for admin in admins %}
+        <tr>
+          <th>{{ admin.name }}</th>
+          <td>{{ admin.username }}</td>
+          <td>
+            {% if admin.disabled %}
+              <span class="text-warning"><i class="icon-minus-sign"></i> Disabled</span>
+              <a href="{{ url_for('accounts.enable_admin', id=admin.id) }}">enable</a>
             {% else %}
-                <tr>
-                    <td colspan="4">
-                        <div class="alert">
-                            <strong>No Partners!</strong> There are no partners in the database. Please get an admin to initialize the database.
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
-    </section>
-    <section>
-        <h2>Admins <small>Manage content and accounts</small></h2>
-        <table class="table table-hover">
-            <tr>
-                <td></td>
-                <th>Username</th>
-                <th>Status</th>
-                <th></th>
-            </tr>
-            {% for admin in admins %}
-                <tr>
-                    <th>{{ admin.name }}</th>
-                    <td>{{ admin.username }}</td>
-                    <td>
-                        {% if admin.disabled %}
-                            <span class="text-warning"><i class="icon-minus-sign"></i> Disabled</span>
-                            <a href="{{ url_for('accounts.enable_admin', id=admin.id) }}">enable</a>
-                        {% else %}
-                            <span class="text-success"><i class="icon-ok"></i> Active</span>
-                            <small class="muted">{{ admin.last_active|since }}</small>
-                            <a href="{{ url_for('accounts.disable_admin', id=admin.id) }}" class="btn btn-small btn-link row-hover-show">disable</a>
-                        {% endif %}
-                    </td>
-                    <td>
-                        <div class="pull-right">
-                            <a href="{{ url_for('accounts.edit_admin', id=admin.id) }}" class="btn btn-small btn-link row-hover-show" title="Edit Admin"><i class="icon-pencil"></i></a>
-                            <a href="{{ url_for('accounts.remove_admin', id=admin.id) }}" class="btn btn-small btn-link row-hover-show" title="Remove Admin"><i class="icon-remove"></i></a>
-                        </div>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="5">
-                        <div class="alert">
-                            <strong>No Admins!</strong> There are no administrators in the database.
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
-        <a href="{{ url_for('accounts.add_admin') }}" class="btn"><i class="icon-plus"></i> Add an Admin</a>
-    </section>
+              <span class="text-success"><i class="icon-ok"></i> Active</span>
+              <small class="muted">{{ admin.last_active|since }}</small>
+              <a href="{{ url_for('accounts.disable_admin', id=admin.id) }}" class="btn btn-small btn-link row-hover-show">disable</a>
+            {% endif %}
+          </td>
+          <td>
+            <div class="pull-right">
+              <a href="{{ url_for('accounts.edit_admin', id=admin.id) }}" class="btn btn-small btn-link row-hover-show" title="Edit Admin"><i class="icon-pencil"></i></a>
+              <a href="{{ url_for('accounts.remove_admin', id=admin.id) }}" class="btn btn-small btn-link row-hover-show" title="Remove Admin"><i class="icon-remove"></i></a>
+            </div>
+          </td>
+        </tr>
+      {% else %}
+        <tr>
+          <td colspan="5">
+            <div class="alert">
+              <strong>No Admins!</strong> There are no administrators in the database.
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+    <a href="{{ url_for('accounts.add_admin') }}" class="btn"><i class="icon-plus"></i> Add an Admin</a>
+  </section>
 
 {% endblock %}

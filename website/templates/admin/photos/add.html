@@ -1,4 +1,4 @@
-{% extends 'admin/w_master.html' %}
+{% extends admin_base_template %}
 
 {% macro horizontal_input(input, labeled=true) %}
   <div class="control-group{% if input.errors %} warning{% endif %}">

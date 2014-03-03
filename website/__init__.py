@@ -9,13 +9,8 @@
 """
 
 from os import environ
-
-try:
-    from flask import Flask
-except ImportError as e:
-    e.message += "\nHave you installed everything from requirements.txt and "\
-                    "activated your virtualenv?"
-    raise e
+from flask import Flask
+from flask.ext.wtf.csrf import CsrfProtect
 
 
 def configure(app, config):
@@ -37,6 +32,7 @@ def configure(app, config):
 def create_app(config=None):
     app = Flask('website')
     configure(app, config)
+    CsrfProtect(app)
     return app
 
 app = create_app()
