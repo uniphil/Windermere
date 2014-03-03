@@ -34,6 +34,7 @@ class XAccelMiddleware(object):
         return self.app(environ, _start_response)
 
     def xfix(self, header):
+        print(header)
         if header[0].lower() != 'x-sendfile':
             return header
         elif header[1].startswith(app.root_path):
