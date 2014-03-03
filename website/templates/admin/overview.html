@@ -1,11 +1,26 @@
 {% extends 'admin/w_master.html' %}
 
 {% block body %}
-    <section>
-        <h2>Overview</h2>
-        <p>Development efforts have, so far, focussed on setting up boring backend stuff like databases, <strong>and</strong> on creating a simple, clean <a href="{{ url_for('accounts.index') }}">account system.</a> It should work, please play with it!</p>
-        <p>This page will eventually show an overview of content, and a summary of recent events.</p>
-        <p class="muted"><em>&mdash; phil</em></p>
-        <p><a href="{{ url_for('accounts.index') }}" class="btn btn-primary">Try Out the Account Manager</a></p>
-    </section>
+	<section>
+
+		<h3>Private Content</h3>
+		<h4><a href="">Document Manager</a></h4>
+		<p>Private documents available through the content browser for Consortium Partners.</p>
+		<hr />
+
+		<h3>Public Content</h3>
+		<h4><a href="">People</a></h4>
+		<p>A list of people show on the home page.</p>
+		<h4><a href="">Photos</a></h4>
+		<p>Scenic photos, including those that rotate for the banner on the home page.</p>
+		<h4><a href="">Publications</a></h4>
+		<p>Details about publications produced by the Windermere Consortium.</p>
+		<hr />
+
+		<h3>Administration</h3>
+		<h4><a href="{{ url_for('accounts.index') }}">Account Manager</a></h4>
+		<p>Set the Access Key for Consortium Partners, and update administrator accounts.</p>
+		<hr />
+
+	</section>
 {% endblock %}

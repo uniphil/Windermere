@@ -27,6 +27,10 @@ class AuthException(Exception):
 
 
 class HomeView(AdminIndexView):
+
+    def is_visible(self):
+        return False
+
     @expose('/')
     def index(self):
         if not (current_user.is_authenticated() and current_user.is_admin):
@@ -74,6 +78,7 @@ class DocumentView(AdminView):
 
 
 class AccountsView(AdminView):
+
     @expose('/')
     def index(self):
         partners = models.Partner.query.all()
@@ -176,8 +181,8 @@ class PeopleView(sqla.ModelView):
     column_searchable_list = ('name',)
 
 
-admin = Admin(app, name='Windermere Admin', index_view=HomeView(name="Overview"))
-admin.add_view(PeopleView(models.Person, models.db.session, name='People'))
+admin = Admin(app, name='Windermere Admin', index_view=HomeView(name="Windermere Admin"))
 admin.add_view(DocumentView(name='Documents'))
+admin.add_view(PeopleView(models.Person, models.db.session, name='People'))
 admin.add_view(PhotoView(models.ScenicPhoto, models.db.session, name='Photos'))
 admin.add_view(AccountsView(name='Accounts', endpoint='accounts'))
