@@ -34,17 +34,18 @@ class XAccelMiddleware(object):
         return self.app(environ, _start_response)
 
     def xfix(self, header):
-        print(header)
         if header[0].lower() != 'x-sendfile':
             return header
-        elif header[1].startswith(app.root_path):
-            return ['X-Accel-Redirect', header[1][len(app.root_path):]]
-        elif header[1].startswith(LIBS):
-            return ['X-Accel-Redirect', '/libstatic' + header[1][len(LIBS):]]
-        elif header[1].startswith(app.config['UPLOAD_FOLDER']):
-            return ['X-Accel-Redirect', '/uploads' + header[1][len(app.config['UPLOAD_FOLDER']):]]
         else:
-            return ['X-Filesend-Error-Noooooooooo', str(header) + ' ..... ' + LIBS]
+            print(header)
+            if header[1].startswith(app.root_path):
+                return ['X-Accel-Redirect', header[1][len(app.root_path):]]
+            elif header[1].startswith(LIBS):
+                return ['X-Accel-Redirect', '/libstatic' + header[1][len(LIBS):]]
+            elif header[1].startswith(app.config['UPLOAD_FOLDER']):
+                return ['X-Accel-Redirect', '/uploads' + header[1][len(app.config['UPLOAD_FOLDER']):]]
+            else:
+                return ['X-Filesend-Error-Noooooooooo', str(header) + ' ..... ' + LIBS]
 
 
 from website import app
