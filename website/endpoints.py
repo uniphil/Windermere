@@ -199,8 +199,7 @@ def document(id):
 
 @app.route('/photo/<path:filename>')
 def photo(filename):
-    filepath = safe_join(app.config['UPLOAD_FOLDER'], filename)
-    print(filename)
+    filepath = safe_join(app.config['UPLOAD_FOLDER'], 'scenic/' + filename)
     if not os.path.isabs(filepath):
         filepath = os.path.join(app.root_path, filepath)
     if not os.path.isfile(filepath):
