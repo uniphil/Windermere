@@ -26,7 +26,7 @@ if '/local/lib/python' not in LIBS:
 
 
 # for third-party assets (namely flask-admin)
-SRCS = LIBS.replace('/lib/python', '/src')
+SRCS = LIBS.split('/local/lib/python', 1)[0] + '/src'
 
 
 class XAccelMiddleware(object):
@@ -45,7 +45,6 @@ class XAccelMiddleware(object):
         if header[0].lower() != 'x-sendfile':
             return header
         else:
-            print(header)
             _, path = header
             xar = 'X-Accel-Redirect'
             if path.startswith(app.root_path):
