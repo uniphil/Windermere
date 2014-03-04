@@ -303,6 +303,7 @@ footer {
     /*margin-top: -24px;*/
     background: #555;
     background-position: 50%;
+    background-size: cover;
     position: relative;
 }
 
