@@ -11,16 +11,27 @@ server {
     error_page 404 /errors/not-found.html;
 
     location /errors/ {
-        root /home/windermere/Windermere/website/static;
-    }   
-
-    location /static/ {
-        root /home/windermere/Windermere/website;
+        alias /home/windermere/Windermere/website/static/errors/;
     }
 
-    location /files/ {
+    location /static/ {
+        alias /home/windermere/Windermere/website/static/;
+    }
+
+    location /libstatic/ {
+        internal;
+        alias /home/windermere/venv/local/lib/python2.7/site-packages/;
+    }
+
+    location /libsrc/ {
+        internal;
+        alias /home/windermere/venv/src/;
+    }
+
+    location /uploads/ {
         # TODO: auth
-        root /home/windermere;
+        internal;
+        alias /home/windermere/files/;
     }
 
     location / {
@@ -28,4 +39,11 @@ server {
         proxy_pass http://windermere_app;
     }
 
+    location /admin {
+        client_max_body_size 0;
+        include proxy_params;
+        proxy_pass http://windermere_app;
+    }
+
 }
+

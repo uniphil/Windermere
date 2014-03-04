@@ -11,6 +11,9 @@ from distutils.sysconfig import get_python_lib
 LIBS = get_python_lib()
 print('original LIBS:', LIBS)
 
+'/home/windermere/venv/src/flask-admin/flask_admin/static/bootstrap/css/bootstrap.css'
+'/home/windermere/venv/local/lib/python2.7/site-packages'
+
 if '/local/lib/python' not in LIBS:
     import os
     assert '/lib/python' in LIBS, 'you have an odd site-packages setup or something...'
@@ -20,6 +23,10 @@ if '/local/lib/python' not in LIBS:
     else:
         print('replacing site-packages path with /local/ one')
         LIBS = LOCAL_LIBS
+
+
+# for third-party assets (namely flask-admin)
+SRCS = LIBS.replace('/lib/python', '/src')
 
 
 class XAccelMiddleware(object):
@@ -39,12 +46,16 @@ class XAccelMiddleware(object):
             return header
         else:
             print(header)
-            if header[1].startswith(app.root_path):
-                return ['X-Accel-Redirect', header[1][len(app.root_path):]]
-            elif header[1].startswith(LIBS):
-                return ['X-Accel-Redirect', '/libstatic' + header[1][len(LIBS):]]
-            elif header[1].startswith(app.config['UPLOAD_FOLDER']):
-                return ['X-Accel-Redirect', '/uploads' + header[1][len(app.config['UPLOAD_FOLDER']):]]
+            _, path = header
+            xar = 'X-Accel-Redirect'
+            if path.startswith(app.root_path):
+                return [xar, path[len(app.root_path):]]
+            elif path.startswith(LIBS):
+                return [xar, '/libstatic' + path[len(LIBS):]]
+            elif path.startswith(SRCS):
+                return [xar, '/libsrc' + path[len(SRCS):]]
+            elif path.startswith(app.config['UPLOAD_FOLDER']):
+                return [xar, '/uploads' + path[len(app.config['UPLOAD_FOLDER']):]]
             else:
                 return ['X-Filesend-Error-Noooooooooo', str(header) + ' ..... ' + LIBS]
 
