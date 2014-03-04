@@ -21,7 +21,7 @@ def home():
     feature_query = models.ScenicPhoto.query.filter_by(featured=True)
     try:
         featurenum = random.randrange(0, feature_query.count())
-        featurefile = url_for('photo', filename=feature_query[featurenum].photo + '_sized.jpg')
+        featurefile = url_for('photo', filename=feature_query[featurenum].photo)
     except ValueError:
         featurefile = ''
     return render_template('home.html', form=form, bg=featurefile)
@@ -197,9 +197,14 @@ def document(id):
     return render_template('content-detail.html', doc=document)
 
 
-@app.route('/photo/<filename>')
+@app.route('/photo/<path:filename>')
 def photo(filename):
-    filepath = app.config['scenic'](filename)
+    filepath = safe_join(app.config['UPLOAD_FOLDER'], filename)
+    print(filename)
+    if not os.path.isabs(filepath):
+        filepath = os.path.join(app.root_path, filepath)
+    if not os.path.isfile(filepath):
+        raise NotFound()
     return send_file(filepath)
 
 
