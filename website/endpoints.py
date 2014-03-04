@@ -217,7 +217,4 @@ def files(filepath):
 
 @app.errorhandler(404)
 def not_found(error):
-    err_dir = os.path.join(app.root_path, 'static', 'errors')
-    not_found_resp = send_from_directory(err_dir, 'not-found.html')
-    not_found_resp.status_code = 404
-    return not_found_resp
+    return render_template('errors/not-found.html'), 404
