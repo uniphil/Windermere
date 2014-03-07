@@ -37,22 +37,35 @@
     <table class="table table-hover">
       <tr>
         <td></td>
-        <th>Username</th>
+        <th>Email</th>
+        <th>Contact Form Recipient</th>
         <th>Status</th>
         <th></th>
       </tr>
       {% for admin in admins %}
         <tr>
           <th>{{ admin.name }}</th>
-          <td>{{ admin.username }}</td>
+          <td>{{ admin.email }}</td>
+          <td>
+            {% if admin.receives_messages %}
+              <i class="icon-envelope"></i>
+              <span class="text-success">Receives messages</span>
+              <a title="Don't send contact form messages from the home page to this users's email" class="btn btn-small btn-link row-hover-show" href="{{ url_for('accounts.disable_messages', id=admin.id) }}">turn off</a>
+            {% else %}
+              <i class="icon-envelope home-unfeature"></i>
+              <a title="Mark this account to recieve contact form messages" class="btn btn-small btn-link row-hover-show" href="{{ url_for('accounts.enable_messages', id=admin.id) }}">receive messages</a>
+            {% endif %}
+          </td>
           <td>
             {% if admin.disabled %}
               <span class="text-warning"><i class="icon-minus-sign"></i> Disabled</span>
               <a href="{{ url_for('accounts.enable_admin', id=admin.id) }}">enable</a>
             {% else %}
-              <span class="text-success"><i class="icon-ok"></i> Active</span>
+              <span class="text-success">
+                <i class="icon-ok"></i> Active
+              </span>
               <small class="muted">{{ admin.last_active|since }}</small>
-              <a href="{{ url_for('accounts.disable_admin', id=admin.id) }}" class="btn btn-small btn-link row-hover-show">disable</a>
+              <a class="btn btn-small btn-link row-hover-show" href="{{ url_for('accounts.disable_admin', id=admin.id) }}">disable account</a>
             {% endif %}
           </td>
           <td>

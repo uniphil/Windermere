@@ -8,11 +8,11 @@ section {
     border-top-color: transparent;
 }
 
-tr a.row-hover-show {
+tr .row-hover-show {
     opacity: 0;
 }
 
-tr:hover a.row-hover-show {
+tr:hover .row-hover-show {
     opacity: 1;
 }
 

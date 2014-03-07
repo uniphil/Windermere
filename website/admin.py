@@ -44,9 +44,9 @@ class HomeView(AdminIndexView):
         if form.validate_on_submit():
             try:
                 the_admin = models.Admin.query.filter_by(
-                                username=form.username.data).first()
+                                email=form.email.data).first()
                 if the_admin is None:
-                    form.username.errors.append('Username not found :|')
+                    form.email.errors.append('Username not found :|')
                     raise AuthException
                 if not the_admin.check_password(form.password.data):
                     form.password.errors.append('Password did not check out :(')
@@ -111,7 +111,7 @@ class AccountsView(AdminView):
         if form.validate_on_submit():
             new_admin = models.Admin()
             new_admin.name = form.name.data
-            new_admin.username = form.username.data
+            new_admin.email = form.email.data
             new_admin.set_password(form.password.data)
             models.db.session.add(new_admin)
             models.db.session.commit()
@@ -125,10 +125,9 @@ class AccountsView(AdminView):
     def edit_admin(self, id):
         the_admin = models.Admin.query.get_or_404(id)
         form = forms.AdminForm(request.form, the_admin)
-        form.password.validators = []
         if form.validate_on_submit():
             the_admin.name = form.name.data
-            the_admin.username = form.username.data
+            the_admin.email = form.email.data
             if form.password.data:
                 the_admin.set_password(form.password.data)
             models.db.session.add(the_admin)
@@ -138,6 +137,26 @@ class AccountsView(AdminView):
             return redirect(url_for('.index'))
         return self.render('admin/accounts/add_admin.html', form=form,
                            verb='Edit', action='Save', ico='pencil')
+
+    @expose('/admin/<int:id>/enable-messages')
+    def enable_messages(self, id):
+        the_admin = models.Admin.query.get_or_404(id)
+        the_admin.receives_messages = True
+        models.db.session.add(the_admin)
+        models.db.session.commit()
+        flash('Messages from the contact form will be sent to {}'
+              .format(the_admin.name))
+        return redirect(url_for('.index'))
+
+    @expose('/admin/<int:id>/disable-messages')
+    def disable_messages(self, id):
+        the_admin = models.Admin.query.get_or_404(id)
+        the_admin.receives_messages = False
+        models.db.session.add(the_admin)
+        models.db.session.commit()
+        flash('Messages from the contact form will no longer be sent to {}'
+              .format(the_admin.name))
+        return redirect(url_for('.index'))
 
     @expose('/admin/<int:id>/disable')
     def disable_admin(self, id):

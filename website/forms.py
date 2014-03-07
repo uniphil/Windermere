@@ -17,12 +17,15 @@ class PartnerForm(Form):
 
 class AdminForm(Form):
     name = fields.TextField('Name', [validators.Length(min=2, max=80)])
-    username = fields.TextField('Username', [validators.Length(min=2, max=80)])
+    email = fields.TextField('Email Address', [
+        validators.DataRequired(),
+        validators.Email(),
+    ])
     password = fields.PasswordField('Password', [validators.DataRequired()])
 
 
 class LoginForm(Form):
-    username = fields.TextField('Username', [validators.DataRequired()])
+    email = fields.TextField('Email', [validators.DataRequired()])
     password = fields.PasswordField('Password', [validators.DataRequired()])
 
 

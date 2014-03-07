@@ -33,7 +33,9 @@ class Partner(db.Model, UserMixin):
 class Admin(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=True)
-    username = db.Column(db.String(80), unique=True)
+    # username not email in the db because sqlalchemy migrations suck
+    email = db.Column('username', db.String(80), unique=True)
+    receives_messages = db.Column(db.Boolean)
     password_hash = db.Column(db.String(87))
     disabled = db.Column(db.Boolean())
     last_active = db.Column(db.DateTime)
@@ -56,7 +58,7 @@ class Admin(db.Model, UserMixin):
         return unicode(self.id)
 
     def __repr__(self):
-        return '<Admin {}>'.format(self.username)
+        return '<Admin {}>'.format(self.email)
 
 
 class Person(db.Model):

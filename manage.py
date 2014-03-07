@@ -88,7 +88,7 @@ def mkphil():
     from website import models
     phil = models.Admin()
     phil.name = 'Phil Schleihauf'
-    phil.username = 'phil'
+    phil.username = 'uniphil@gmail.com'
     phil.set_password('asdf')
     models.db.session.add(phil)
     models.db.session.commit()

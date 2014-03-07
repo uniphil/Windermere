@@ -24,7 +24,7 @@
         <form action="" method="post" class="form-horizontal">
             {{ form.csrf_token }}
             {{ horizontal_input(form.name) }}
-            {{ horizontal_input(form.username) }}
+            {{ horizontal_input(form.email) }}
             {{ horizontal_input(form.password) }}
             {% set buttons='
                 <button type="submit" class="btn btn-success">
