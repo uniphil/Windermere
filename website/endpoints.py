@@ -12,19 +12,32 @@ from flask import (request, session, render_template, redirect, url_for, flash,
 from flask.helpers import safe_join
 from flask.ext.login import (current_user, login_required, login_user,
                              logout_user)
+from flask.ext.mail import Mail, Message
 from . import app, models, forms
 
 
-@app.route('/')
+mail = Mail()
+mail.init_app(app)  # eventually move to website.create_app
+
+
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    form = forms.PartnerForm(request.form)
+    form = forms.ContactForm(request.form)
+    message_sent = False
+    if form.validate_on_submit():
+        message = Message(form.message.data, sender=form.sender.data)
+        for recpi in models.Admin.query.filter_by(receives_messages=True):
+            message.add_recipient(recpi.email)
+        mail.send(message)
+        message_sent = True
     feature_query = models.ScenicPhoto.query.filter_by(featured=True)
     try:
         featurenum = random.randrange(0, feature_query.count())
         featurefile = url_for('photo', filename=feature_query[featurenum].photo)
     except ValueError:
         featurefile = ''
-    return render_template('home.html', form=form, bg=featurefile)
+    return render_template('home.html', form=form, message_sent=message_sent,
+                           bg=featurefile)
 
 
 @app.route('/people')

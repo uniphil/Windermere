@@ -11,6 +11,12 @@ from wtforms import fields, validators
 from website import app
 
 
+class ContactForm(Form):
+    sender = fields.TextField('From', validators=[validators.Email()])
+    message = fields.TextAreaField('Message',
+                                   validators=[validators.DataRequired()])
+
+
 class PartnerForm(Form):
     key = fields.TextField('Key', validators=[validators.DataRequired()])
 

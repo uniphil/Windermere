@@ -74,24 +74,54 @@
     <div class="col-sm-4 col-lg-4">
       <h3>Contact Us</h3>
       <p>Send an email to Bill at <a href="mailto:warnott@uottawa.ca?subject=Question+about+the+Windermere+Consortium" title="Send Bill an email">warnott@uottawa.ca</a>, or use the contact form below:</p>
-      <form class="form-horizontal" role="form">
-        <div class="form-group">
-          <label for="from" class="col-xs-3 col-sm-3 col-md-2 control-label">From:</label>
-          <div class="col-xs-9 col-sm-9 col-md-10">
-            <input type="email" class="form-control" id="from" name="from" placeholder="Enter your email" />
+      <form method="post" action="" class="form-horizontal" role="form">
+        {{ form.csrf_token() }}
+        {% if form.errors %}
+          <div class="alert alert-warning">
+            <h4>Whoops, check this:</h4>
+            <ul>
+              {% for field, errors in form.errors.items() %}
+                <li>
+                  <strong>{{ field }}</strong>: {{ errors | join(', ') }}
+                </li>
+              {% endfor %}
+            </ul>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="message" class="sr-only control-label">Message</label>
-          <div class="col-sm-12">
-            <textarea class="form-control" name="message" rows="5" placeholder="Write a message..."></textarea>
+        {% endif %}
+        {% if message_sent %}
+          <div class="alert alert-success">
+            <h4>Message Sent</h4>
+            <p>Your message is on its way.</p>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-12">
-            <button type="submit" class="btn btn-sm btn-default"><span data-icon="m">&nbsp;</span> Send Message</button>
+        {% else %}
+          <div class="form-group">
+            <label for="from" class="col-xs-3 col-sm-3 col-md-2 control-label">From:</label>
+            <div class="col-xs-9 col-sm-9 col-md-10">
+              <input
+                type="email"
+                class="form-control"
+                id="sender"
+                name="sender"
+                placeholder="Enter your email"
+                value="{{ form.sender.data or '' }}" />
+            </div>
           </div>
-        </div>
+          <div class="form-group">
+            <label for="message" class="sr-only control-label">Message</label>
+            <div class="col-sm-12">
+              <textarea
+                class="form-control"
+                name="message"
+                rows="5"
+                placeholder="Write a message...">{{ form.message.data or '' }}</textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <button type="submit" class="btn btn-sm btn-default"><span data-icon="m">&nbsp;</span> Send Message</button>
+            </div>
+          </div>
+        {% endif %}
       </form>
     </div>
   </div>
