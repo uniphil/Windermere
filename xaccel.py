@@ -55,6 +55,8 @@ class XAccelMiddleware(object):
                 return [xar, '/libsrc' + path[len(SRCS):]]
             elif path.startswith(app.config['UPLOAD_FOLDER']):
                 return [xar, '/uploads' + path[len(app.config['UPLOAD_FOLDER']):]]
+            elif path.startswith(app.config['PHOTO_CACHE_FOLDER']):
+                return [xar, '/photo-cache' + path[len(app.config['PHOTO_CACHE_FOLDER']):]]
             else:
                 return ['X-Filesend-Error-Noooooooooo', str(header) + ' ..... ' + LIBS]
 
