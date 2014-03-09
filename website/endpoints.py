@@ -35,7 +35,7 @@ def home():
         try:
             mail.send(message)
         except AssertionError:
-            return "Email configuration problem, sorry :(", 500
+            return "Email configuration problem (no recipients), sorry :(", 500
         message_sent = True
     feature_query = models.ScenicPhoto.query.filter_by(featured=True)
     try:
