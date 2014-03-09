@@ -27,7 +27,7 @@ def home():
     if form.validate_on_submit():
         message = Message("[No Reply] Windere Contact Form Message",
                           sender='contact-form@windermere.uottawa.ca')
-        content = 'from: {}\nmessage: {}'.format(form.sender.data,
+        content = 'from: {}\nmessage:\n{}'.format(form.sender.data,
                                                  form.message.data)
         message.body = content
         for recpi in models.Admin.query.filter_by(receives_messages=True):
