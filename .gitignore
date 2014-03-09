@@ -17,6 +17,7 @@ venv/
 
 # uploads la la la
 uploads/
+photo-cache/
 
 # le le le
 import-old/

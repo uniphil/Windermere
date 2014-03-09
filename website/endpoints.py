@@ -13,7 +13,7 @@ from flask.helpers import safe_join
 from flask.ext.login import (current_user, login_required, login_user,
                              logout_user)
 from flask.ext.mail import Mail, Message
-from . import app, models, forms
+from . import app, models, forms, photo_utils
 
 
 mail = Mail()
@@ -40,7 +40,8 @@ def home():
     feature_query = models.ScenicPhoto.query.filter_by(featured=True)
     try:
         featurenum = random.randrange(0, feature_query.count())
-        featurefile = url_for('photo', filename=feature_query[featurenum].photo)
+        featurefile = url_for('photo', size=1140,
+                              filename=feature_query[featurenum].photo)
     except ValueError:
         featurefile = ''
     return render_template('home.html', form=form, message_sent=message_sent,
@@ -219,11 +220,15 @@ def document(id):
 
 @app.route('/photo/<path:filename>')
 def photo(filename):
+    photosize = request.args.get('size')
     filepath = safe_join(app.config['UPLOAD_FOLDER'], 'scenic/' + filename)
     if not os.path.isabs(filepath):
         filepath = os.path.join(app.root_path, filepath)
     if not os.path.isfile(filepath):
         raise NotFound()
+    if photosize is not None:
+        photosize = int(photosize)
+        filepath = photo_utils.scaled_cached(filepath, photosize)
     return send_file(filepath)
 
 

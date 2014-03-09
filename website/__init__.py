@@ -22,8 +22,9 @@ def configure(app, config):
         DEBUG        = get('DEBUG') in ('TRUE', 'True', 'true', True),
         HOST         = get('HOST', '127.0.0.1'),
         PORT         = int(get('PORT', 5000)),
-        SQLALCHEMY_DATABASE_URI = get('SQLALCHEMY_DATABASE_URI', 'sqlite:///data.sqlite3'),
-        UPLOAD_FOLDER= get('UPLOAD_FOLDER', 'uploads'),
+        SQLALCHEMY_DATABASE_URI=get('SQLALCHEMY_DATABASE_URI', 'sqlite:///data.sqlite3'),
+        UPLOAD_FOLDER= get('UPLOAD_FOLDER', 'uploads/'),
+        PHOTO_CACHE_FOLDER=get('PHOTO_CACHE_FOLDER', 'photo-cache/'),
         ACCESS_SEED  = get('ACCESS_SEED', 'WhiteChristmas'),
         CSRF_ENABLED = config.get('CSRF_ENABLED', True),  # for testing ONLY
     )
