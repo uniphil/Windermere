@@ -35,6 +35,8 @@ tricky dependencies:
 
 8. export all necessary further configs (see `website/__init__.py`)
 
+9. install postfix
+
 
 ## updating
 

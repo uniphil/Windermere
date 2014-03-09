@@ -25,10 +25,17 @@ def home():
     form = forms.ContactForm(request.form)
     message_sent = False
     if form.validate_on_submit():
-        message = Message(form.message.data, sender=form.sender.data)
+        message = Message("[No Reply] Windere Contact Form Message",
+                          sender='contact-form@windermere.uottawa.ca')
+        content = 'from: {}\nmessage: {}'.format(form.sender.data,
+                                                 form.message.data)
+        message.body = content
         for recpi in models.Admin.query.filter_by(receives_messages=True):
             message.add_recipient(recpi.email)
-        mail.send(message)
+        try:
+            mail.send(message)
+        except AssertionError:
+            return "Email configuration problem, sorry :(", 500
         message_sent = True
     feature_query = models.ScenicPhoto.query.filter_by(featured=True)
     try:
