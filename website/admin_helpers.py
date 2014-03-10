@@ -10,6 +10,7 @@
 """
 
 import os
+from functools import wraps, partial
 from tempfile import NamedTemporaryFile
 from werkzeug.security import safe_join
 from werkzeug.exceptions import NotFound
@@ -62,6 +63,19 @@ class FileField(fields.FileField):
         self.widget = FileInput(endpoint, folder=folder, photo=photo)
 
 
+def wrap_method_of(cls):    
+    def wrapper(new_function):
+        method_name = new_function.__name__
+        original_method = getattr(cls, method_name)
+        @wraps(new_function)
+        def wrapped(self, *args, **kwargs):
+            super_ish = partial(original_method, self)
+            return new_function(super_ish, self, *args, **kwargs)
+        setattr(cls, method_name, wrapped)
+        return wrapped
+    return wrapper
+
+
 def wrap_file_field(field_name, upload_dir, endpoint, photo=False):
     """Wraps a sqla.ModelView from flask_admin to pull out files"""
 
@@ -90,59 +104,55 @@ def wrap_file_field(field_name, upload_dir, endpoint, photo=False):
 
     def wrap_view(sqla_model_view):
 
-        class WrappedView(sqla_model_view):
-            """this should go away"""
+        @wrap_method_of(sqla_model_view)
+        def create_model(super_ish, self, form):
+            field = getattr(form, field_name)
+            incoming = field.data
+            filename = get_safe_filename(incoming.filename)
+            field.data = filename  # sqla willl store this for us
+            result = super_ish(form)
+            if result is False:
+                remove(filename)
+                return False
+            if filename is not None:
+                save(incoming, filename)
+            return True
 
-            def create_model(self, form):
-                field = getattr(form, field_name)
-                incoming = field.data
-                filename = get_safe_filename(incoming.filename)
-                field.data = filename  # sqla willl store this for us
-                result = super(WrappedView, self).create_model(form)
-                if result is False:
-                    remove(filename)
-                    return False
-                if filename is not None:
-                    save(incoming, filename)
-                return True
-
-            def update_model(self, form, model):
-                field = getattr(form, field_name)
-                stored_name = getattr(model, field_name)
-                incoming = field.data
-                filename = get_safe_filename(incoming.filename)
-                field.data = filename or stored_name
-                result = super(WrappedView, self).update_model(form, model)
-                if result is False:
-                    remove(filename)
-                    return False
-                if filename is not None:
-                    if stored_name is not None:
-                        remove(stored_name)
-                    save(incoming, filename)
-                return True
-
-            def delete_model(self, model):
-                result = super(WrappedView, self).delete_model(model)
-                if result is False:
-                    return False
-                stored_name = getattr(model, field_name)
+        @wrap_method_of(sqla_model_view)
+        def update_model(super_ish, self, form, model):
+            field = getattr(form, field_name)
+            stored_name = getattr(model, field_name)
+            incoming = field.data
+            filename = get_safe_filename(incoming.filename)
+            field.data = filename or stored_name
+            result = super_ish(form, model)
+            if result is False:
+                remove(filename)
+                return False
+            if filename is not None:
                 if stored_name is not None:
                     remove(stored_name)
-                return True
+                save(incoming, filename)
+            return True
 
+        @wrap_method_of(sqla_model_view)
+        def delete_model(super_ish, self, model):
+            result = super_ish(model)
+            if result is False:
+                return False
+            stored_name = getattr(model, field_name)
+            if stored_name is not None:
+                remove(stored_name)
+            return True
 
-        if WrappedView.form_extra_fields is None:
-            WrappedView.form_extra_fields = {}
-        if field_name not in WrappedView.form_extra_fields:
+        if sqla_model_view.form_extra_fields is None:
+            sqla_model_view.form_extra_fields = {}
+        if field_name not in sqla_model_view.form_extra_fields:
             nice_name = prettify_name(field_name)
             field = FileField(nice_name, photo=photo, endpoint=endpoint, folder=upload_dir)
-            WrappedView.form_extra_fields[field_name] = field
+            sqla_model_view.form_extra_fields[field_name] = field
 
 
-        WrappedView.__name__ = sqla_model_view.__name__
-        WrappedView.__doc__ = sqla_model_view.__doc__
-
-        return WrappedView
+        return sqla_model_view
 
     return wrap_view
