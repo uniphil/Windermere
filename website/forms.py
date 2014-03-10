@@ -35,17 +35,6 @@ class LoginForm(Form):
     password = fields.PasswordField('Password', [validators.DataRequired()])
 
 
-class ScenicPhotoForm(Form):
-    photo = fields.FileField('Photo')
-    title = fields.TextField('Title', [validators.DataRequired()])
-    featured = fields.BooleanField('Homepage Cover Photo')
-    description = fields.TextAreaField('Description')
-
-    def validate_photo(form, field):
-        if field.data:
-            field.data = re.sub(r'[^\w\.\-]', '_', field.data)
-
-
 class PersonForm(Form):
     name = fields.TextField('Name')
     current = fields.BooleanField('Current?')
