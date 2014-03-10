@@ -193,6 +193,14 @@ class PhotoView(sqla.ModelView):
     """Public scenic photos"""
     list_template = 'admin/photos/index.html'
     column_list = ('title', 'added', 'featured')
+    column_default_sort = ('featured', True)
+    
+    def _order_by(self, *args, **kwargs):
+        """hack to secondary-sort"""
+        query, joins = super(PhotoView, self)._order_by(*args, **kwargs)
+        query = query.order_by(self.model.added.desc())
+        return query, joins
+
 
 
 @wrap_file_field('photo', 'people', endpoint='uploaded_file', photo=True)

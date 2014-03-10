@@ -17,7 +17,7 @@
         {% for photo in data %}
           <tr>
             <th><img width="32" src="{{ url_for('photo', size=32, filename=photo.photo) }}" alt="thumbnail" /> {{ photo.title }}</th>
-            <td>{{ photo.added|since }}</td>
+            <td>{{ photo.added | since }}</td>
             <td>
               <div class="pull-right">
                 <a href="{#{ url_for('photos.toggle_feature', id=photo.id) }#}" class="btn btn-mini btn-link" title="Feature on home page">
