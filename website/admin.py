@@ -201,6 +201,13 @@ class PhotoView(sqla.ModelView):
         query = query.order_by(self.model.added.desc())
         return query, joins
 
+    @expose('/<int:id>/toggle-feature')
+    def toggle_feature(self, id):
+        the_photo = models.ScenicPhoto.query.get_or_404(id)
+        the_photo.featured = not the_photo.featured
+        models.db.session.add(the_photo)
+        models.db.session.commit()
+        return redirect(request.referrer or url_for('.index'))
 
 
 @wrap_file_field('photo', 'people', endpoint='uploaded_file', photo=True)
