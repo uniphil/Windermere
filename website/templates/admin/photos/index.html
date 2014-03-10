@@ -16,7 +16,7 @@
         </tr>
         {% for photo in data %}
           <tr>
-            <th><img width="32" src="{{ url_for('photo', size=32, filename=photo.photo) }}" alt="thumbnail" /> {{ photo.title }}</th>
+            <th><img width="32" src="{{ url_for('photo', size=32, filename=photo.photo) if photo.photo }}" alt="thumbnail" /> {{ photo.title }}</th>
             <td>{{ photo.added | since }}</td>
             <td>
               <div class="pull-right">

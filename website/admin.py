@@ -201,6 +201,13 @@ class PhotoView(sqla.ModelView):
         query = query.order_by(self.model.added.desc())
         return query, joins
 
+    def create_model(self, form):
+        """use the current time by default"""
+        added = getattr(form, 'added')
+        if added.data is None:
+            added.data = datetime.now()
+        return super(PhotoView, self).create_model(form)
+
     @expose('/<int:id>/toggle-feature')
     def toggle_feature(self, id):
         the_photo = models.ScenicPhoto.query.get_or_404(id)
