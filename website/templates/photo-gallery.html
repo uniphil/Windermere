@@ -1,6 +1,13 @@
 {% extends "base-full.html" %}
 
+{% set title = "Photos" %}
+
 {% block page_content %}
+
+  <div class="page-header">
+    <h1>Photo Gallery</h1>
+    <p><a href="{{ url_for('home') }}" data-icon="b"> Back to Windermere Home</a></p>
+  </div>
 
   {% for photo in photos %}
     {% if photo.photo %}

@@ -1,7 +1,11 @@
 {% extends 'content-overview.html' %}
 
+{% set title = doc.title %}
+
 {% block page_top %}
-  <a href="javascript:history.go(-1)">&laquo; back</a>
+  <div class="page-header">
+    <p><a href="javascript:history.go(-1)" data-icon="b"> Back to content browser</a></p>
+  </div>
 {% endblock %}
 
 {% block side %}
