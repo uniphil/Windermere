@@ -6,6 +6,7 @@
         <p>This action cannot be undone.</p>
         
         <form action="{{ url_for('accounts.remove_admin', id=admin.id) }}" method="post" class="form-inline">
+            <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token() }}" />
             <input type="hidden" name="confirm" value="yes" />
             <button type="submit" class="btn btn-danger"><i class="icon-remove-sign icon-white"></i> Remove {{ admin.name }}</button>
             <a href="{{ url_for('accounts.index') }}" class="btn btn-link">Cancel</a>
