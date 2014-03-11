@@ -216,6 +216,13 @@ class PhotoView(sqla.ModelView):
         models.db.session.commit()
         return redirect(request.referrer or url_for('.index'))
 
+    @expose('/<int:id>/confirm-removal')
+    def confirm_delete(self, id):
+        the_photo = models.ScenicPhoto.query.get_or_404(id)
+        next = request.args.get('next') or url_for('.index')
+        return self.render('admin/photos/remove.html', photo=the_photo,
+                           next=next)
+
 
 @wrap_file_field('photo', 'people', endpoint='uploaded_file', photo=True)
 class PeopleView(sqla.ModelView):

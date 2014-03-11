@@ -26,12 +26,9 @@
                 <a href="{{ url_for('.edit_view', id=get_pk_value(photo), url=return_url) }}" class="btn btn-mini btn-link row-hover-show" title="Edit Photo">
                   <i class="icon-pencil"></i>
                 </a>
-                <form action="{{ url_for('.delete_view', id=get_pk_value(photo), url=return_url) }}" method="POST" class="btn btn-mini btn-link row-hover-show" title="Remove Photo">
-                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                  <button title="Delete Photo" class="btn btn-mini btn-link row-hover-show">
-                    <i class="icon-remove"></i>
-                  </button>
-                </form>
+                <a href="{{ url_for('.confirm_delete', id=get_pk_value(photo), next=return_url) }}" class="btn btn-mini btn-link row-hover-show" title="Remove Photo">
+                  <i class="icon-remove"></i>
+                </a>
               </div>
             </td>
           </tr>
