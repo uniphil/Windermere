@@ -206,9 +206,9 @@ def topic_overview(category=None):
     if category:
         base_q = base_q.filter(models.db.and_(
             models.db.or_(
-                *(models.DocCategory.safe == c for c in cat_filters)
+                *(models.Category.safe == c for c in cat_filters)
             ),
-            models.DocCategory.document_id == models.Document.id,
+            models.Category.document_id == models.Document.id,
         ))
 
     for f in sel_filters:

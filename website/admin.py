@@ -46,7 +46,7 @@ class HomeView(AdminIndexView):
                 the_admin = models.Admin.query.filter_by(
                                 email=form.email.data).first()
                 if the_admin is None:
-                    form.email.errors.append('Username not found :|')
+                    form.email.errors.append('Email not found :|')
                     raise AuthException
                 if not the_admin.check_password(form.password.data):
                     form.password.errors.append('Password did not check out :(')

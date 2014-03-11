@@ -44,7 +44,7 @@ def load_oldphotos(datafile='import-old/data.json'):
 def load_olddocs(datafile='import-old/data.json'):
     import json
     from datetime import datetime
-    from website.models import db, Document, DocCategory
+    from website.models import db, Document, Category
 
     with open(datafile) as f:
         data = json.load(f)
@@ -61,11 +61,15 @@ def load_olddocs(datafile='import-old/data.json'):
         doc.type = doc_data['type']
         doc.authors = doc_data['author']
         for category in doc_data['categories']:
-            cat = DocCategory()
-            cat.name = category
-            cat.safe = nice_to_safe(category)
-            cat.document = doc
-            db.session.add(cat)
+            cat_safe = nice_to_safe(category)
+            cat = Category.query.filter_by(safe=cat_safe).first()
+            if cat is None:
+                cat = Category()
+                cat.name = category
+                cat.safe = cat_safe
+                db.session.add(cat)
+                db.session.commit()
+            doc.categories.append(cat)
         db.session.add(doc)
 
     db.session.commit()
@@ -88,7 +92,7 @@ def mkphil():
     from website import models
     phil = models.Admin()
     phil.name = 'Phil Schleihauf'
-    phil.username = 'uniphil@gmail.com'
+    phil.email = 'uniphil@gmail.com'
     phil.set_password('asdf')
     models.db.session.add(phil)
     models.db.session.commit()

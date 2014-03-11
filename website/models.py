@@ -80,7 +80,15 @@ class ScenicPhoto(db.Model):
     featured = db.Column(db.Boolean)
 
 
+document_categories = db.Table('document_categories', db.Model.metadata,
+    db.Column('document_id', db.Integer, db.ForeignKey('documents.id')),
+    db.Column('category_id', db.Integer, db.ForeignKey('categories.id'))
+)
+
+
 class Document(db.Model):
+    __tablename__ = 'documents'
+
     id = db.Column(db.Integer, primary_key=True)
     file = db.Column(db.String(220))
     title = db.Column(db.String(128))
@@ -88,6 +96,9 @@ class Document(db.Model):
     added = db.Column(db.DateTime)
     type = db.Column(db.String(64))
     authors = db.Column(db.String(128))
+
+    categories = db.relationship('Category', secondary=document_categories,
+                                 backref='documents')
 
     def __repr__(self):
         return '<Document: {}...>'.format(self.title[:21])
@@ -97,15 +108,15 @@ class Document(db.Model):
         return path.split(self.file)[-1]
 
 
-class DocCategory(db.Model):
+class Category(db.Model):
+    __tablename__ = 'categories'
+
     id = db.Column(db.Integer, primary_key=True)
+    safe = db.Column(db.String(128), unique=True)
     name = db.Column(db.String(128))
-    safe = db.Column(db.String(128))
-    document_id = db.Column(db.Integer, db.ForeignKey('document.id'))
-    document = db.relationship('Document', backref=db.backref('categories'))
 
     def __repr__(self):
-        return '<DocCategory: {}>'.format(self.name)
+        return '<Category: {}>'.format(self.name)
 
 
 class Photo(db.Model):
