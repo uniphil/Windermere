@@ -8,7 +8,7 @@ import random
 from collections import namedtuple
 from werkzeug.exceptions import NotFound
 from flask import (request, session, render_template, redirect, url_for, flash,
-                   send_from_directory, send_file, abort)
+                   send_from_directory, send_file, abort, jsonify)
 from flask.helpers import safe_join
 from flask.ext.login import (current_user, login_required, login_user,
                              logout_user)
@@ -48,6 +48,15 @@ def home():
     return render_template('home.html', form=form, message_sent=message_sent,
                            bg=featurefile, banner_photo_title=featuredesc)
 
+
+@app.route('/random-feature-photo')
+def random_feature_photo():
+    feature_query = models.ScenicPhoto.query.filter_by(featured=True)
+    random_index = random.randrange(0, feature_query.count())
+    print random_index
+    photo = feature_query[random_index]
+    return jsonify({ 'photo': url_for('photo', filename=photo.photo),
+                     'title': photo.title })
 
 
 @app.route('/photos')
