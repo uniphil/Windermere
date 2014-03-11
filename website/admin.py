@@ -236,12 +236,12 @@ admin = Admin(app,
     index_view=HomeView(name="Windermere Admin"),
     base_template='admin/master.html')
 admin.add_view(DocumentView(name='Documents'))
-admin.add_view(PeopleView(models.Person,
-                          models.db.session,
-                          name='People',
-                          endpoint='people'))
 admin.add_view(PhotoView(models.ScenicPhoto,
                          models.db.session,
                          name='Photos',
                          endpoint='photos'))
+admin.add_view(PeopleView(models.Person,
+                          models.db.session,
+                          name='People',
+                          endpoint='People'))
 admin.add_view(AccountsView(name='Accounts', endpoint='accounts'))

@@ -3,7 +3,7 @@
 {% block body %}
     <section>
         <h2>Really Remove {{ photo.title }}? <small>({{ photo.description }})</small></h2>
-        <img class="span4 pull-right" src="{{ url_for('photo', filename=photo.photo) if photo.photo }}" alt="{{ photo.title }}" />
+        <img class="span4 pull-right" src="{{ url_for('photo', type='scenic', filename=photo.photo) if photo.photo }}" alt="{{ photo.title }}" />
         <p>This action cannot be undone.</p>
         
         <form action="{{ url_for('.delete_view', id=photo.id, url=next) }}" method="post" class="form-inline">

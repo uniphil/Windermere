@@ -23,6 +23,7 @@ mail.init_app(app)  # eventually move to website.create_app
 @app.route('/', methods=['GET', 'POST'])
 def home():
     form = forms.ContactForm(request.form)
+    people = models.Person.query.order_by(models.Person.current).all()
     message_sent = False
     if form.validate_on_submit():
         message = Message("[No Reply] Windere Contact Form Message",
@@ -41,21 +42,21 @@ def home():
     try:
         featurenum = random.randrange(0, feature_query.count())
         featureobj = feature_query[featurenum]
-        featurefile = url_for('photo', size=1140, filename=featureobj.photo)
+        featurefile = url_for('photo', type='scenic', size=1140, filename=featureobj.photo)
         featuredesc = featureobj.title
     except ValueError:
         featuredesc = featurefile = ''
     return render_template('home.html', form=form, message_sent=message_sent,
-                           bg=featurefile, banner_photo_title=featuredesc)
+                           bg=featurefile, banner_photo_title=featuredesc,
+                           people=people)
 
 
 @app.route('/random-feature-photo')
 def random_feature_photo():
     feature_query = models.ScenicPhoto.query.filter_by(featured=True)
     random_index = random.randrange(0, feature_query.count())
-    print random_index
     photo = feature_query[random_index]
-    return jsonify({ 'photo': url_for('photo', filename=photo.photo),
+    return jsonify({ 'photo': url_for('photo', type='scenic', filename=photo.photo),
                      'title': photo.title })
 
 
@@ -235,10 +236,11 @@ def document(id):
     return render_template('content-detail.html', doc=document)
 
 
-@app.route('/photo/<path:filename>')
-def photo(filename):
+@app.route('/photo/<type>/<path:filename>')
+def photo(type, filename):
     photosize = request.args.get('size')
-    filepath = safe_join(app.config['UPLOAD_FOLDER'], 'scenic/' + filename)
+    sub_path = os.path.join(type, filename)
+    filepath = safe_join(app.config['UPLOAD_FOLDER'], sub_path)
     if not os.path.isabs(filepath):
         filepath = os.path.join(app.root_path, filepath)
     if not os.path.isfile(filepath):
