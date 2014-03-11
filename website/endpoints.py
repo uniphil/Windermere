@@ -105,12 +105,6 @@ def lock():
     return redirect(url_for('home'))
 
 
-@app.route('/restricted')
-@login_required
-def restricted():
-    return "lalala"
-
-
 Filter = namedtuple('Filter', 'name plural active')
 filters = (
     Filter('Presentation', 'Presentations', False),
@@ -145,7 +139,7 @@ categories = (
 
 @app.route('/content/')
 @app.route('/content/<string:category>/')
-#@login_required
+@login_required
 def topic_overview(category=None):
 
     cat_name = 'Overview'
@@ -240,6 +234,7 @@ def topic_overview(category=None):
 
 
 @app.route('/content/document/<int:id>')
+@login_required
 def document(id):
     document = models.Document.query.get(id) or abort(404)
     return render_template('content-detail.html', doc=document)
@@ -261,6 +256,7 @@ def photo(type, filename):
 
 
 @app.route('/data/<path:filepath>')
+@login_required
 def files(filepath):
     folder, filename = filepath.rsplit('/', 1)
     path = os.path.join(app.config['UPLOAD_FOLDER'], folder)

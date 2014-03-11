@@ -189,7 +189,7 @@ class AccountsView(AdminView):
 
 
 @wrap_file_field('photo', 'scenic', endpoint='uploaded_file', photo=True)
-class PhotoView(sqla.ModelView):
+class PhotoView(sqla.ModelView, AdminView):
     """Public scenic photos"""
     list_template = 'admin/photos/index.html'
     column_list = ('title', 'added', 'featured')
@@ -225,7 +225,7 @@ class PhotoView(sqla.ModelView):
 
 
 @wrap_file_field('photo', 'people', endpoint='uploaded_file', photo=True)
-class PeopleView(sqla.ModelView):
+class PeopleView(sqla.ModelView, AdminView):
     """Researchers to list on home page"""
     column_list = ('name', 'current')
     column_searchable_list = ('name',)
@@ -243,5 +243,5 @@ admin.add_view(PhotoView(models.ScenicPhoto,
 admin.add_view(PeopleView(models.Person,
                           models.db.session,
                           name='People',
-                          endpoint='People'))
+                          endpoint='people'))
 admin.add_view(AccountsView(name='Accounts', endpoint='accounts'))
