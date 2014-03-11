@@ -68,7 +68,16 @@ def photo_gallery():
 
 @app.route('/people')
 def people():
-    return render_template('people.html')
+    query = models.Person.query
+    current_count = query.filter_by(current=True).count()
+    alum_count = query.filter_by(current=False).count()
+    people_filter = request.args.get('filter')
+    if people_filter is not None and people_filter in ('current', 'alum'):
+        current = True if people_filter == 'current' else False
+        query = query.filter_by(current=current)
+    people = query.all()
+    return render_template('people.html', people=people, alum_count=alum_count,
+                           current_count=current_count, filter=people_filter)
 
 
 @app.route('/unlock', methods=['GET', 'POST'])

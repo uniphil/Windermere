@@ -46,34 +46,21 @@
     <div class="col-sm-4 col-lg-4">
       <h3>People</h3>
       <ul class="media-list">
-        <li class="media">
-          <a class="pull-left" href="#">
-            <img class="media-object" src="http://162.242.208.238/photo/bill-small.jpg" alt="Bill Arnott" width="42" />
-          </a>
-          <div class="media-body">
-            <h4 class="media-heading">Bill Arnott</h4>
-            <p>whatever</p>
-          </div>
-        </li>
-        <li class="media">
-          <a class="pull-left" href="#">
-            <img class="media-object" src="http://162.242.208.238/photo/terlaki-small.jpg" alt="Viktor Terlaki" width="42" />
-          </a>
-          <div class="media-body">
-            <h4 class="media-heading">Viktor Terlaky</h4>
-            <p>however</p>
-          </div>
-        </li>
-        <li class="media">
-          <a class="pull-left" href="#">
-            <img class="media-object" src="http://162.242.208.238/photo/jon-small.jpg" alt="Jonathan Rocheleau" width="42" />
-          </a>
-          <div class="media-body">
-            <h4 class="media-heading">Jonathan Rocheleau</h4>
-            <p>whoever</p>
-          </div>
-        </li>
+        {% for person in people %}
+          <li class="media">
+            <a class="pull-left" href="{{ url_for('people') }}">
+              <img class="media-object" src="{{ url_for('photo', type='people', filename=person.photo, size=42) }}" alt="Photo of {{ person.name }}" width="42" />
+            </a>
+            <div class="media-body">
+              <h4 class="media-heading">
+                <a href="{{ url_for('people') }}">{{ person.name }}</a>
+              </h4>
+              <p>{{ person.bio[:128] }}{{ '&hellip;'|safe if person.bio[128:] }}</p>
+            </div>
+          </li>
+        {% endfor %}
       </ul>
+      <p><a class="btn btn-sm btn-default" href="{{ url_for('people') }}">See all people</a></p>
     </div>
 
     <div class="col-sm-4 col-lg-4">
