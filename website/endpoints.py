@@ -40,12 +40,20 @@ def home():
     feature_query = models.ScenicPhoto.query.filter_by(featured=True)
     try:
         featurenum = random.randrange(0, feature_query.count())
-        featurefile = url_for('photo', size=1140,
-                              filename=feature_query[featurenum].photo)
+        featureobj = feature_query[featurenum]
+        featurefile = url_for('photo', size=1140, filename=featureobj.photo)
+        featuredesc = featureobj.title
     except ValueError:
-        featurefile = ''
+        featuredesc = featurefile = ''
     return render_template('home.html', form=form, message_sent=message_sent,
-                           bg=featurefile)
+                           bg=featurefile, banner_photo_title=featuredesc)
+
+
+
+@app.route('/photos')
+def photo_gallery():
+    photos = models.ScenicPhoto.query.all()
+    return render_template('photo-gallery.html', photos=photos)
 
 
 @app.route('/people')

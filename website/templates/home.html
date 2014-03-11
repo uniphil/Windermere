@@ -3,6 +3,10 @@
 {% block page_content %}
   <div class="page-header cover" style="background-image:url('{{ bg }}');">
     <h1>The Windermere Consortium</h1>
+    <div class="photo-showoff">
+      Photo: {{ banner_photo_title }}
+      <a href="{{ url_for('photo_gallery') }}">photo gallery</a>
+    </div>
   </div>
 
   <div class="row">

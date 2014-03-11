@@ -318,6 +318,15 @@ footer {
     background: rgba(0, 0, 0, 0.667);
 }
 
+.photo-showoff {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 0.25em 0.5em;
+  color: #ccc;
+  background: rgba(0, 0, 0, 0.667);
+}
+
 
 .sponsors {
   text-align: center;

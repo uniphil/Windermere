@@ -1,0 +1,14 @@
+{% extends "base-full.html" %}
+
+{% block page_content %}
+
+  {% for photo in photos %}
+    {% if photo.photo %}
+      <a href="{{ url_for('photo', filename=photo.photo) if photo.photo }}">
+        <img class="col-sm-3" alt="{{ photo.description or photo.title or 'untitled photo' }}" src="{{ url_for('photo', filename=photo.photo, size=293) if photo.photo }}" />
+      </a>
+    {% endif %}
+
+  {% endfor %}
+
+{% endblock %}
