@@ -1,36 +1,30 @@
 {% extends 'base-full.html' %}
 
+
+{% macro tree_builder(tree, root, selection_path) %}
+  {% for safe_name, subtree in tree.items() %}
+    {% set as_root = root + (safe_name,) %}
+    <li{% if safe_name == selection_path[0] %} class="selected"{% endif %}>
+      <a href="{{ url_for('topic_overview', category='/'.join(as_root), filter=request.args.get('filter')) }}">{{ category_names[as_root] }}</a>
+      {% if subtree is not none %}
+        <ul>
+          {{ tree_builder(subtree, as_root, selection_path[1:]) }}
+        </ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+{% endmacro %}
+
+
 {% block page_content %}
 
   {% block page_top %}
     <nav class="tree">
       <ul>
-        <li{{ ' class="selected"'|safe if cat_name=='Overview' }}>
+        <li{% if not selected_category_parts %} class="selected"{% endif %}>
           <a href="{{ url_for('topic_overview', filter=request.args.get('filter')) }}">All Categories</a>
         </li>
-        {% for cat in categories %}
-          <li{{ ' class="selected"'|safe if cat.selected }}>
-            <a href="{{ url_for('topic_overview', category=cat.safe, filter=request.args.get('filter')) }}">{{ cat.name }}</a>
-            {% if cat.children %}
-              <ul>
-                {% for subcat in cat.children %}
-                  <li{{ ' class="selected"'|safe if subcat.selected }}>
-                    <a href="{{ url_for('topic_overview', category=subcat.safe, filter=request.args.get('filter')) }}">{{ subcat.name }}</a>
-                    {% if subcat.children %}
-                      <ul>
-                        {% for subsub in subcat.children %}
-                          <li{{ ' class="selected"'|safe if subsub.selected }}>
-                            <a href="{{ url_for('topic_overview', category=subsub.safe, filter=request.args.get('filter')) }}">{{ subsub.name }}</a>
-                          </li>
-                        {% endfor %}
-                      </ul>
-                    {% endif %}
-                  </li>
-                {% endfor %}
-              </ul>
-            {% endif %}
-          </li>
-        {% endfor %}
+        {{ tree_builder(category_tree, (), selected_category_parts) }}
       </ul>
     </nav>
   {% endblock %}
@@ -45,8 +39,8 @@
             <li class="{% if not filtered %}active{% endif %}">
               <a href=".?">Everything</a>
             </li>
-          {% for type, records, count in data %}
-            <li class="{% if type.active %}active{% endif %}{% if not count and not type.active %}disabled{% endif %}">
+          {% for type, records, count in grouped_documents %}
+            <li class="{% if type.name == request.args.get('filter') %}active{% endif %}{% if not count and not type.active %}disabled{% endif %}">
               <a href=".?filter={{ type.name }}">{{ type.plural }}{% if count %} <small class="text-muted">{{ count }}</small>{% endif %}</a>
             </li>
           {% endfor %}
@@ -57,16 +51,20 @@
     <div class="col-sm-9 col-lg-10">
       {% block page_main %}
 
-        <h2>{{ cat_name }}</h2>
+        <h2>{{ page_name }}</h2>
 
-        {% for type, records, count in data %}
+        {% for type, records, count in grouped_documents %}
           {% if records is not none and count > 0 %}
             <div class="type-summary">
-              <h3>{{ type.plural }}</h3>
+              {% if not filtered %}
+                <h3>{{ type.plural }}</h3>
+              {% else %}
+                <hr />
+              {% endif %}
               <ul class="type-summary-list list-unstyled">
                 {% for rec in records %}
                   <li>
-                    {% if not list_details %}
+                    {% if not filtered %}
 
                       <p>
                         <a href="{{ url_for('files', filepath=rec.file) }}" class="btn btn-default btn-xs ttbutton" data-icon="d" data-toggle="tooltip" title="Download"><span class="text-hide"> Download</span></a>

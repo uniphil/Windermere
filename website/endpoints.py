@@ -106,7 +106,7 @@ def lock():
 
 
 Filter = namedtuple('Filter', 'name plural active')
-filters = (
+all_type_filters = (
     Filter('Presentation', 'Presentations', False),
     Filter('Publication', 'Publications', False),
     Filter('Abstract', 'Abstracts', False),
@@ -114,122 +114,118 @@ filters = (
     Filter('High-Resolution Image', 'High-Resolution Images', False),
 )
 
-Category = namedtuple('Category', 'name safe selected children')
-categories = (
-    Category('Slope', 'slope', False, (
-        Category('Channels', 'slope-channels', False, (
-             Category('Large Channels', 'slope-channels-large-channels', False, None),
-             Category('Small Channels', 'slope-channels-small-channels', False, None),
-        )),
-        Category('Levees and Splays', 'slope-levees-and-splays', False, None),
-        Category('Mass Transport Deposits', 'slope-mass-transport-deposits', False, None),
-    )),
-    Category('Channel Lobe Transition Zone', 'channel-lobe-transition-zone', False, None),
-    Category('Basin Floor Lobes', 'basin-floor-lobes', False, (
-        Category('Isolated Scour', 'basin-floor-lobes-isolated-scour', False, None),
-        Category('Avulsion Spray', 'basin-floor-lobes-avulsion-spray', False, None),  # TOFIX spray -> splay
-        Category('Feeder Channel', 'basin-floor-lobes-feeder-channel', False, None),
-        Category('Distributary Channel', 'basin-floor-lobes-distributary-channel', False, None),
-        Category('Terminal Splay', 'basin-floor-lobes-terminal-splay', False, None),
-    )),
-    Category('Old Fort Point', 'old-fort-point', False, None),
-    Category('Current Events', 'current-events', False, None),
-)
+category_tree = {
+    'slope': {
+        'channels': {
+            'large-channels': None,
+            'small-channels': None,
+        },
+        'levees-and-splays': None,
+        'mass-transport-deposits': None,
+    },
+    'channel-lobe-transition-zone': None,
+    'basin-floor-lobes': {
+        'isolated-scour': None,
+        'avulsion-spray': None,
+        'feeder-channel': None,
+        'distributary-channel': None,
+        'terminal-splay': None,
+    },
+    'old-fort-point': None,
+    'current-events': None,
+}
+category_names = {
+    ('slope',): 'Slope',
+    ('slope', 'channels'): 'Channels',
+    ('slope', 'channels', 'large-channels'): 'Large Channels',
+    ('slope', 'channels', 'small-channels'): 'Small Channels',
+    ('slope', 'levees-and-splays'): 'Levees and Splays',
+    ('slope', 'mass-transport-deposits'): 'Mass Transport Deposits',
+    ('channel-lobe-transition-zone',): 'Channel-Lobe Transition Zone',
+    ('basin-floor-lobes',): 'Basin Floor Lobes',
+    ('basin-floor-lobes', 'isolated-scour'): 'Isolated Scour',
+    ('basin-floor-lobes', 'avulsion-spray'): 'Avulsion Splay',
+    ('basin-floor-lobes', 'feeder-channel'): 'Feeder Channel',
+    ('basin-floor-lobes', 'distributary-channel'): 'Distributary Channel',
+    ('basin-floor-lobes', 'terminal-splay'): 'Terminal Splay',
+    ('old-fort-point',): 'Old Fort Point',
+    ('current-events',): 'Current Events',
+}
+
+
+def subtree_to_subcategories(tree):
+    if tree is None:
+        yield []
+    else:
+        for name, subtree in tree.items():
+            if subtree is not None:
+                for subcat in subtree_to_subcategories(subtree):
+                    yield [name] + subcat
+            else:
+                yield [name]
+
+
+def get_categories_from_parts(node_path):
+    """[slope, channels] => [slope-channels-large, slope-channels-small]"""
+    categories = []
+    subtree = category_tree
+
+    for node in node_path:
+        # build up the root and trim the tree to the smallest subtree
+        subtree = subtree[node]
+
+    for subcategory in subtree_to_subcategories(subtree):
+        category = '-'.join(node_path + subcategory)
+        categories.append(category)
+
+    return categories
 
 
 @app.route('/content/')
-@app.route('/content/<string:category>/')
+@app.route('/content/<path:category>/')
 @login_required
 def topic_overview(category=None):
 
-    cat_name = 'Overview'
-    cat_filters = []
+    title = 'Content Browser'
+    page_name = 'Overview'
+    grouped_documents = []
 
-    sel_cats = []
-    for cat in categories:
-        name, safe = cat.name, cat.safe
-        scats = None
+    base_query = models.Document.query.order_by(models.Document.added.asc())
+    query = base_query
 
-        if cat.safe == category:
-            sel = True
-            cat_name = cat.name
-        else:
-            sel = False
-
-        if cat.children is not None:
-            scats = []
-            for scat in cat.children:
-                sname, ssafe = scat.name, scat.safe
-                mcats = None
-
-                if scat.safe == category:
-                    sel = ssel = True
-                    cat_name = scat.name
-                else:
-                    ssel = False
-
-                if scat.children is not None:
-                    mcats = []
-                    for mcat in scat.children:
-                        mname, msafe = mcat.name, mcat.safe
-                        if mcat.safe == category:
-                            sel = ssel = msel = True
-                            cat_name = mcat.name
-                        else:
-                            msel = False
-                        if msel and mcat.children is None:
-                            cat_filters.append(mcat.safe)
-
-                        mcats.append(Category(mname, msafe, msel, None))
-
-                if ssel and scat.children is None:
-                    cat_filters.append(scat.safe)
-                scats.append(Category(sname, ssafe, ssel, mcats))
-
-        if sel and cat.children is None:
-            cat_filters.append(cat.safe)
-        sel_cats.append(Category(name, safe, sel, scats))
-
-
-    filter = request.args.get('filter', None)
-
-    sel_filters = []
-    for f in filters:
-        if f.name == filter:
-            f = Filter(f.name, f.plural, True)
-        sel_filters.append(f)
-
-    data = []
-    base_q = models.Document.query \
-                .distinct() \
-                .order_by(models.Document.added.asc())
-    if category:
-        base_q = base_q.filter(models.db.and_(
-            models.db.or_(
-                *(models.Category.safe == c for c in cat_filters)
-            ),
-            models.Category.document_id == models.Document.id,
+    if category is not None:
+        selected_category_parts = category.split('/')
+        categories = get_categories_from_parts(selected_category_parts)
+        query = query.filter(models.db.or_(
+            *(models.Document.categories.any(safe=c) for c in categories)
         ))
+    else:
+        selected_category_parts = []
 
-    for f in sel_filters:
-        q = base_q.filter_by(type=f.name)
-        if f.name == filter:
-            recs = q.all()
-        elif filter == None:
-            recs = q.limit(3)
+
+    active_type_filter = request.args.get('filter')
+
+    for type_filter in all_type_filters:
+        documents_of_type = query.filter_by(type=type_filter.name)
+        if active_type_filter is None:
+            docs = documents_of_type.limit(3)
+        elif type_filter.name == active_type_filter:
+            docs = documents_of_type.all()
+            page_name = type_filter.plural
         else:
-            recs = None
-        count = q.count()
-        data.append((f, recs, count))
+            docs = None
+        grouped_documents.append([
+            type_filter, docs, documents_of_type.count()])
+
 
     return render_template('content-overview.html',
-        title='Content Browser',
-        category=category,
-        data=data,
-        filtered=filter is not None,
-        categories=sel_cats,
-        cat_name=cat_name,
-        list_details=(filter is not None),
+        title=title,
+        page_name=page_name,
+        grouped_documents=grouped_documents,
+        filtered=active_type_filter is not None,
+        category_tree=category_tree,
+        category_names=category_names,
+        selected_category_parts=selected_category_parts,
     )
 
 
