@@ -132,6 +132,8 @@ category_tree = {
         'terminal-splay': None,
     },
     'old-fort-point': None,
+    'experimental': None,
+    'miscellaneous': None,
     'current-events': None,
 }
 category_names = {
@@ -149,6 +151,8 @@ category_names = {
     ('basin-floor-lobes', 'distributary-channel'): 'Distributary Channel',
     ('basin-floor-lobes', 'terminal-splay'): 'Terminal Splay',
     ('old-fort-point',): 'Old Fort Point',
+    ('experimental',): 'Experimental',
+    ('miscellaneous',): 'Miscellaneous',
     ('current-events',): 'Current Events',
 }
 
