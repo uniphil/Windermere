@@ -105,13 +105,13 @@ def lock():
     return redirect(url_for('home'))
 
 
-Filter = namedtuple('Filter', 'name plural active')
+Filter = namedtuple('Filter', 'name plural safe')
 all_type_filters = (
-    Filter('Presentation', 'Presentations', False),
-    Filter('Publication', 'Publications', False),
-    Filter('Abstract', 'Abstracts', False),
-    Filter('Thesis', 'Theses', False),
-    Filter('High-Resolution Image', 'High-Resolution Images', False),
+    Filter('Presentation', 'Presentations', 'presentation'),
+    Filter('Publication', 'Publications', 'publication'),
+    Filter('Abstract', 'Abstracts', 'abstract'),
+    Filter('Thesis', 'Theses', 'thesis'),
+    Filter('High-Resolution Image', 'High-Resolution Images', 'high-resolution-image'),
 )
 
 category_tree = {
@@ -208,10 +208,10 @@ def topic_overview(category=None):
     for type_filter in all_type_filters:
         documents_of_type = query.\
             filter(models.Document.type_id==models.Type.id).\
-            filter(models.Type.name==type_filter.name)
+            filter(models.Type.safe==type_filter.safe)
         if active_type_filter is None:
             docs = documents_of_type.limit(3)
-        elif type_filter.name == active_type_filter:
+        elif type_filter.safe == active_type_filter:
             docs = documents_of_type.all()
             page_name = type_filter.plural
         else:

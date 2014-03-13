@@ -40,8 +40,8 @@
               <a href=".?">Everything</a>
             </li>
           {% for type, records, count in grouped_documents %}
-            <li class="{% if type.name == request.args.get('filter') %}active{% endif %}{% if not count and not type.active %}disabled{% endif %}">
-              <a href=".?filter={{ type.name }}">{{ type.plural }}{% if count %} <small class="text-muted">{{ count }}</small>{% endif %}</a>
+            <li class="{% if type.safe == request.args.get('filter') %}active{% endif %}{% if not count and not type.active %}disabled{% endif %}">
+              <a href=".?filter={{ type.safe }}">{{ type.plural }}{% if count %} <small class="text-muted">{{ count }}</small>{% endif %}</a>
             </li>
           {% endfor %}
         </ul>
@@ -93,7 +93,7 @@
               </ul>
               {% if not filtered and count > 3 %}
                 <p>
-                  <a href=".?filter={{ type.name }}" class="btn btn-sm btn-default summary-more">
+                  <a href=".?filter={{ type.safe }}" class="btn btn-sm btn-default summary-more">
                     View all {{ type.plural }} <span class="text-muted">({{ count }})</span>
                   </a>
                 </p>
