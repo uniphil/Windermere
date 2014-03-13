@@ -1,0 +1,59 @@
+{% extends 'admin/model/list.html' %}
+
+{% block body %}
+  <section>
+
+    <h2>People</h2>
+    <p>Public index of researchers in the consortium, past and present.</p>
+
+    <table class="table table-hover">
+      <tr>
+        <td></td>
+        <th>Name</th>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      {% for person in data %}
+        <tr>
+          <td>
+            <img width="32" src="{{ url_for('photo', type='people', size=32, filename=person.photo) if person.photo }}" alt="thumbnail of {{ person.name }}" />
+          </td>
+          <td>
+            {{ person.name }}<br/>
+            {{ person.contact }}
+          </td>
+          <td>
+            {% if person.current %}
+              <span class="text-success">current</span>
+            {% else %}
+              <span class="muted">past</span>
+            {% endif %}
+          </td>
+          <td>{{ person.bio[:80] }}{% if person.bio[80:] %}&hellip;{% endif %}</td>
+          <td>
+            <div class="pull-right">
+              <a href="{{ url_for('.edit_view', id=get_pk_value(person), url=return_url) }}" class="btn btn-mini btn-link row-hover-show" title="Edit Photo">
+                <i class="icon-pencil"></i>
+              </a>
+              <a href="{{ url_for('.confirm_delete', id=get_pk_value(person), next=return_url) }}" class="btn btn-mini btn-link row-hover-show" title="Remove Photo">
+                <i class="icon-remove"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+      {% else %}
+        <tr>
+          <td colspan="4">
+            <div class="alert">
+              <strong>No People!</strong> There is not even one person in the database :(
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    <a href="{{ url_for('.create_view', url=return_url) }}" class="btn"><i class="icon-plus"></i> Add a Person</a>
+
+  </section>
+{% endblock %}

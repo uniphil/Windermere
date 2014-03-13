@@ -227,8 +227,15 @@ class PhotoView(sqla.ModelView, AdminView):
 @wrap_file_field('photo', 'people', endpoint='uploaded_file', photo=True)
 class PeopleView(sqla.ModelView, AdminView):
     """Researchers to list on home page"""
-    column_list = ('name', 'current')
-    column_searchable_list = ('name',)
+    list_template = 'admin/people/index.html'
+    column_default_sort = ('current', True)
+
+    @expose('/<int:id>/confirm-removal')
+    def confirm_delete(self, id):
+        the_person = models.People.query.get_or_404(id)
+        next = request.args.get('next') or url_for('.index')
+        return self.render('admin/photos/remove.html', photo=the_person,
+                           next=next)
 
 
 admin = Admin(app,
