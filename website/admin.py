@@ -232,9 +232,9 @@ class PeopleView(sqla.ModelView, AdminView):
 
     @expose('/<int:id>/confirm-removal')
     def confirm_delete(self, id):
-        the_person = models.People.query.get_or_404(id)
+        the_person = models.Person.query.get_or_404(id)
         next = request.args.get('next') or url_for('.index')
-        return self.render('admin/photos/remove.html', photo=the_person,
+        return self.render('admin/people/remove.html', person=the_person,
                            next=next)
 
 
