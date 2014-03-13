@@ -16,7 +16,12 @@
         </tr>
         {% for photo in data %}
           <tr>
-            <th><img width="32" src="{{ url_for('photo', type='scenic', size=32, filename=photo.photo) if photo.photo }}" alt="thumbnail" /> {{ photo.title }}</th>
+            <td>
+              <a href="{{ url_for('.edit_view', id=get_pk_value(photo), url=return_url) }}">
+                <img width="64" src="{{ url_for('photo', type='scenic', size=64, filename=photo.photo) if photo.photo }}" alt="thumbnail" />
+                <strong>{{ photo.title }}</strong>
+              </a>
+            </td>
             <td>{{ photo.added | since }}</td>
             <td>
               <div class="pull-right">
