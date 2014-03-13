@@ -104,6 +104,9 @@ class Type(db.Model):
     def __repr__(self):
         return '<Type of document: {}>'.format(self.safe)
 
+    def __str__(self):
+        return self.name
+
 
 class Category(db.Model):
     __tablename__ = 'categories'
@@ -118,6 +121,9 @@ class Category(db.Model):
 
     def __repr__(self):
         return '<Category: {}>'.format(self.safe)
+
+    def __str__(self):
+        return self.name
 
 
 class Document(db.Model):

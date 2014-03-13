@@ -71,13 +71,6 @@ class AdminView(BaseView):
         return current_user.is_authenticated() and current_user.is_admin
 
 
-class DocumentView(AdminView):
-    @expose('/')
-    def index(self):
-        return self.render('admin/documents.html')
-
-
-
 class AccountsView(AdminView):
 
     @expose('/')
@@ -238,17 +231,43 @@ class PeopleView(sqla.ModelView, AdminView):
                            next=next)
 
 
+
+
+class DocumentView(AdminView):
+    @expose('/')
+    def index(self):
+        return self.render('admin/documents.html')
+
+
+
+
+@wrap_file_field('file', 'documents', endpoint='uploaded_file', photo=False)
+class DocumentView(sqla.ModelView, AdminView):
+    """Access-controlled stuff"""
+
+    list_template = 'admin/documents/index.html'
+    column_default_sort = ('added', True)
+
+    @expose('/<int:id>/confirm-removal')
+    def confirm_delete(self, id):
+        the_doc = models.Document.query.get_or_404(id)
+        next = request.args.get('next') or url_for('.index')
+        return self.render('admin/documents/remove.html',
+                           document=the_doc, next=next)
+
+
 admin = Admin(app,
     name='Windermere Admin',
     index_view=HomeView(name="Windermere Admin"),
     base_template='admin/master.html')
-admin.add_view(DocumentView(name='Documents', endpoint='documents'))
-admin.add_view(PhotoView(models.ScenicPhoto,
-                         models.db.session,
-                         name='Photos',
-                         endpoint='photos'))
-admin.add_view(PeopleView(models.Person,
-                          models.db.session,
-                          name='People',
-                          endpoint='people'))
+
+admin.add_view(DocumentView(models.Document, models.db.session,
+                            name='Documents', endpoint='documents'))
+
+admin.add_view(PhotoView(models.ScenicPhoto, models.db.session,
+                         name='Photos', endpoint='photos'))
+
+admin.add_view(PeopleView(models.Person, models.db.session,
+                          name='People', endpoint='people'))
+
 admin.add_view(AccountsView(name='Accounts', endpoint='accounts'))
