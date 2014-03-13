@@ -267,3 +267,8 @@ def files(filepath):
 @app.errorhandler(404)
 def not_found(error):
     return render_template('errors/not-found.html'), 404
+
+
+@app.errorhandler(500)
+def server_error(error):
+    return render_template('errors/error.html', error=error)

@@ -23,3 +23,9 @@ small:hover {
     -o-transform: rotate(90deg);
     transform: rotate(90deg);
 }
+
+p {
+    text-align: center;
+    font-size: 0.8em;
+    color: #900;
+}
