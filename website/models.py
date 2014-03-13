@@ -86,26 +86,23 @@ document_categories = db.Table('document_categories', db.Model.metadata,
 )
 
 
-class Document(db.Model):
-    __tablename__ = 'documents'
+def safeify(name):
+    return name.replace('/ ', '').lower().replace(' ', '-')
+
+
+class Type(db.Model):
+    __tablename__ = 'document_types'
 
     id = db.Column(db.Integer, primary_key=True)
-    file = db.Column(db.String(220))
-    title = db.Column(db.String(128))
-    description = db.Column(db.Text)
-    added = db.Column(db.DateTime)
-    type = db.Column(db.String(64))
-    authors = db.Column(db.String(128))
+    safe = db.Column(db.String(128), unique=True)
+    name = db.Column(db.String(128))
 
-    categories = db.relationship('Category', secondary=document_categories,
-                                 backref='documents')
+    def __init__(self, name):
+        self.name = name
+        self.safe = safeify(name)
 
     def __repr__(self):
-        return '<Document: {}...>'.format(self.title[:21])
-
-    @property
-    def filename(self):
-        return path.split(self.file)[-1]
+        return '<Type of document: {}>'.format(self.safe)
 
 
 class Category(db.Model):
@@ -115,8 +112,35 @@ class Category(db.Model):
     safe = db.Column(db.String(128), unique=True)
     name = db.Column(db.String(128))
 
+    def __init__(self, name):
+        self.name = name
+        self.safe = safeify(name)
+
     def __repr__(self):
-        return '<Category: {}>'.format(self.name)
+        return '<Category: {}>'.format(self.safe)
+
+
+class Document(db.Model):
+    __tablename__ = 'documents'
+
+    id = db.Column(db.Integer, primary_key=True)
+    file = db.Column(db.String(220))
+    title = db.Column(db.String(128))
+    description = db.Column(db.Text)
+    added = db.Column(db.DateTime)
+    authors = db.Column(db.String(128))
+    type_id = db.Column(db.Integer, db.ForeignKey('document_types.id'))
+
+    type = db.relationship('Type', backref=db.backref('documents'))
+    categories = db.relationship('Category', secondary=document_categories,
+                                 backref='documents')
+
+    def __repr__(self):
+        return '<Document: {}...>'.format(self.title[:21])
+
+    @property
+    def filename(self):
+        return path.split(self.file)[-1]
 
 
 class Photo(db.Model):

@@ -44,13 +44,10 @@ def load_oldphotos(datafile='import-old/data.json'):
 def load_olddocs(datafile='import-old/data.json'):
     import json
     from datetime import datetime
-    from website.models import db, Document, Category
+    from website.models import db, Document, Type, Category
 
     with open(datafile) as f:
         data = json.load(f)
-
-    def nice_to_safe(name):
-        return name.replace('/ ', '').lower().replace(' ', '-')
 
     for doc_data in data['documents']:
         doc = Document()
@@ -58,15 +55,18 @@ def load_olddocs(datafile='import-old/data.json'):
         doc.title = doc_data['title']
         doc.description = doc_data['body']
         doc.added = datetime.utcfromtimestamp(doc_data['timestamp'])
-        doc.type = doc_data['type']
         doc.authors = doc_data['author']
+        type_name = doc_data['type']
+        type = Type.query.filter_by(name=type_name).first()
+        if type is None and type_name is not None:
+            type = Type(type_name)
+            db.session.add(type)
+            db.session.commit()
+        doc.type = type
         for category in doc_data['categories']:
-            cat_safe = nice_to_safe(category)
-            cat = Category.query.filter_by(safe=cat_safe).first()
+            cat = Category.query.filter_by(name=category).first()
             if cat is None:
-                cat = Category()
-                cat.name = category
-                cat.safe = cat_safe
+                cat = Category(category)
                 db.session.add(cat)
                 db.session.commit()
             doc.categories.append(cat)
@@ -96,6 +96,12 @@ def mkphil():
     phil.set_password('asdf')
     models.db.session.add(phil)
     models.db.session.commit()
+
+
+@manager.command
+def init_db():
+    from website.models import db
+    db.create_all()
 
 
 if __name__ == '__main__':

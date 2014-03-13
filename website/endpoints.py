@@ -206,7 +206,9 @@ def topic_overview(category=None):
     active_type_filter = request.args.get('filter')
 
     for type_filter in all_type_filters:
-        documents_of_type = query.filter_by(type=type_filter.name)
+        documents_of_type = query.\
+            filter(models.Document.type_id==models.Type.id).\
+            filter(models.Type.name==type_filter.name)
         if active_type_filter is None:
             docs = documents_of_type.limit(3)
         elif type_filter.name == active_type_filter:
@@ -214,8 +216,8 @@ def topic_overview(category=None):
             page_name = type_filter.plural
         else:
             docs = None
-        grouped_documents.append([
-            type_filter, docs, documents_of_type.count()])
+        docs_in_category = documents_of_type.count()
+        grouped_documents.append([type_filter, docs, docs_in_category])
 
 
     return render_template('content-overview.html',
