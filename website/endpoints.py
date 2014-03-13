@@ -5,7 +5,6 @@
 
 import os
 import random
-from collections import namedtuple
 from werkzeug.exceptions import NotFound
 from flask import (request, session, render_template, redirect, url_for, flash,
                    send_from_directory, send_file, abort, jsonify)
@@ -105,86 +104,6 @@ def lock():
     return redirect(url_for('home'))
 
 
-Filter = namedtuple('Filter', 'name plural safe')
-all_type_filters = (
-    Filter('Presentation', 'Presentations', 'presentation'),
-    Filter('Publication', 'Publications', 'publication'),
-    Filter('Abstract', 'Abstracts', 'abstract'),
-    Filter('Thesis', 'Theses', 'thesis'),
-    Filter('High-Resolution Image', 'High-Resolution Images', 'high-resolution-image'),
-)
-
-category_tree = {
-    'slope': {
-        'channels': {
-            'large-channels': None,
-            'small-channels': None,
-        },
-        'levees-and-splays': None,
-        'mass-transport-deposits': None,
-    },
-    'channel-lobe-transition-zone': None,
-    'basin-floor-lobes': {
-        'isolated-scour': None,
-        'avulsion-spray': None,
-        'feeder-channel': None,
-        'distributary-channel': None,
-        'terminal-splay': None,
-    },
-    'old-fort-point': None,
-    'experimental': None,
-    'miscellaneous': None,
-    'current-events': None,
-}
-category_names = {
-    ('slope',): 'Slope',
-    ('slope', 'channels'): 'Channels',
-    ('slope', 'channels', 'large-channels'): 'Large Channels',
-    ('slope', 'channels', 'small-channels'): 'Small Channels',
-    ('slope', 'levees-and-splays'): 'Levees and Splays',
-    ('slope', 'mass-transport-deposits'): 'Mass Transport Deposits',
-    ('channel-lobe-transition-zone',): 'Channel-Lobe Transition Zone',
-    ('basin-floor-lobes',): 'Basin Floor Lobes',
-    ('basin-floor-lobes', 'isolated-scour'): 'Isolated Scour',
-    ('basin-floor-lobes', 'avulsion-spray'): 'Avulsion Splay',
-    ('basin-floor-lobes', 'feeder-channel'): 'Feeder Channel',
-    ('basin-floor-lobes', 'distributary-channel'): 'Distributary Channel',
-    ('basin-floor-lobes', 'terminal-splay'): 'Terminal Splay',
-    ('old-fort-point',): 'Old Fort Point',
-    ('experimental',): 'Experimental',
-    ('miscellaneous',): 'Miscellaneous',
-    ('current-events',): 'Current Events',
-}
-
-
-def subtree_to_subcategories(tree):
-    if tree is None:
-        yield []
-    else:
-        for name, subtree in tree.items():
-            if subtree is not None:
-                for subcat in subtree_to_subcategories(subtree):
-                    yield [name] + subcat
-            else:
-                yield [name]
-
-
-def get_categories_from_parts(node_path):
-    """[slope, channels] => [slope-channels-large, slope-channels-small]"""
-    categories = []
-    subtree = category_tree
-
-    for node in node_path:
-        # build up the root and trim the tree to the smallest subtree
-        subtree = subtree[node]
-
-    for subcategory in subtree_to_subcategories(subtree):
-        category = '-'.join(node_path + subcategory)
-        categories.append(category)
-
-    return categories
-
-
 @app.route('/content/')
 @app.route('/content/<path:category>/')
 @login_required
@@ -199,7 +118,7 @@ def topic_overview(category=None):
 
     if category is not None:
         selected_category_parts = category.split('/')
-        categories = get_categories_from_parts(selected_category_parts)
+        categories = models.Category.list_from_parts(selected_category_parts)
         query = query.filter(models.db.or_(
             *(models.Document.categories.any(safe=c) for c in categories)
         ))
@@ -209,7 +128,7 @@ def topic_overview(category=None):
 
     active_type_filter = request.args.get('filter')
 
-    for type_filter in all_type_filters:
+    for type_filter in models.Type.all_filters:
         documents_of_type = query.\
             filter(models.Document.type_id==models.Type.id).\
             filter(models.Type.safe==type_filter.safe)
@@ -229,8 +148,8 @@ def topic_overview(category=None):
         page_name=page_name,
         grouped_documents=grouped_documents,
         filtered=active_type_filter is not None,
-        category_tree=category_tree,
-        category_names=category_names,
+        category_tree=models.Category.tree,
+        category_names=models.Category.names,
         selected_category_parts=selected_category_parts,
     )
 

@@ -5,6 +5,7 @@
     Database models for content on the Windermere Consortium website
 """
 
+from collections import namedtuple
 from math import ceil
 from PIL import Image
 from os import urandom, path
@@ -90,8 +91,18 @@ def safeify(name):
     return name.replace('/ ', '').lower().replace(' ', '-')
 
 
+Filter = namedtuple('Filter', 'name plural safe')
+
 class Type(db.Model):
     __tablename__ = 'document_types'
+
+    all_filters = (
+        Filter('Presentation', 'Presentations', 'presentation'),
+        Filter('Publication', 'Publications', 'publication'),
+        Filter('Abstract', 'Abstracts', 'abstract'),
+        Filter('Thesis', 'Theses', 'thesis'),
+        Filter('High-Resolution Image', 'High-Resolution Images', 'high-resolution-image'),
+    )
 
     id = db.Column(db.Integer, primary_key=True)
     safe = db.Column(db.String(128), unique=True)
@@ -124,6 +135,73 @@ class Category(db.Model):
 
     def __str__(self):
         return self.name
+
+    tree = {
+        'slope': {
+            'channels': {
+                'large-channels': None,
+                'small-channels': None,
+            },
+            'levees-and-splays': None,
+            'mass-transport-deposits': None,
+        },
+        'channel-lobe-transition-zone': None,
+        'basin-floor-lobes': {
+            'isolated-scour': None,
+            'avulsion-spray': None,
+            'feeder-channel': None,
+            'distributary-channel': None,
+            'terminal-splay': None,
+        },
+        'old-fort-point': None,
+        'experimental': None,
+        'miscellaneous': None,
+        'current-events': None,
+    }
+    names = {
+        ('slope',): 'Slope',
+        ('slope', 'channels'): 'Channels',
+        ('slope', 'channels', 'large-channels'): 'Large Channels',
+        ('slope', 'channels', 'small-channels'): 'Small Channels',
+        ('slope', 'levees-and-splays'): 'Levees and Splays',
+        ('slope', 'mass-transport-deposits'): 'Mass Transport Deposits',
+        ('channel-lobe-transition-zone',): 'Channel-Lobe Transition Zone',
+        ('basin-floor-lobes',): 'Basin Floor Lobes',
+        ('basin-floor-lobes', 'isolated-scour'): 'Isolated Scour',
+        ('basin-floor-lobes', 'avulsion-spray'): 'Avulsion Splay',
+        ('basin-floor-lobes', 'feeder-channel'): 'Feeder Channel',
+        ('basin-floor-lobes', 'distributary-channel'): 'Distributary Channel',
+        ('basin-floor-lobes', 'terminal-splay'): 'Terminal Splay',
+        ('old-fort-point',): 'Old Fort Point',
+        ('experimental',): 'Experimental',
+        ('miscellaneous',): 'Miscellaneous',
+        ('current-events',): 'Current Events',
+    }
+
+    @staticmethod
+    def list_from_subtree(tree):
+        if tree is None:
+            yield []
+        else:
+            for name, subtree in tree.items():
+                if subtree is not None:
+                    for subcat in Category.list_from_subtree(subtree):
+                        yield [name] + subcat
+                else:
+                    yield [name]
+
+    @staticmethod
+    def list_from_parts(node_path):
+        """[slope, channels] => [slope-channels-large, slope-channels-small]"""
+        categories = []
+        subtree = Category.tree
+        for node in node_path:
+            # build up the root and trim the tree to the smallest subtree
+            subtree = subtree[node]
+        for subcategory in Category.list_from_subtree(subtree):
+            category = '-'.join(node_path + subcategory)
+            categories.append(category)
+        return categories
 
 
 class Document(db.Model):
