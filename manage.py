@@ -41,6 +41,15 @@ def load_oldphotos(datafile='import-old/data.json'):
 
 
 @manager.command
+def clear_nonscenic():
+    from website.models import db, ScenicPhoto
+    for photo in ScenicPhoto.query.all():
+        if 'Sedimentary Structures' in photo.photo:
+            db.session.delete(photo)
+    db.session.commit()
+
+
+@manager.command
 def load_olddocs(datafile='import-old/data.json'):
     import json
     from datetime import datetime
