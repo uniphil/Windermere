@@ -231,16 +231,6 @@ class PeopleView(sqla.ModelView, AdminView):
                            next=next)
 
 
-
-
-class DocumentView(AdminView):
-    @expose('/')
-    def index(self):
-        return self.render('admin/documents.html')
-
-
-
-
 @wrap_file_field('file', 'documents', endpoint='uploaded_file', photo=False)
 class DocumentView(sqla.ModelView, AdminView):
     """Access-controlled stuff"""
