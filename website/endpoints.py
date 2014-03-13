@@ -220,7 +220,7 @@ def topic_overview(category=None):
         grouped_documents.append([type_filter, docs, docs_in_category])
 
 
-    return render_template('content-overview.html',
+    return render_template('content-browser.html',
         title=title,
         page_name=page_name,
         grouped_documents=grouped_documents,
