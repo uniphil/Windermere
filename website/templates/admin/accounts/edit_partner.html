@@ -1,16 +1,14 @@
 {% extends admin_base_template %}
 
 {% block body %}
-    <section>
-        <h2>{{ verb }} {{ name or 'a Partner' }} Access Key</h2>
-        
-        <form action="" method="post" class="form-inline">
-            <label class="control-label" for="name">Key</label>
-            <input type="text" id="key" name="key" placeholder="key" required="required" value="{{ key }}" />
-            <button type="submit" class="btn btn-success"><i class="icon-{{ ico }} icon-white"></i> {{ action }}</button>
-            <a href="{{ url_for('accounts.index') }}" class="btn btn-link">Cancel</a>
-        </form>
-
-    </section>
-
+  <section>
+    <h2>{{ verb }} {{ name or 'a Partner' }} Access Key</h2>
+    
+    <form action="" method="post" class="form-inline">
+      <label class="control-label" for="name">Key</label>
+      <input type="text" id="key" name="key" placeholder="key" required="required" value="{{ key }}" />
+      <button type="submit" class="btn btn-success"><i class="icon-{{ ico }} icon-white"></i> {{ action }}</button>
+      <a href="{{ url_for('accounts.index') }}" class="btn btn-link">Cancel</a>
+    </form>
+  </section>
 {% endblock %}

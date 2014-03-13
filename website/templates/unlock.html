@@ -3,41 +3,41 @@
 {% block page_header %}{% endblock %}
 
 {% block page_content %}
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <ul class="list-unstyled">
-                {% for category, message in messages %}
-                    <li class="alert alert-{{ category }}">{{ message }}<a class="close" data-dismiss="alert" title="dismiss" href="#">&times;</a></li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-    <div class="page-header">
-        <h1>Restricted Access <small>Partners Only</small></h1>
-        <p>Please provide your access key to continue</p>
-    </div>
-    <div class="">
-        <form method="post" action="{{ url_for('unlock', next=request.args.get('next')) }}">
-            {{ form.csrf_token }}
-            {% if form.key.errors %}
-                <ul class="list-unstyled">
-                    {% for error in form.key.errors %}
-                        <li class="alert">{{ error }}<a href="#" class="close" data-dismiss="alert" title="dismiss">&times;</a></li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-            <div class="input-group">
-                <span class="input-group-addon"><span data-icon="k" title="key"><span class="text-hide">key</span></span></span>
-                <input type="text"
-                       id="{{ form.key.id }}"
-                       name="{{ form.key.name }}"
-                       class="form-control"
-                       placeholder="Access Key"
-                       required="required" />
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-primary">Unlock</button>
-                </span>
-            </div>
-        </form>
-    </div>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="list-unstyled">
+        {% for category, message in messages %}
+          <li class="alert alert-{{ category }}">{{ message }}<a class="close" data-dismiss="alert" title="dismiss" href="#">&times;</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  <div class="page-header">
+    <h1>Restricted Access <small>Partners Only</small></h1>
+    <p>Please provide your access key to continue</p>
+  </div>
+  <div class="">
+    <form method="post" action="{{ url_for('unlock', next=request.args.get('next')) }}">
+      {{ form.csrf_token }}
+      {% if form.key.errors %}
+        <ul class="list-unstyled">
+          {% for error in form.key.errors %}
+            <li class="alert">{{ error }}<a href="#" class="close" data-dismiss="alert" title="dismiss">&times;</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      <div class="input-group">
+        <span class="input-group-addon"><span data-icon="k" title="key"><span class="text-hide">key</span></span></span>
+        <input type="text"
+             id="{{ form.key.id }}"
+             name="{{ form.key.name }}"
+             class="form-control"
+             placeholder="Access Key"
+             required="required" />
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-primary">Unlock</button>
+        </span>
+      </div>
+    </form>
+  </div>
 {% endblock %}

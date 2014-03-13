@@ -1,24 +1,24 @@
 {% extends admin_base_template %}
 
 {% block body %}
-	<section>
+  <section>
 
-		<h3>Private Content</h3>
-		<h4><a href="{{ url_for('documents.index') }}">Document</a></h4>
-		<p>Private documents available through the content browser for Consortium Partners.</p>
-		<hr />
+    <h3>Private Content</h3>
+    <h4><a href="{{ url_for('documents.index') }}">Document</a></h4>
+    <p>Private documents available through the content browser for Consortium Partners.</p>
+    <hr />
 
-		<h3>Public Content</h3>
-		<h4><a href="{{ url_for('photos.index_view') }}">Photos</a></h4>
-		<p>Scenic photos, including those that rotate for the banner on the home page.</p>
-		<h4><a href="{{ url_for('people.index_view') }}">People</a></h4>
-		<p>A list of people show on the home page.</p>
-		<hr />
+    <h3>Public Content</h3>
+    <h4><a href="{{ url_for('photos.index_view') }}">Photos</a></h4>
+    <p>Scenic photos, including those that rotate for the banner on the home page.</p>
+    <h4><a href="{{ url_for('people.index_view') }}">People</a></h4>
+    <p>A list of people show on the home page.</p>
+    <hr />
 
-		<h3>Administration</h3>
-		<h4><a href="{{ url_for('accounts.index') }}">Account Manager</a></h4>
-		<p>Set the Access Key for Consortium Partners, and update administrator accounts.</p>
-		<hr />
+    <h3>Administration</h3>
+    <h4><a href="{{ url_for('accounts.index') }}">Account Manager</a></h4>
+    <p>Set the Access Key for Consortium Partners, and update administrator accounts.</p>
+    <hr />
 
-	</section>
+  </section>
 {% endblock %}
