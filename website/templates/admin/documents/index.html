@@ -37,6 +37,17 @@
           <td>
             <div class="pull-right">
               <nobr>
+                <a href="{{ url_for('.toggle_feature', id=document.id) }}" class="btn btn-link" title="Feature on home page">
+                  <i class="icon-home {{ 'home-feature' if document.featured else 'home-unfeature' }}"></i>
+                  {% if document.featured %}
+                    <span class="text-success">featured</span>
+                  {% else %}
+                    <span class="muted">feature</span>
+                  {% endif %}
+                </a>
+              </nobr>
+              <br/>
+              <nobr>
                 <a href="{{ url_for('.edit_view', id=get_pk_value(document), url=return_url) }}" class="btn btn-link" title="Edit Document">
                   <i class="icon-pencil"></i> edit
                 </a>

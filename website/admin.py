@@ -236,7 +236,21 @@ class DocumentView(sqla.ModelView, AdminView):
     """Access-controlled stuff"""
 
     list_template = 'admin/documents/index.html'
-    column_default_sort = ('published', True)
+    column_default_sort = ('featured', True)
+
+    def _order_by(self, *args, **kwargs):
+        """hack to secondary-sort"""
+        query, joins = super(DocumentView, self)._order_by(*args, **kwargs)
+        query = query.order_by(self.model.published.desc())
+        return query, joins
+
+    @expose('/<int:id>/toggle-feature')
+    def toggle_feature(self, id):
+        the_doc = models.Document.query.get_or_404(id)
+        the_doc.featured = not the_doc.featured
+        models.db.session.add(the_doc)
+        models.db.session.commit()
+        return redirect(request.referrer or url_for('.index'))
 
     @expose('/<int:id>/confirm-removal')
     def confirm_delete(self, id):

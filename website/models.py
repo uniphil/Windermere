@@ -214,6 +214,7 @@ class Document(db.Model):
     published = db.Column('added', db.DateTime)
     authors = db.Column(db.String(128))
     type_id = db.Column(db.Integer, db.ForeignKey('document_types.id'))
+    featured = db.Column(db.Boolean)
 
     type = db.relationship('Type', backref=db.backref('documents'))
     categories = db.relationship('Category', secondary=document_categories,
