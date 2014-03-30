@@ -65,7 +65,7 @@ def random_feature_photo():
 
 @app.route('/photos')
 def photo_gallery():
-    photos = models.ScenicPhoto.query.order_by(models.ScenicPhoto.added.desc()).all()
+    photos = models.ScenicPhoto.query.order_by(models.ScenicPhoto.added.desc())
     return render_template('photo-gallery.html', photos=photos)
 
 
