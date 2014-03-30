@@ -225,7 +225,3 @@ class Document(db.Model):
     @property
     def filename(self):
         return path.split(self.file)[-1]
-
-
-class Photo(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
