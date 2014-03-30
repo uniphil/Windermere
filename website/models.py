@@ -21,7 +21,7 @@ db = SQLAlchemy(app)
 
 class Partner(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    key = db.Column(db.String(24), unique=True)
+    key = db.Column(db.String(128), unique=True)
     name = db.Column(db.String(80), unique=True)
     last_active = db.Column(db.DateTime)
     last_keychange = db.Column(db.DateTime)
@@ -33,9 +33,9 @@ class Partner(db.Model, UserMixin):
 
 class Admin(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=True)
+    name = db.Column(db.String(128), unique=True)
     # username not email in the db because sqlalchemy migrations suck
-    email = db.Column('username', db.String(80), unique=True)
+    email = db.Column('username', db.String(128), unique=True)
     receives_messages = db.Column(db.Boolean)
     password_hash = db.Column(db.String(87))
     disabled = db.Column(db.Boolean())
@@ -75,7 +75,7 @@ class Person(db.Model):
 class ScenicPhoto(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     photo = db.Column(db.String(220))
-    title = db.Column(db.String(100))
+    title = db.Column(db.String(256))
     description = db.Column(db.Text)
     added = db.Column(db.DateTime)
     featured = db.Column(db.Boolean)
@@ -209,7 +209,7 @@ class Document(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     file = db.Column(db.String(220))
-    title = db.Column(db.String(128))
+    title = db.Column(db.String(1024))
     description = db.Column(db.Text)
     published = db.Column('added', db.DateTime)
     authors = db.Column(db.String(128))
