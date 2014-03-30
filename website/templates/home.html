@@ -17,21 +17,22 @@
     </div>
 
     <div class="col-sm-6 col-lg-4">
-      <h3>Featured Publications</h3>
-      <article>
-        <h4>On the Nature of Coherent Turbulent Structures in Channel Bends <small>15 Jan 2014</small></h4>
-        <p>Abstract for a presentation given at the 2009 IAHR conference in Vancouver.</p>
-        <a href="#" class="btn btn-xs btn-default ttbutton" data-icon="d" data-toggle="tootltip" title="Download"><span class="text-hide">Download</span></a>
-        <a href="#" class="btn btn-xs btn-default">More Details</a>
-      </article>
-      <hr />
-      <article>
-        <h4>Differentiating deep-marine overbank from crevasse splay deposits <small>4 Nov 2011</small></h4>
-        <p>Detailed discussion of the characteristics of both overbank and crevasse splay deposits. Using outcrop examples from the Castle Creek site, outlines the depositional model&hellip;</p>
-        <a href="#" class="btn btn-xs btn-default ttbutton" data-icon="d" data-toggle="tootltip" title="Download"><span class="text-hide">Download</span></a>
-        <a href="#" class="btn btn-xs btn-default">More Details</a>
-      </article>
-      <a href="#" class="btn btn-sm btn-default pull-right" data-icon="f"> See All Featured Publications</a>
+      <h3>Featured Documents</h3>
+      {% for document in featured_documents %}
+        {% if loop.index0 > 0 %}
+          <hr/>
+        {% endif %}
+        <article>
+          <h4>{{ document.title }} <small>{{ document.published }}</small></h4>
+          <p>{{ document.description }}</p>
+          <a href="" class="btn btn-xs btn-default ttbutton" data-icon="d" data-toggle="tootltip" title="Download"> Download</a>
+        </article>
+      {% else %}
+        <article>
+          <p>Nothing featured.</p>
+        </article>
+      {% endfor %}
+      <a href="{{ url_for('public_docs') }}" class="btn btn-sm btn-default pull-right" data-icon="f"> See all featured documents</a>
     </div>
   </div>
 

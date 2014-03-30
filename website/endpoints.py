@@ -45,9 +45,13 @@ def home():
         featuredesc = featureobj.title
     except ValueError:
         featuredesc = featurefile = ''
+    featured_documents = models.Document.query.\
+                            filter_by(featured=True).\
+                            order_by(models.Document.published).\
+                            limit(2)
     return render_template('home.html', form=form, message_sent=message_sent,
                            bg=featurefile, banner_photo_title=featuredesc,
-                           people=people)
+                           people=people, featured_documents=featured_documents)
 
 
 @app.route('/random-feature-photo')
@@ -77,6 +81,14 @@ def people():
     people = query.all()
     return render_template('people.html', people=people, alum_count=alum_count,
                            current_count=current_count, filter=people_filter)
+
+
+@app.route('/documents')
+def public_docs():
+    featured_docs = models.Document.query.\
+                        filter_by(featured=True).\
+                        order_by(models.Document.published)
+    return render_template('public-docs.html', documents=featured_docs)
 
 
 @app.route('/unlock', methods=['GET', 'POST'])
