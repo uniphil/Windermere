@@ -179,8 +179,12 @@ def photo(type, filename):
 @app.route('/data/<path:filepath>')
 @login_required
 def files(filepath):
-    folder, filename = filepath.rsplit('/', 1)
-    path = os.path.join(app.config['UPLOAD_FOLDER'], folder)
+    file_parts = filepath.rsplit('/', 1)
+    if len(file_parts) == 1:
+        file_parts = ['.'] + file_parts
+    folder, filename = file_parts
+    path = os.path.join(app.config['UPLOAD_FOLDER'], 'documents', folder)
+    print(path)
     filepath = safe_join(path, filename)
     if not os.path.isabs(filepath):
         filepath = os.path.join(app.root_path, filepath)
