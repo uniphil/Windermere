@@ -113,7 +113,7 @@ def topic_overview(category=None):
     page_name = 'Overview'
     grouped_documents = []
 
-    base_query = models.Document.query.order_by(models.Document.added.asc())
+    base_query = models.Document.query.order_by(models.Document.published.asc())
     query = base_query
 
     if category is not None:

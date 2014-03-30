@@ -63,7 +63,7 @@ def load_olddocs(datafile='import-old/data.json'):
         doc.file = doc_data['path']
         doc.title = doc_data['title']
         doc.description = doc_data['body']
-        doc.added = datetime.utcfromtimestamp(doc_data['timestamp'])
+        doc.published = datetime.utcfromtimestamp(doc_data['timestamp'])
         doc.authors = doc_data['author']
         type_name = doc_data['type']
         type = Type.query.filter_by(name=type_name).first()

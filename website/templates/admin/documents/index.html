@@ -30,7 +30,10 @@
             {% endif %}
           </td>
           <td>{{ document.categories | join('<br/>'|safe) }}</td>
-          <td>{{ document.added | since }}</td>
+          <td>
+            {{ document.published | since }}<br/>
+            {{ document.published.date() }}
+          </td>
           <td>
             <div class="pull-right">
               <nobr>

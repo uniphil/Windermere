@@ -236,7 +236,7 @@ class DocumentView(sqla.ModelView, AdminView):
     """Access-controlled stuff"""
 
     list_template = 'admin/documents/index.html'
-    column_default_sort = ('added', True)
+    column_default_sort = ('published', True)
 
     @expose('/<int:id>/confirm-removal')
     def confirm_delete(self, id):

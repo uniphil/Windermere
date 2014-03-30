@@ -211,7 +211,7 @@ class Document(db.Model):
     file = db.Column(db.String(220))
     title = db.Column(db.String(128))
     description = db.Column(db.Text)
-    added = db.Column(db.DateTime)
+    published = db.Column('added', db.DateTime)
     authors = db.Column(db.String(128))
     type_id = db.Column(db.Integer, db.ForeignKey('document_types.id'))
 
