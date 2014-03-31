@@ -1,0 +1,75 @@
+{% extends admin_base_template %}
+
+
+{% block head %}
+    {{ super() }}
+    <link href="{{ admin_static.url(filename='select2/select2.css') }}" rel="stylesheet">
+    <link href="{{ admin_static.url(filename='datetimepicker/bootstrap-datetimepicker.css') }}" rel="stylesheet">
+{% endblock %}
+
+
+{% macro input(input, width=None) %}
+  <div class="span{{ width }} {{ 'warning' if input.errors }}">
+    <label for="{{ input.id }}">{{ input.label.text }}</label>
+    {% if width is not none %}
+      {{ input(class="span{}".format(width)) }}
+    {% else %}
+      {{ input }}
+    {% endif %}
+    {% if input.errors %}
+      <span class="help-block">{{ input.errors.0 }}</span>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro hinput(input) %}
+  <div class="control-group row {{ 'warning' if input.errors }}">
+    <label for="{{ input.id }}" class="span2">{{ input.label.text }}</label>
+    <div class="span4">
+      {{ input }}
+      {% if input.errors %}
+        <span class="help-block offset2">{{ input.errors.0 }}</span>
+      {% endif %}
+    </div>
+  </div>
+{% endmacro %}
+
+
+{% block body %}
+  <section class="page">
+    <header class="page-header">
+      <h2>{{ 'Create' if '/new/' in request.path else 'Edit' }} a Document</h2>
+      <p>Documents are the private content accessible through the Content Browser. Note that documents become public when "featured" is selected.</p>
+    </header>
+    <form action="" method="post" enctype="multipart/form-data">
+      <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token() }}" />
+      <div class="control-group row">
+        {{ input(form.title, 6) }}
+        {{ input(form.featured) }}
+      </div>
+      <div class="control-group row">
+        {{ input(form.authors, 3) }}
+        {{ input(form.published) }}
+      </div>
+      <div class="control-group row">
+        {{ input(form.description, 6) }}
+      </div>
+      {{ hinput(form.type) }}
+      {{ hinput(form.categories) }}
+      {{ hinput(form.file) }}
+      <div class="control-group row">
+        <br/>
+        <button type="submit" class="span3 btn btn-large btn-success">
+          <i class="icon-plus icon-white"></i> {{ 'Create' if '/new/' in request.path else 'Save' }} document
+        </button>
+      </div>
+    </form>
+  </section>
+{% endblock %}
+
+
+{% block tail %}
+  {{ super() }}
+  <script src="{{ admin_static.url(filename='datetimepicker/bootstrap-datetimepicker.js') }}"></script>
+  <script src="{{ admin_static.url(filename='admin/js/form.js') }}"></script>
+{% endblock %}
