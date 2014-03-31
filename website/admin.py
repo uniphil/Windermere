@@ -12,10 +12,12 @@
 import os
 from datetime import datetime
 from PIL import Image
+from wtforms import fields
 from werkzeug import secure_filename
 from flask import request, flash, redirect, url_for
 from flask.ext.login import current_user, login_user, logout_user
 from flask.ext.admin import Admin, BaseView, AdminIndexView, expose
+from flask.ext.admin.form import DatePickerWidget
 from flask.ext.admin.contrib import sqla
 from website import app
 from website import models
@@ -236,8 +238,14 @@ class DocumentView(sqla.ModelView, AdminView):
     """Access-controlled stuff"""
 
     list_template = 'admin/documents/index.html'
-    form_columns = ('title', 'description', 'authors', 'type', 'categories', 'published', 'file')
+    create_template = 'admin/documents/create.html'
+    edit_template = 'admin/documents/create.html'
     column_default_sort = ('featured', True)
+
+    def scaffold_form(self):
+        form_class = super(DocumentView, self).scaffold_form()
+        form_class.published = fields.TextField('Published', widget=DatePickerWidget())
+        return form_class
 
     def _order_by(self, *args, **kwargs):
         """hack to secondary-sort"""
@@ -248,9 +256,19 @@ class DocumentView(sqla.ModelView, AdminView):
     def create_model(self, form):
         """use the current time by default"""
         published = getattr(form, 'published')
-        if published.data is None:
+        d = published.data
+        if d is None:
             published.data = datetime.now()
+        else:
+            published.data = datetime.strptime(d, '%Y-%m-%d')
         return super(DocumentView, self).create_model(form)
+
+    def update_model(self, form, model):
+        """fix date -> datetime"""
+        published = getattr(form, 'published')
+        clean_data = published.data.split(' ', 1)[0]
+        published.data = datetime.strptime(clean_data, '%Y-%m-%d')
+        return super(DocumentView, self).update_model(form, model)
 
     @expose('/<int:id>/toggle-feature')
     def toggle_feature(self, id):
