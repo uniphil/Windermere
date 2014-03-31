@@ -236,6 +236,7 @@ class DocumentView(sqla.ModelView, AdminView):
     """Access-controlled stuff"""
 
     list_template = 'admin/documents/index.html'
+    form_columns = ('title', 'description', 'authors', 'type', 'categories', 'published', 'file')
     column_default_sort = ('featured', True)
 
     def _order_by(self, *args, **kwargs):
