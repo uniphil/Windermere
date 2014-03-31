@@ -109,7 +109,7 @@ def wrap_file_field(field_name, upload_dir, endpoint, photo=False):
             field = getattr(form, field_name)
             incoming = field.data
             filename = get_safe_filename(incoming.filename)
-            field.data = filename  # sqla willl store this for us
+            field.data = filename  # sqla will store this for us
             result = super_ish(form)
             if result is False:
                 remove(filename)
