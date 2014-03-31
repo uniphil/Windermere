@@ -25,7 +25,7 @@
         <article>
           <h4>{{ document.title }} <small>{{ document.published }}</small></h4>
           <p>{{ document.description }}</p>
-          <a href="" class="btn btn-xs btn-default ttbutton" data-icon="d" data-toggle="tootltip" title="Download"> Download</a>
+          <a href="{{ url_for('files', filepath=document.file) }}" class="btn btn-xs btn-default ttbutton" data-icon="d" data-toggle="tootltip" title="Download"> Download</a>
         </article>
       {% else %}
         <article>

@@ -47,7 +47,7 @@ def home():
         featuredesc = featurefile = ''
     featured_documents = models.Document.query.\
                             filter_by(featured=True).\
-                            order_by(models.Document.published).\
+                            order_by(models.Document.published.desc()).\
                             limit(2)
     return render_template('home.html', form=form, message_sent=message_sent,
                            bg=featurefile, banner_photo_title=featuredesc,
@@ -87,7 +87,7 @@ def people():
 def public_docs():
     featured_docs = models.Document.query.\
                         filter_by(featured=True).\
-                        order_by(models.Document.published)
+                        order_by(models.Document.published.desc())
     return render_template('public-docs.html', documents=featured_docs)
 
 
@@ -125,7 +125,7 @@ def topic_overview(category=None):
     page_name = 'Overview'
     grouped_documents = []
 
-    base_query = models.Document.query.order_by(models.Document.published.asc())
+    base_query = models.Document.query.order_by(models.Document.published.desc())
     query = base_query
 
     if category is not None:
@@ -189,8 +189,12 @@ def photo(type, filename):
 
 
 @app.route('/data/<path:filepath>')
-@login_required
 def files(filepath):
+    doc = models.Document.query.filter_by(file=filepath).first()
+    if doc is None:
+        abort(404)
+    if current_user.is_anonymous() and doc.featured is not True:
+        abort(404)
     file_parts = filepath.rsplit('/', 1)
     if len(file_parts) == 1:
         file_parts = ['.'] + file_parts

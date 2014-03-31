@@ -65,7 +65,7 @@ class Admin(db.Model, UserMixin):
 class Person(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    photo = db.Column(db.String(220))
+    photo = db.Column(db.String(220), unique=True)
     bio = db.Column(db.Text)
     href = db.Column(db.String(120))
     contact = db.Column(db.Text)
@@ -74,7 +74,7 @@ class Person(db.Model):
 
 class ScenicPhoto(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    photo = db.Column(db.String(220))
+    photo = db.Column(db.String(220), unique=True)
     title = db.Column(db.String(256))
     description = db.Column(db.Text)
     added = db.Column(db.DateTime)
@@ -208,7 +208,7 @@ class Document(db.Model):
     __tablename__ = 'documents'
 
     id = db.Column(db.Integer, primary_key=True)
-    file = db.Column(db.String(220))
+    file = db.Column(db.String(220), unique=True)
     title = db.Column(db.String(1024))
     description = db.Column(db.Text)
     published = db.Column('added', db.DateTime)

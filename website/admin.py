@@ -244,6 +244,13 @@ class DocumentView(sqla.ModelView, AdminView):
         query = query.order_by(self.model.published.desc())
         return query, joins
 
+    def create_model(self, form):
+        """use the current time by default"""
+        published = getattr(form, 'published')
+        if published.data is None:
+            published.data = datetime.now()
+        return super(DocumentView, self).create_model(form)
+
     @expose('/<int:id>/toggle-feature')
     def toggle_feature(self, id):
         the_doc = models.Document.query.get_or_404(id)

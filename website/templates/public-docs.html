@@ -1,0 +1,29 @@
+{% extends "base-full.html" %}
+
+{% set title = "Featured Documents" %}
+
+{% block page_content %}
+
+  <div class="page-header">
+    <h1>{{ title }}</h1>
+    <p><a href="{{ url_for('home') }}" data-icon="b"> Back to Windermere Home</a></p>
+  </div>
+
+  {% for document in documents %}
+    <article>
+      <h3>{{ document.title }} <small>{{ document.published }}</small></h3>
+      <p>{{ document.description }}</p>
+      <a href="{{ url_for('files', filepath=document.file) }}" class="btn btn-default ttbutton" data-icon="d" data-toggle="tootltip" title="Download"> Download</a>
+    </article>
+    <hr/>
+  {% endfor %}
+
+  <h2>Windermere Partners</h2>
+  <h3>See all documents</h3>
+  {% if current_user.is_authenticated() %}
+    <a href="{{ url_for('topic_overview') }}" class="btn btn-primary"><span data-icon="r"></span>&nbsp;&nbsp;Content Browser</a>
+  {% else %}
+    <a href="{{ url_for('unlock') }}" class="btn btn-success"><span data-icon="k"></span>&nbsp;&nbsp;&nbsp;Partner Access</a>
+  {% endif %}
+
+{% endblock %}
