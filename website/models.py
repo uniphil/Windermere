@@ -5,7 +5,7 @@
     Database models for content on the Windermere Consortium website
 """
 
-from collections import namedtuple
+from collections import namedtuple, OrderedDict
 from math import ceil
 from PIL import Image
 from os import urandom, path
@@ -136,28 +136,28 @@ class Category(db.Model):
     def __str__(self):
         return self.name
 
-    tree = {
-        'slope': {
-            'channels': {
-                'large-channels': None,
-                'small-channels': None,
-            },
-            'levees-and-splays': None,
-            'mass-transport-deposits': None,
+    tree = OrderedDict()
+    tree['slope'] = {
+        'channels': {
+            'large-channels': None,
+            'small-channels': None,
         },
-        'channel-lobe-transition-zone': None,
-        'basin-floor-lobes': {
-            'isolated-scour': None,
-            'avulsion-spray': None,
-            'feeder-channel': None,
-            'distributary-channel': None,
-            'terminal-splay': None,
-        },
-        'old-fort-point': None,
-        'experimental': None,
-        'miscellaneous': None,
-        'current-events': None,
+        'levees-and-splays': None,
+        'mass-transport-deposits': None,
     }
+    tree['channel-lobe-transition-zone'] = None
+    tree['basin-floor-lobes'] = {
+        'isolated-scour': None,
+        'avulsion-spray': None,
+        'feeder-channel': None,
+        'distributary-channel': None,
+        'terminal-splay': None,
+    }
+    tree['old-fort-point'] = None
+    tree['experimental'] = None
+    tree['miscellaneous'] = None
+    tree['current-events'] = None
+
     names = {
         ('slope',): 'Slope',
         ('slope', 'channels'): 'Channels',
