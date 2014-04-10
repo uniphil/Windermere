@@ -97,6 +97,7 @@ def wrap_file_field(field_name, upload_dir, endpoint, photo=False):
     def save(incoming, filename):
         path = os.path.join(drop_dir, filename)
         incoming.save(path)
+        os.chmod(path, 0o644)
 
     def remove(filename):
         path = os.path.join(drop_dir, filename)
