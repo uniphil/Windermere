@@ -257,7 +257,7 @@ class DocumentView(sqla.ModelView, AdminView):
         """use the current time by default"""
         published = getattr(form, 'published')
         d = published.data
-        if d is None:
+        if d is None or d == '':
             published.data = datetime.now()
         else:
             published.data = datetime.strptime(d, '%Y-%m-%d')
