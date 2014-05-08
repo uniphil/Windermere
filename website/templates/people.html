@@ -30,8 +30,8 @@
         <ul class="media-list">
           {% for person in people %}
             <li class="media">
-              <a class="pull-left" href="{{ url_for('photo', type='people', filename=person.photo) }}">
-                <img class="media-object" src="{{ url_for('photo', type='people', filename=person.photo, size=81) }}" alt="Photo of {{ person.name }}" width="81" />
+              <a class="pull-left" {% if person.photo %}href="{{ url_for('photo', type='people', filename=person.photo) }}"{% endif %}>
+                <img class="media-object" src="{% if person.photo %}{{ url_for('photo', type='people', filename=person.photo, size=81) }}{% else %}{{ url_for('static', filename='img/person-placeholder.jpg') }}{% endif %}" alt="Photo of {{ person.name }}" width="81" />
               </a>
               <div class="media-body">
                 <h4>{{ person.name }}</h4>

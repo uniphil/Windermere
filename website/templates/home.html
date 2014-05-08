@@ -50,7 +50,7 @@
         {% for person in people %}
           <li class="media">
             <a class="pull-left" href="{{ url_for('people') }}">
-              <img class="media-object" src="{{ url_for('photo', type='people', filename=person.photo, size=42) }}" alt="Photo of {{ person.name }}" width="42" />
+              <img class="media-object" src="{% if person.photo %}{{ url_for('photo', type='people', filename=person.photo, size=42) }}{% else %}{{ url_for('static', filename='img/person-placeholder.jpg') }}{% endif %}" alt="Photo of {{ person.name }}" width="42" />
             </a>
             <div class="media-body">
               <h4 class="media-heading">
