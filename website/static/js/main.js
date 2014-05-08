@@ -18,3 +18,15 @@ var cover = $('.page-header.cover'),
   });
   t = setTimeout(rotate_cover, 6000);
 })();
+
+var keep_reading_link = $('[href="#keep-reading-studying-here"]'),
+    keep_reading_content = $('#keep-reading-studying-here');
+(function keep_reading() {
+  if (keep_reading_link.length < 1) return;
+  keep_reading_content.hide();
+  keep_reading_link.on('click', function readMore(e) {
+    e.preventDefault();
+    keep_reading_link.remove();
+    keep_reading_content.slideDown();
+  });
+})();
