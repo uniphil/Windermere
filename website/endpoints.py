@@ -22,7 +22,7 @@ mail.init_app(app)  # eventually move to website.create_app
 @app.route('/', methods=['GET', 'POST'])
 def home():
     form = forms.ContactForm(request.form)
-    people = models.Person.query.order_by(models.Person.current).all()
+    people = models.Person.query.filter_by(current=True).all()
     message_sent = False
     if form.validate_on_submit():
         message = Message("[No Reply] Windere Contact Form Message",
