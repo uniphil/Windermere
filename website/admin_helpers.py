@@ -63,7 +63,7 @@ class FileField(fields.FileField):
         self.widget = FileInput(endpoint, folder=folder, photo=photo)
 
 
-def wrap_method_of(cls):    
+def wrap_method_of(cls):
     def wrapper(new_function):
         method_name = new_function.__name__
         original_method = getattr(cls, method_name)

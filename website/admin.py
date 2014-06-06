@@ -189,7 +189,7 @@ class PhotoView(sqla.ModelView, AdminView):
     list_template = 'admin/photos/index.html'
     column_list = ('title', 'added', 'featured')
     column_default_sort = ('featured', True)
-    
+
     def _order_by(self, *args, **kwargs):
         """hack to secondary-sort"""
         query, joins = super(PhotoView, self)._order_by(*args, **kwargs)

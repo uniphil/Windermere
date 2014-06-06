@@ -5,7 +5,7 @@
 
     <h2>Really Remove {{ document.title }}?</small></h2>
     <p>This action cannot be undone.</p>
-    
+
     <form action="{{ url_for('.delete_view', id=document.id, url=next) }}" method="post" class="form-inline">
       <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token() }}" />
       <input type="hidden" name="confirm" value="yes" />
