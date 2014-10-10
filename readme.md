@@ -33,9 +33,11 @@ tricky dependencies:
 
 7. set up the server with the config in `deploy-configs`
 
-8. export all necessary further configs (see `website/__init__.py`)
+8. enable the app to [start up on boot](http://stackoverflow.com/questions/7221757/run-automatically-program-on-startup-under-linux-ubuntu) `sudo update-rc.d windermere defaults`
 
-9. install postfix
+9. export all necessary further configs (see `website/__init__.py`)
+
+10. install postfix
 
 
 ## updating
